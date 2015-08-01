@@ -25,7 +25,7 @@ author:
   email:             
 
 pages_list:       
-  About: '/about'
+  About: '/Biostats/about'
   #Archive: '/archive'
   Feed: '/atom.xml'
   
