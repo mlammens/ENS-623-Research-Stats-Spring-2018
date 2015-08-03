@@ -26,8 +26,8 @@ author:
 
 pages_list:       
   About: '/Biostats/about'
-  #Archive: '/archive'
-  Feed: '/atom.xml'
+  Archive: '/Biostats/archive'
+  #Feed: '/atom.xml'
   
 # Custom vars
 version:             2.0.0
