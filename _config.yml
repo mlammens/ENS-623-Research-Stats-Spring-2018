@@ -27,10 +27,10 @@ author:
   email:             
 
 pages_list:       
-  #About: '/Biostats/about'
-  #Archive: '/Biostats/archive'
-  About: '/about'
-  Archive: '/archive'
+  About: '/Biostats/about'
+  Archive: '/Biostats/archive'
+  #About: '/about'
+  #Archive: '/archive'
   #Feed: '/atom.xml'
   
 # Custom vars
