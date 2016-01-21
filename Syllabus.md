@@ -1,3 +1,8 @@
+---
+layout: page
+title: About
+---
+
 # Special Topics in Environmental Sciences - Biostatistics
 
 **Course Number:** ENS 798  
