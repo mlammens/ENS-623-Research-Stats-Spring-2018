@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Syllabus Spring '16
+title: Syllabus
 ---
 
 # Special Topics in Environmental Sciences - Biostatistics
