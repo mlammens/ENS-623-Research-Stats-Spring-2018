@@ -29,7 +29,7 @@ author:
 pages_list:       
   About: '/Biostats/about'
   Archive: '/Biostats/archive'
-  Syllabus Spring '16: '/Biostats/syllabus'
+  Syllabus Spring '16: '/Biostats/syllabus/'
   #About: '/about'
   #Archive: '/archive'
   #Feed: '/atom.xml'
