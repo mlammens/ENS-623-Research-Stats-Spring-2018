@@ -62,24 +62,24 @@ This is a guide for the material we will cover during the course, however it may
 Note that the **Reading** column indicates chapters in which material relavant to our topic can be found. 
 The specific sections / pages will be determined as we progress.
 
-|Date | Topic | Reading |
-|-----|-------|---------|
-|1/25 |Introduction to Biostatistics and R |Q&K Chap. 1; Logan Chap. 1 |
-|2/1  |Data Exploration and Probability Distributions | |
-|2/8  |Estimation, Maximum Likelihood, and Hypothesis Testing ||
-|2/15 | NO CLASS | |
-|2/22 |Hypothesis Testing Revisited | |
-|2/29 |Non-parametric Methods | |
-|3/7  |Linear Models, Correlation, and Regression | |
-|3/14 |Multiple Regression and GLMs | |
-|3/21 | NO CLASS | |
-|3/28 |ANOVA | |
-|4/4  |Nested and Factorial ANOVA | |
-|4/11 |Two-way and Multi-way ANOVA | |
-|4/18 |ANCOVA | |
-|4/25 |Analysis of Frequencies | |
-|5/2  |Project Presentations | |
-|5/9  |Final Exam | [Correlation](https://xkcd.com/552/) | 
+|Date | Topic | Reading | Assignment |
+|-----|-------|---------|------------|
+|1/25 |Introduction to Biostatistics and R |Q&K Chap. 1; Logan Chap. 1 ||
+|2/1  |Data Exploration and Probability Distributions | | |
+|2/8  |Estimation, Maximum Likelihood, and Hypothesis Testing | | |
+|2/15 | NO CLASS | | |
+|2/22 |Hypothesis Testing Revisited | | |
+|2/29 |Non-parametric Methods | | |
+|3/7  |Linear Models, Correlation, and Regression | | |
+|3/14 |Multiple Regression and GLMs | | Take-home Midterm |
+|3/21 | NO CLASS | | |
+|3/28 |ANOVA | | |
+|4/4  |Nested and Factorial ANOVA | | |
+|4/11 |Two-way and Multi-way ANOVA | | |
+|4/18 |ANCOVA | | |
+|4/25 |Analysis of Frequencies | | |
+|5/2  |Project Presentations | | PROJECT PAPERS DUE |
+|5/9  |Final Exam | [Correlation](https://xkcd.com/552/) | |
 
 ## Accommodations for Students with Disabilities
 

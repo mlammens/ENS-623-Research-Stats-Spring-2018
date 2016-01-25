@@ -1,0 +1,339 @@
+---
+title: "Lecture 1"
+author: "Matthew E. Aiello-Lammens"
+date: '2016-01-25'
+output: html_document
+---
+
+# Class expectations
+
+* Why are you taking this class?
+* What are you hoping to learn by taking this class?
+
+See [Syllabus](http://mlammens.github.io/Biostats/syllabus/)
+
+
+# Hypothesis testing and the scientific method
+
+### What is a theory?
+
+A proposed explanation for some event or process that is based the available evidence related to that event.
+We also call this a **model**. *Models are not necessarily equivelant to math.*
+
+### What is a hypothesis?
+
+A prediction based on our model or theory. 
+For a hypothesis to be considered **scientific** it much be **falsifable**.
+
+## Scientific method
+
+Traditional view:
+
+1. Develop a hypothesis 
+2. Make a prediction based on hypothesis 
+3. Do an experiment to test the prediction
+4. Analyze the data from our experiment
+5. Based on results, make an inference about our hypothesis - do the data support or reject our prediction?
+6. Repeat as necessary to acquire knowledge
+
+Checkout [Understanding Science](http://undsci.berkeley.edu/article/0_0_0/howscienceworks_02)
+
+# Introduction to R and RStudio
+
+## Getting started
+
+### Overall layout
+
+* Four panels, each has valuable information
+
+### File management
+
+* Setup a `Biostatistics` directory
+* Make a `data` directory
+* Make a `scripts` directory
+
+### Getting help
+
+* **Help** panel (lower right corner)
+* `help.search`
+
+```{r}
+help.search("bar plot")
+```
+
+**Challange**
+
+Use the `help.search` function to search for something in statistics that you think should be in R? Did you find anything?
+
+* I know my function - just give me the details - `?barplot`
+
+
+## R as calculator
+
+We can use R just like any other calculator.
+
+```{r}
+3 + 5
+```
+
+There's internal control for order of operations (Please Excuse My Dear Aunt Sally)
+
+```{r}
+(3 * 5) + 7
+```
+
+```{r}
+3 * 5 + 7
+```
+
+**Challange**
+
+Writen an example where adding parantheses matters.
+
+There are a ton of internal functions, and a lot of add-ons.
+
+```{r}
+sqrt(4)
+
+abs(-5)
+
+sqrt(-5)
+```
+
+## R script file
+
+Use a script file for your work. It's easier to go back to and easy to document.
+
+## Variables and objects
+
+There are several basic types of data structures in R.
+
+* **VECTORS**: One-dimensional arrays of numbers, character strings, or logical values (T/F)
+* **FACTORS**: One-dimensional arrays of factors (Stop - Let's discuss factors)
+* **DATA FRAMES**: Data tables in which the various columns may be of different type
+* **MATRICES**: In R, matrices can only be 2-dimensional, anything higher dimension is called an array (see below). Matrix elements are numerical; some functions, like the transpose function t(), only work on matrices
+* **ARRAYS**: higher dimensional matrices are called arrays in R
+* **LISTS**: lists can contain any type of object as list elements. You can have a list of numbers, a list of matrices, a list of characters, etc., or any combination of the above.
+
+Functions that are useful for understanding the different types of data structures
+
+```
+str()
+class()
+```
+
+# Probability
+
+### Frequentist perspective 
+
+The relative frequency of an event over the long term, after many trials.
+
+E.g., throwing a coin. What's the probablity of a 'heads'? After one trial, two trials, ..., 1000 trials.
+
+```{r}
+(head <- runif(1) > 0.5)
+```
+
+
+### Bayes perspective
+
+Stay tuned.
+
+***
+
+
+## M&Ms
+
+Open your bag and count how many M&Ms you got. Also count how many of each color.
+
+### Assignment operator
+
+Make a new variable (object) called `tot_mm` and assign it the number of MMs in your bag.
+
+```{r}
+tot_mm <- 60
+```
+
+### `mean` number of MMs in a bag
+
+* Vector
+* `sum` function
+* `mean` function
+
+Calculate the mean number of MMs in a bag.
+
+```{r}
+tot_mm_pop_sample <- c(60, 58, 57, 63, 61, 60, 59)
+```
+
+Mean:
+
+$$
+\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n}
+$$
+
+Using the `sum` function.
+
+```{r}
+(mean_mm_1 <- sum(tot_mm_pop_sample) / length(tot_mm_pop_sample))
+```
+
+Using the `mean` function.
+
+```{r}
+mean_mm_2 <- mean(tot_mm_pop_sample)
+```
+
+### Quantify the variation in the number of MMs in a bag
+
+* `var` function
+* `sd` function
+
+What do we mean by variation? 
+In general, we mean something along the lines of 'the amount of variation around some mean value'.
+
+**How might we quantify this?**
+
+* Add up the distances from the mean. 
+
+First calculate distances from the mean for each bag.
+
+```{r}
+(dist_from_mean <- tot_mm_pop_sample - mean_mm_1)
+```
+
+Next calculate the total distances.
+
+```{r}
+(sum_dist_from_mean <- sum(dist_from_mean))
+```
+
+What information does this give us, and why might it not be useful?
+
+* Add up the *absolute* distances form the mean. 
+
+First calculate the *absolute* distances from the mean.
+
+```{r}
+(absdist_from_mean <- abs(tot_mm_pop_sample - mean_mm_1))
+```
+
+Next add up the total *absolute* distances from the mean.
+
+```{r}
+(sum_absdist_from_mean <- sum(absdist_from_mean))
+```
+
+* Add up the *squared* distances from the mean.
+
+While the absolute distance from the mean does give us a reasonable measure of variability, because of specific mathematical properties, it's more convenient to work with *squared* distances from the mean, leading to the measures of **variance** and **standard deviation**.
+
+**Challange**
+
+Calculate *squared* distances from the mean, and sum them to determine the total squared deviation.
+
+**Challange**
+
+Can you find an R function to do this in one step?
+
+
+## Probability and M&Ms
+
+Without looking, you chose one M&M. What colors could you have chosen?
+
+The **set** of brown, yellow, green, red, orange, blue is the **sample space**.
+
+Your selection of a single M&M is called an **event**.
+
+
+**Challange**
+
+* What's the probability of getting a "color" M&M in **your** bag?
+
+P(brown), P(yellow), etc.
+
+**Challange**
+
+What is the mean probablity of getting each color across each bag?
+
+Tools to use:
+
+* `data.frames`
+* `apply`
+
+
+## Venn diagrams
+
+* What's the P(green OR blue OR red) in **your** bag? 
+
+P(green) + P(blue) + P(red)
+
+* What is the P(NOT green) in **your** bag?
+
+$$
+P(NOT Green) = 1 - P(Green) = P(G)^c
+$$
+
+
+### Sampling with replacement
+
+* What's the P(green and then blue), first putting back your first draw?
+
+Intersection: P(green intersection blue) = P(green) * P(blue) 
+
+* What's the P(green or blue)?
+
+Union: P(green) + P(blue) - P(green and blue)
+
+
+### Sampling without replacement
+
+* What is the probability of getting green, then blue, *without replacing your first draw*?
+
+**Challange**
+
+What is the sample space for drawing two M&Ms?
+
+Well work further on similar problems in future classes.
+
+### Conditional probability
+
+* What's the probability of drawing a red M&M, CONDITIONAL on having a bag with 60 M&Ms?
+
+### How likely is my bag of M&Ms?
+
+Write a short R script to simulate the combinations of colors that would have been possible from your bag of M&Ms assuming the company-stated color distribution (24% blue, 14% brown, 16% green, 20% orange, 13% red, 14% yellow) and use this script to calculate the probability of obtaining the combination in your bag. 
+
+Needed:
+* `for` loop
+* `if` statement
+* `sample` function
+
+```{r}
+# Let each color be represented by a number
+colors<-c(1,2,3,4,5,6)
+# Here's what my bag looked like
+mycount<-c(5,6,5,9,21,12)
+# Company probabilities
+probs<-c(.14,.14,.16,.13,.20,.24)
+# Set up a counter and start it at 0
+count<-0
+replications<-3000
+
+for(i in 1:replications){
+  probsample<-sample(colors,58,replace=TRUE,probs)
+  probsamplevector<-c(as.numeric(sum(probsample==1)),as.numeric(sum(probsample==2)),
+                      as.numeric(sum(probsample==3)),as.numeric(sum(probsample==4)),
+                      as.numeric(sum(probsample==5)),as.numeric(sum(probsample==6)))
+  if(identical(mycount,probsamplevector)=="TRUE"){
+    count<-count+1
+    }
+  }
+  probability<-count/replications
+probability
+```
+
+
+
+
+
