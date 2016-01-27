@@ -300,40 +300,17 @@ Well work further on similar problems in future classes.
 
 * What's the probability of drawing a red M&M, CONDITIONAL on having a bag with 60 M&Ms?
 
-### How likely is my bag of M&Ms?
-
-Write a short R script to simulate the combinations of colors that would have been possible from your bag of M&Ms assuming the company-stated color distribution (24% blue, 14% brown, 16% green, 20% orange, 13% red, 14% yellow) and use this script to calculate the probability of obtaining the combination in your bag. 
-
-Needed:
-* `for` loop
-* `if` statement
-* `sample` function
+### Draw a random bag of M&Ms using the company stated frequencies/probabilities for each color
 
 ```{r}
-# Let each color be represented by a number
-colors<-c(1,2,3,4,5,6)
-# Here's what my bag looked like
-mycount<-c(5,6,5,9,21,12)
-# Company probabilities
-probs<-c(.14,.14,.16,.13,.20,.24)
-# Set up a counter and start it at 0
-count<-0
-replications<-3000
+## Colors as a vector
+mm_colors <- c("blue", "brown", "green", "orange", "red", "yellow")
+mm_probs <- c(.24, .14, .16, .20, .13, .14)
 
-for(i in 1:replications){
-  probsample<-sample(colors,58,replace=TRUE,probs)
-  probsamplevector<-c(as.numeric(sum(probsample==1)),as.numeric(sum(probsample==2)),
-                      as.numeric(sum(probsample==3)),as.numeric(sum(probsample==4)),
-                      as.numeric(sum(probsample==5)),as.numeric(sum(probsample==6)))
-  if(identical(mycount,probsamplevector)=="TRUE"){
-    count<-count+1
-    }
-  }
-  probability<-count/replications
-probability
+## I want to "sample" a bag of MMs
+new_bag <- sample(x = mm_colors, size = 55, replace = TRUE, prob = mm_probs)
+table(new_bag)
+
 ```
-
-
-
 
 

@@ -1,0 +1,42 @@
+---
+title: "Lecture 2"
+author: "Matthew E. Aiello-Lammens"
+date: "January 26, 2016"
+output: html_document
+---
+
+### How likely is my bag of M&Ms?
+
+Write a short R script to simulate the combinations of colors that would have been possible from your bag of M&Ms assuming the company-stated color distribution (24% blue, 14% brown, 16% green, 20% orange, 13% red, 14% yellow) and use this script to calculate the probability of obtaining the combination in your bag. 
+
+Needed:
+* `for` loop
+* `if` statement
+* `sample` function
+
+```{r}
+# Let each color be represented by a number
+colors<-c(1,2,3,4,5,6)
+# Here's what my bag looked like
+mycount<-c(5,6,5,9,21,12)
+# Company probabilities
+probs<-c(.14,.14,.16,.13,.20,.24)
+# Set up a counter and start it at 0
+count<-0
+replications<-3000
+
+for(i in 1:replications){
+  probsample<-sample(colors,58,replace=TRUE,probs)
+  probsamplevector<-c(as.numeric(sum(probsample==1)),as.numeric(sum(probsample==2)),
+                      as.numeric(sum(probsample==3)),as.numeric(sum(probsample==4)),
+                      as.numeric(sum(probsample==5)),as.numeric(sum(probsample==6)))
+  if(identical(mycount,probsamplevector)=="TRUE"){
+    count<-count+1
+    }
+  }
+  probability<-count/replications
+probability
+```
+
+
+

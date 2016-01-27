@@ -60,26 +60,26 @@ This paper is functionally equivalent to the Methods and Results sections of a p
 
 This is a guide for the material we will cover during the course, however it may be amended during the semester as needed. 
 Note that the **Reading** column indicates chapters in which material relavant to our topic can be found. 
-The specific sections / pages will be determined as we progress.
+I do not expect you to read all of what is listed here, but rather am pointing to the chapters most relevant for helping you solidify your knowledge of what we cover in class.
 
-|Date | Topic | Reading | Assignment |
-|-----|-------|---------|------------|
-|1/25 |Introduction to Biostatistics and R |Q&K Chap. 1; Logan Chap. 1 ||
-|2/1  |Data Exploration and Probability Distributions | | |
-|2/8  |Estimation, Maximum Likelihood, and Hypothesis Testing | | |
-|2/15 | NO CLASS | | |
-|2/22 |Hypothesis Testing Revisited | | |
-|2/29 |Non-parametric Methods | | |
-|3/7  |Linear Models, Correlation, and Regression | | |
-|3/14 |Multiple Regression and GLMs | | Take-home Midterm |
-|3/21 | NO CLASS | | |
-|3/28 |ANOVA | | |
-|4/4  |Nested and Factorial ANOVA | | |
-|4/11 |Two-way and Multi-way ANOVA | | |
-|4/18 |ANCOVA | | |
-|4/25 |Analysis of Frequencies | | |
-|5/2  |Project Presentations | | PROJECT PAPERS DUE |
-|5/9  |Final Exam | [Correlation](https://xkcd.com/552/) | |
+|Date | Topic | Reading | Lecture Notes | Assignment |
+|-----|-------|---------|---------------|------------|
+|1/25 |Introduction to Biostatistics and R |Q&K Chap. 1; Logan Chap. 1 | [Lecture notes](http://mlammens.github.io/Biostats/lectures/Lecture-1.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-1-InClass.R)|[Problem Set 1](http://mlammens.github.io/Biostats/problem_sets/Problem-set-1.html) |
+|2/1  |Data Exploration and Probability Distributions |Q&K Chap. 2 & 3; Logan Chap. 3 & 6 | | |
+|2/8  |Estimation, Maximum Likelihood, and Hypothesis Testing | | | |
+|2/15 | NO CLASS | | | |
+|2/22 |Hypothesis Testing Revisited | | | |
+|2/29 |Non-parametric Methods | | | |
+|3/7  |Linear Models, Correlation, and Regression | | | |
+|3/14 |Multiple Regression and GLMs | | Take-home Midterm | |
+|3/21 | NO CLASS | | | |
+|3/28 |ANOVA | | | |
+|4/4  |Nested and Factorial ANOVA | | | |
+|4/11 |Two-way and Multi-way ANOVA | | | |
+|4/18 |ANCOVA | | | |
+|4/25 |Analysis of Frequencies | | | |
+|5/2  |Project Presentations | | | PROJECT PAPERS DUE |
+|5/9  |Final Exam | [Correlation](https://xkcd.com/552/) | | |
 
 ## Accommodations for Students with Disabilities
 
