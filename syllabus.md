@@ -81,6 +81,10 @@ I do not expect you to read all of what is listed here, but rather am pointing t
 |5/2  |Project Presentations | | | PROJECT PAPERS DUE |
 |5/9  |Final Exam | [Correlation](https://xkcd.com/552/) | | |
 
+## Data sets
+
+* M&M color counts from our bags during class 1: [class_mm_data.csv](http://mlammens.github.io/Biostats/datasets/class_mm_data.csv)
+
 ## Accommodations for Students with Disabilities
 
 The University’s commitment to equal educational opportunities for students with disabilities includes providing reasonable accommodations for the needs of students with disabilities. 
