@@ -236,6 +236,7 @@ Calculate *squared* distances from the mean, and sum them to determine the total
 
 Can you find an R function to do this in one step?
 
+**Standard deviation** can be thought of as the average deviation from the mean.
 
 ## Probability and M&Ms
 
@@ -296,11 +297,8 @@ What is the sample space for drawing two M&Ms?
 
 Well work further on similar problems in future classes.
 
-### Conditional probability
 
-* What's the probability of drawing a red M&M, CONDITIONAL on having a bag with 60 M&Ms?
-
-### Draw a random bag of M&Ms using the company stated frequencies/probabilities for each color
+## Draw a random bag of M&Ms using the company stated frequencies/probabilities for each color
 
 ```{r}
 ## Colors as a vector
