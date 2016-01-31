@@ -28,8 +28,9 @@ author:
 
 pages_list:       
   About: '/Biostats/about'
-  Archive: '/Biostats/archive'
   Syllabus: '/Biostats/syllabus'
+  Resources: '/Biostats/resources'
+  Archive: '/Biostats/archive'
   #About: '/about'
   #Archive: '/archive'
   #Feed: '/atom.xml'
