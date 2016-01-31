@@ -5,6 +5,12 @@ date: "January 26, 2016"
 output: html_document
 ---
 
+### Conditional probability
+
+* What's the probability of drawing a red M&M, CONDITIONAL on having a bag with 60 M&Ms?
+
+
+
 ### How likely is my bag of M&Ms?
 
 Write a short R script to simulate the combinations of colors that would have been possible from your bag of M&Ms assuming the company-stated color distribution (24% blue, 14% brown, 16% green, 20% orange, 13% red, 14% yellow) and use this script to calculate the probability of obtaining the combination in your bag. 
