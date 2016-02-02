@@ -1,0 +1,8 @@
+---
+title: "Problem Set 2"
+author: "Matthew E. Aiello-Lammens"
+date: "February 1, 2016"
+output: html_document
+---
+
+1. Describe each component of a generic boxplot, and describe why we might be interested in each value that is represented.
