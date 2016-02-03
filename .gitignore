@@ -47,3 +47,6 @@ node_modules
 
 # Symbolic link to QK data
 data/QK_data*
+
+# Ignore submitted work
+submitted_work/*
