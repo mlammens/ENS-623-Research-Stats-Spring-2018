@@ -50,3 +50,4 @@ data/QK_data*
 
 # Ignore submitted work
 submitted_work/*
+solutions/*
