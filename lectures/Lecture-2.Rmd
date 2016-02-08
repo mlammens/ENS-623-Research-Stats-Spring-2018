@@ -6,7 +6,7 @@ output:
     toc: yes
 ---
 
-# Week 2 - Data Exploration and Probability Distributions
+# Week 2 - Probability and Data Exploration
 
 ## Review from Week 1
 
