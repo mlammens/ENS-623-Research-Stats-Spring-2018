@@ -66,7 +66,7 @@ I do not expect you to read all of what is listed here, but rather am pointing t
 |-----|-------|---------|---------------|------------|
 |1/25 |Introduction to Biostatistics and R |Q&K Chap. 1; Logan Chap. 1 | [Lecture notes 1](http://mlammens.github.io/Biostats/lectures/Lecture-1.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-1-InClass.R)|[Problem Set 1](http://mlammens.github.io/Biostats/problem_sets/Problem-set-1.html) |
 |2/1  |Data Exploration and Probability Distributions |Q&K Chap. 1 & 4; Logan Chap. 3 & 5 | [Lecture notes 2](http://mlammens.github.io/Biostats/lectures/Lecture-2.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-2-InClass.R)| |
-|2/8  |Probability Distributions and Estimation |Q&K Chap. 2 ; Logan Chap. 3 |[Lecture notes 3](http://mlammens.github.io/Biostats/lectures/Lecture-3.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-3-InClass.R) | |
+|2/8  |Probability Distributions and Estimation |Q&K Chap. 2 ; Logan Chap. 3 |[Lecture notes 3](http://mlammens.github.io/Biostats/lectures/Lecture-3.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-3-InClass.R) | [Problem Set 2](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html)|
 |2/15 | NO CLASS | | | |
 |2/22 |Hypothesis Testing | | | |
 |2/29 |Non-parametric Methods | | | |

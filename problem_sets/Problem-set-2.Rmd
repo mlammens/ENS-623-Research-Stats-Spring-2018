@@ -1,9 +1,10 @@
 ---
 title: "Problem Set 2"
 author: "Matthew E. Aiello-Lammens"
-date: "February 1, 2016"
 output: html_document
 ---
+
+# DUE Monday February 22
 
 # Part 1
 
