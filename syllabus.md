@@ -68,7 +68,7 @@ I do not expect you to read all of what is listed here, but rather am pointing t
 |2/1  |Data Exploration and Probability Distributions |Q&K Chap. 1 & 4; Logan Chap. 3 & 5 | [Lecture notes 2](http://mlammens.github.io/Biostats/lectures/Lecture-2.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-2-InClass.R)| |
 |2/8  |Probability Distributions and Estimation |Q&K Chap. 2 ; Logan Chap. 3 |[Lecture notes 3](http://mlammens.github.io/Biostats/lectures/Lecture-3.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-3-InClass.R) | [Problem Set 2](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html)|
 |2/15 | NO CLASS | | | |
-|2/22 |Distributions and Hypothesis Testing |Q&K Chap. 3; Logan Chap. 6 | | |
+|2/22 |Distributions and Hypothesis Testing |Q&K Chap. 3; Logan Chap. 6 |[Lecture notes 4](http://mlammens.github.io/Biostats/lectures/Lecture-4.html) | |
 |2/29 |Non-parametric Methods | | | |
 |3/7  |Linear Models, Correlation, and Regression | | | |
 |3/14 |Multiple Regression and GLMs | | Take-home Midterm | |
