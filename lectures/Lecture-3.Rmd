@@ -6,7 +6,7 @@ output:
     toc: yes
 ---
 
-# Week 3 - Probability Distributions
+# Lecture 3 - Probability Distributions
 
 ## Review of homework 1
 
