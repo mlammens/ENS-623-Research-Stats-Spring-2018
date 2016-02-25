@@ -3,7 +3,7 @@ Problem Set 3: Probability Distributions
 
 **Suggested submission: Feb, 29 2016**
 
-## Part 1
+## Part 1 (10 pnts for function; 5 pnts for figures)
 
 Write a function in R that:
 
@@ -26,7 +26,7 @@ Draw a large number (10,000 is probably fine, but you can play around with it) o
 Plot these three histograms, preferably using `ggplot2` so that each histogram is on the same plot.
 (You could also use the `hist` function with the option `add = T`, which will allow you to plot them all on the same plot).
 
-## Part 2
+## Part 2 (5 pnts)
 
 Using 1000 random draws from the t-distribution (you can use your function or R’s built-in function here) and the Normal distribution, plot the QQ plot comparing them for $n = 5$, $n =50$, and $n =500$. 
 (Hint: Use the function `qqplot` and see Logan p. 118.) 
