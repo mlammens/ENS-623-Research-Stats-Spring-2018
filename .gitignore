@@ -51,3 +51,6 @@ data/QK_data*
 # Ignore submitted work
 submitted_work/*
 solutions/*
+
+# html in _posts folder
+_posts/*html
