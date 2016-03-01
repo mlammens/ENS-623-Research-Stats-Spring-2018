@@ -1,0 +1,40 @@
+---
+title: "Lecture 6"
+author: "Matthew E. Aiello-Lammens"
+date: "February 29, 2016"
+output: html_document
+---
+
+# Non-parametric tests
+
+Let's say our data don't fit the assumptions of the *t* test. What are our options?
+
+## Rank based tests - Mann-Whitney test
+
+Look at ranks, rather than actualy values.
+
+## Randomization tests
+
+Let's look at a dataset from Logan. 
+
+```{r}
+lizard <- read.csv(file = "https://mlammens.github.io/Biostats/data/Logan_Examples/Chapter6/Data/beetle.csv")
+
+library(ggplot2)
+ggplot() +
+  geom_boxplot(data = lizard, aes(x = SIZE, y = BEETLES) ) +
+  theme_bw()
+  
+```
+
+#### Major Challenge
+
+1. Calculate the *t*-statistic for differences in number of beetles consumed the two size classes of lizards.
+2. Randomize/ shuffle the data.
+3. Calculate the **new** *t*-statistic. Repeat this 999 times.
+4. How does the observed *t*-stat compare to the generated *t*-stats?
+
+
+# Relationships among the distributions
+
+![distribution relationships](/Volumes/Garage/Professional-Annex/SBU-Grad-School/SBU-Teaching/Biometry-BEE-552-SP13/Figure adapted from Leemis (1986).pdf) 
