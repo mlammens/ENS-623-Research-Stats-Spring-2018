@@ -1,9 +1,169 @@
 ---
-title: "Lecture 6"
+title: "Lecture 6 - Hypothesis Testing and Introduction to Linear Models"
 author: "Matthew E. Aiello-Lammens"
 date: "February 29, 2016"
 output: html_document
 ---
+
+# Hypothesis testing
+
+#### Challenge
+
+What are the general steps to hypothesis testing?
+
+See p. 33-34 in Q&K. Fisher's approach below:
+
+* Construct null hypothesis ($H_0$)
+* Choose a test stat that measures deviation from null
+* Collect data and compare the value of the test stat to the known distribution of that stat.
+* Determine p-val
+* Accept or reject null
+
+What are some of the potential problems with this approach?
+
+### Our data or something more extreme
+
+When we use a sampling distribution for our test statistic (e.g., the *t* distribution), we are asking "what is the probability of observing our data, or something more extreme, in the long run, if $H_0$ is true."
+Mathematically, this can be written as:
+
+$$
+P(data|H_0)
+$$
+
+## Examples of parametric hypothesis testing
+
+In [Lecture 5](http://mlammens.github.io/Biostats/lectures/Lecture-5.html) we discussed the generic form of the *t* statistic:
+
+$$
+t_s = \frac{St - \theta}{S_{St}}
+$$
+
+where $St$ is the value of some statistic (e.g., the mean) from our **sample**, $\theta$ is the **population** value for that statistic, and $S_{St}$ is the estimated standard error of the statistic $St$ (based on our sample).
+
+How can we use this formula to test whether two samples are drawn from the same population?
+
+Imagine the case where we have two different samples, and for each we're testing whether the means are different from the population means.
+We then have:
+
+$$
+t = \frac{\bar{y_1}-\mu_1}{s_{\bar{y}_1}}
+$$
+
+and
+
+$$
+t = \frac{\bar{y_2}-\mu_2}{s_{\bar{y}_2}}
+$$
+
+If the two samples are drawn from the same population, then $\mu_1 = \mu_2$, or $\mu_1 - \mu_2 = 0$.
+
+We can then write our *t* stat as:
+
+$$
+t = \frac{(\bar{y_1} - \bar{y_2}) - (\mu_1 - \mu_2)}{s_{\bar{y}_1 - \bar{y}_2}}
+$$
+
+which simplifies to:
+
+$$
+t = \frac{\bar{y_1} - \bar{y_2}}{s_{\bar{y}_1 - \bar{y}_2}}
+$$
+
+where $s_{\bar{y}_1 - \bar{y}_2}$ is the standard error of the difference between the means and is equal to:
+
+$$
+s_{\bar{y}_1 - \bar{y}_2} = 
+\sqrt{
+\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 -2}
+(\frac{1}{n_1} + \frac{1}{n_2})
+}
+$$
+
+
+### Differences in fecundity of intertidal gastropods in two different intertidal zones (Example 6A in Logan, Box 3.1 in Q&K)
+
+Ward and Quinn (1988) investigated the differences in fecundity of *Lepsiella vinosa* in two different intertidal zones (mussel zone and littorinid zone). 
+
+Get the data and have a quick look
+
+```{r}
+gastro <- read.csv(file = "https://mlammens.github.io/Biostats/data/Logan_Examples/Chapter6/Data/ward.csv")
+summary(gastro)
+View(gastro)
+```
+
+Make a box plot to help assess differences in variance and deviations from normality.
+
+```{r}
+library(ggplot2)
+
+ggplot() +
+  geom_boxplot(data = gastro, aes(x = ZONE, y = EGGS)) +
+  theme_bw()
+
+```
+
+Calculate means and standard deviations of each group separatley. We will be using `dplyr` for this.
+
+```{r}
+library(dplyr)
+
+gastro %>%
+  group_by(ZONE) %>%
+  summarise(Mean = mean(EGGS), Var = var(EGGS))
+
+```
+
+
+Run *t* test.
+
+```{r}
+(gastro_t_test <- t.test(data = gastro, EGGS ~ ZONE, var.equal = TRUE))
+
+gastro_t_test$estimate[1] - gastro_t_test$estimate[2]
+
+```
+
+
+### Metabolic rates of northern fulmars (sea-bird)
+
+Furness and Bryant (1996) measured the metabolic rates of male and female breeding northern fulmars, and tested if there were any observalbe differences in these rates.
+
+Get the data and have a look
+
+```{r}
+fulmars <- read.csv(file = "https://mlammens.github.io/Biostats/data/Logan_Examples/Chapter6/Data/furness.csv")
+fulmars
+summary(fulmars)
+```
+
+Make a box plot to help assess differences in variance and deviations from normality.
+
+```{r}
+ggplot() +
+  geom_boxplot(data = fulmars, aes(x = SEX, y = METRATE)) +
+  theme_bw()
+
+```
+
+#### Challange
+
+Are the variances the same?
+
+Calculate means and standard deviations of each group separatley. We will be using `dplyr` for this.
+
+```{r}
+fulmars %>%
+  group_by(SEX) %>%
+  summarise(Mean = mean(METRATE), Var = var(METRATE))
+
+```
+
+Based on inequality of variances, use Welch's *t*-test.
+
+```{r}
+(fulmars_t_test <- t.test(data = fulmars, METRATE ~ SEX, var.equal = FALSE))
+```
 
 # Non-parametric tests
 
@@ -11,21 +171,50 @@ Let's say our data don't fit the assumptions of the *t* test. What are our optio
 
 ## Rank based tests - Mann-Whitney test
 
-Look at ranks, rather than actualy values.
+Look at ranks, rather than actual values.
+
+From Q&K p. 47:
+
+1. Rank all observations, ignoring groups. Tied observations get the average of their ranks.
+2. Calculate the sum of the ranks for both samples. If $H_0$ is true, then you should expect similar sums.
+3. Compare the smaller rank sum to the probability distribution of rank sums, based on repeated randomization of observations to groups.
+4. If sample sizes are large, the probability distribution of rank sums approximates a normal distribution and the *z* statistic can be used.
 
 ## Randomization tests
 
-Let's look at a dataset from Logan. 
+Powell and Russel (1984, 1985) investigated differences in bettle consumption between two size classes of eastern horned lizards.
+
+
+Get the data and look at it
 
 ```{r}
 lizard <- read.csv(file = "https://mlammens.github.io/Biostats/data/Logan_Examples/Chapter6/Data/beetle.csv")
+head(lizard)
+summary(lizard)
+```
 
-library(ggplot2)
+Have a look at the box plots for these data.
+
+```{r}
 ggplot() +
   geom_boxplot(data = lizard, aes(x = SIZE, y = BEETLES) ) +
   theme_bw()
-  
 ```
+
+
+Let's also look at the histograms of these data
+
+```{r}
+ggplot() +
+  geom_histogram(data = lizard, aes(x = BEETLES, fill = SIZE) ) +
+  facet_grid( . ~ SIZE ) +
+  theme_bw()
+```
+
+#### Challenge
+
+What do you observe here that seems like a strong violation to the assumptions of a *t* test?
+
 
 #### Major Challenge
 
@@ -33,6 +222,146 @@ ggplot() +
 2. Randomize/ shuffle the data.
 3. Calculate the **new** *t*-statistic. Repeat this 999 times.
 4. How does the observed *t*-stat compare to the generated *t*-stats?
+
+
+```{r}
+## Run t-test
+t.test(data = lizard, BEETLES ~ SIZE)
+
+## Record the original t-stat
+t_orig <- t.test(data = lizard, BEETLES ~ SIZE)$statistic
+
+## Initiate vector of new t-stat values
+t_rand <- c()
+
+## Set the number of reps (shuffles) we want to use
+reps <- 1000
+
+## Begin for loop to randomize data
+for ( int in 1:reps){
+  
+  ## Shuffle the data
+  lizard_shuffled <- data.frame(SIZE = sample(lizard$SIZE), BEETLES = lizard$BEETLES)
+  
+  ## Run the t-test on the new data, and save the t-stat to the t_rand vector
+  t_rand <- c( t_rand,
+               t.test(data = lizard_shuffled, BEETLES ~ SIZE)$statistic )
+  
+}
+
+ggplot() + 
+  geom_histogram(data = NULL, aes(x = t_rand)) +
+  geom_vline(xintercept = t_orig, colour = "red") +
+  theme_bw()
+
+```
+
+
+To calculate how likely our original *t* statistic is, look at how many values are more extreme.
+Remember to check both tails.
+
+```{r}
+t_rand_extreme <- sum(abs(t_rand) > t_orig)
+
+(p_t_orig <- t_rand_extreme/ reps)
+
+```
+
+## Multiple testing
+
+* If you perform a singly hypothesis test, using $\alpha = 0.05$, what is the probability that you reject the null hypothesis, even though the null is correct?
+
+* If you perform 20 hypothesis tests, using $\alpha = 0.05$, what is the probability that in at least one of those cases, you will reject the null hypothesis, even though it is correct?
+
+
+### Example of problems with multiple comparisons
+
+Make some random data - 10 sets of 10 observations from the standard normal.
+**We know that all of these sets are from the exact same population!**
+
+```{r}
+my_data <- list()
+for (i in 1:20) {
+    my_data[[i]] <- rnorm(10)  #Note the double brackets for a list
+}
+```
+
+Run a *t* test for all possible pair-wise comparisons.
+
+```{r}
+p_vals <- matrix(ncol = 20, nrow = 20)
+for (i in 1:19) {
+    for (j in (i + 1):20) {
+        p_vals[i, j] <- t.test(my_data[[i]], my_data[[j]])$p.value
+    }
+}
+p_vals
+```
+
+How many are false possitives?
+
+```{r}
+sum(p_vals < 0.05, na.rm = TRUE)
+```
+
+# Introduction to Linear Models
+
+## Statistical Models
+
+From Logan, p. 151:
+
+> A **statistical model** is an expression that attempts to explain patterns in the observed values of a *response variable* by relating the response variable to a set of *predictor variables* and parameters.
+
+A generic model looks like:
+
+response variable = model + error
+
+### Simple linear model
+
+$$
+y = bx + a
+$$
+
+where $b$ is the slope and $a$ is the y-intercept.
+
+**Board material**
+
+### Simple example
+
+Effects of starvation and humidity on water loss in the confused flour beetle.
+Here, looking at the relationship between humidity and weight loss
+
+```{r}
+flr_beetle <- read.csv(file = "https://mlammens.github.io/Biostats/data/Logan_Examples/Chapter8/Data/nelson.csv")
+flr_beetle
+```
+
+Plot these data
+
+```{r}
+ggplot() +
+  geom_point(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
+  theme_bw()
+```
+
+Run a linear regression
+
+```{r}
+flr_beetle_lm <- lm(data = flr_beetle, WEIGHTLOSS ~ HUMIDITY)
+
+flr_beetle_lm
+
+summary(flr_beetle_lm)
+```
+
+Plot these data, with `lm` fit
+
+```{r}
+ggplot(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
+  geom_point() +
+  stat_smooth(method = "lm") +
+  theme_bw()
+```
 
 
 # Relationships among the distributions
