@@ -1,0 +1,56 @@
+---
+title: "Lecture 7 - Linear Models, Correlation, and Regression"
+author: "Matthew E. Aiello-Lammens"
+output: 
+  html_document: 
+    toc: yes
+---
+
+# Logistics
+
+* Solution sets for problem sets 1-3 will be posted on the Open Science Framework site on 3/21. This will also be the last day to submit any past assignments.
+* The take-home midterm will be distributed tomorrow afternoon.
+* The midterm is due Monday, 3/28.
+
+# Relationships among the distributions
+
+![distribution relationships](/Volumes/Garage/Professional-Annex/SBU-Grad-School/SBU-Teaching/Biometry-BEE-552-SP13/Figure adapted from Leemis (1986).pdf) 
+
+
+### Simple example
+
+Effects of starvation and humidity on water loss in the confused flour beetle.
+Here, looking at the relationship between humidity and weight loss
+
+```{r}
+flr_beetle <- read.csv(file = "https://mlammens.github.io/Biostats/data/Logan_Examples/Chapter8/Data/nelson.csv")
+flr_beetle
+```
+
+Plot these data
+
+```{r}
+ggplot() +
+  geom_point(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
+  theme_bw()
+```
+
+Run a linear regression
+
+```{r}
+flr_beetle_lm <- lm(data = flr_beetle, WEIGHTLOSS ~ HUMIDITY)
+
+flr_beetle_lm
+
+summary(flr_beetle_lm)
+```
+
+Plot these data, with `lm` fit
+
+```{r}
+ggplot(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
+  geom_point() +
+  stat_smooth(method = "lm") +
+  theme_bw()
+```
+
