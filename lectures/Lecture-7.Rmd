@@ -16,8 +16,71 @@ output:
 
 ![distribution relationships](/Volumes/Garage/Professional-Annex/SBU-Grad-School/SBU-Teaching/Biometry-BEE-552-SP13/Figure adapted from Leemis (1986).pdf) 
 
+# Linear model review
 
-### Simple example
+**Written Notes - Pages 1-3**
+
+## Co-variation
+
+Calcualte covariation between sepal length and sepal width, using the `iris` dataset.
+
+```{r}
+data(iris)
+head(iris)
+
+library(ggplot2)
+qplot(x = iris$Sepal.Length, y = iris$Sepal.Width, colour = iris$Species) +
+  theme_bw()
+
+covar <- sum((iris$Sepal.Length - mean(iris$Sepal.Length)) * (iris$Sepal.Width - mean(iris$Sepal.Width)))/ (nrow(iris) - 1)
+
+## Confirm
+var(x = iris$Sepal.Length, y = iris$Sepal.Width)
+
+```
+
+
+**Written Notes - Page 4**
+
+## Correlation
+
+Calculate the correlation between sepal length and sepal width, and calculate whether $r$ is significantly different from 0 or not.
+
+```{r}
+cor_iris <- covar / (sd(iris$Sepal.Length)*sd(iris$Sepal.Width))
+
+se_cor_iris <- sqrt((1 - cor_iris^2)/(nrow(iris) - 2))
+
+t_cor_iris <- cor_iris/se_cor_iris
+
+dt(x = t_cor_iris, df = (nrow(iris)-2))
+
+## Use `cor` to find correlation value
+with(data = iris, cor(x = Sepal.Length, y = Sepal.Width, method = "pearson"))
+
+## Test the correlation
+with(data = iris, cor.test(x = Sepal.Length, y = Sepal.Width, method = "pearson"))
+
+
+```
+
+
+## Robust correlation
+
+For Pearson's correlation coefficient to be appropriate, the data should have:
+
+1. A linear relationship
+2. A bivariate normal distribution
+
+* Spearman's Rank Correlation - calculates correlation on ranks of observed values
+* Kendall's Rank Correlation
+
+
+# Linear regression
+
+Now we assume that any change in **y** is due to a change in **x**.
+
+## Example of linear regression
 
 Effects of starvation and humidity on water loss in the confused flour beetle.
 Here, looking at the relationship between humidity and weight loss
@@ -40,7 +103,8 @@ Run a linear regression
 ```{r}
 flr_beetle_lm <- lm(data = flr_beetle, WEIGHTLOSS ~ HUMIDITY)
 
-flr_beetle_lm
+## This will give us a multitude of diagnostic plots
+plot(flr_beetle_lm)
 
 summary(flr_beetle_lm)
 ```

@@ -1,7 +1,6 @@
 ---
 title: "Lecture 6 - Hypothesis Testing and Introduction to Linear Models"
 author: "Matthew E. Aiello-Lammens"
-date: "February 29, 2016"
 output: 
   html_document: 
     toc: yes
