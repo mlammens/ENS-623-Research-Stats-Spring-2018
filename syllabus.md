@@ -71,7 +71,7 @@ I do not expect you to read all of what is listed here, but rather am pointing t
 |2/22 |Distributions and Hypothesis Testing |Q&K Chap. 2; Logan Chap. 3 |[Lecture notes 4](http://mlammens.github.io/Biostats/lectures/Lecture-4.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-4-InClass.R) |[Problem Set 3](http://mlammens.github.io/Biostats/problem_sets/Problem-set-3.html) |
 |2/29 |Estimation, Hypothesis Testing |Q&K Chap. 3; Logan Chap. 6  |[Lecture notes 5](http://mlammens.github.io/Biostats/lectures/Lecture-5.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-5-InClass.R) | |
 |3/7  |Hypothesis Testing, Non-parametric Methods, Introduction to Linear Models |Q&K Chap. 3; Logan Chap. 6 |[Lecture notes 6](http://mlammens.github.io/Biostats/lectures/Lecture-6.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-6-InClass.R) | |
-|3/14 |Correlation, Regression, Multiple Regression and GLMs | | [Lecture notes 7](http://mlammens.github.io/Biostats/lectures/Lecture-7.html); [Lecture notes 7 - addition](http://mlammens.github.io/Biostats/lectures/Lecture-7-Notes.pdf); Take-home Midterm | |
+|3/14 |Correlation, Regression, Multiple Regression and GLMs | | [Lecture notes 7](http://mlammens.github.io/Biostats/lectures/Lecture-7.html); [Lecture notes 7 - addition](http://mlammens.github.io/Biostats/lectures/Lecture-7-Notes.pdf); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-7-InClass.R); Take-home Midterm | |
 |3/21 | NO CLASS | | | |
 |3/28 |ANOVA | | | |
 |4/4  |Nested and Factorial ANOVA | | | |

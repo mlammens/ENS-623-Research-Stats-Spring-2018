@@ -53,7 +53,8 @@ se_cor_iris <- sqrt((1 - cor_iris^2)/(nrow(iris) - 2))
 
 t_cor_iris <- cor_iris/se_cor_iris
 
-dt(x = t_cor_iris, df = (nrow(iris)-2))
+## Calculate the probability of getting our t value, or one more extreme
+pt(q = t_cor_iris, df = (nrow(iris)-2))*2
 
 ## Use `cor` to find correlation value
 with(data = iris, cor(x = Sepal.Length, y = Sepal.Width, method = "pearson"))

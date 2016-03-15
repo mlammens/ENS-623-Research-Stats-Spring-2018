@@ -175,8 +175,9 @@ se_cor_iris &lt;- sqrt((1 - cor_iris^2)/(nrow(iris) - 2))
 
 t_cor_iris &lt;- cor_iris/se_cor_iris
 
-dt(x = t_cor_iris, df = (nrow(iris)-2))</code></pre>
-<pre><code>## [1] 0.141197</code></pre>
+## Calculate the probability of getting our t value, or one more extreme
+pt(q = t_cor_iris, df = (nrow(iris)-2))*2</code></pre>
+<pre><code>## [1] 0.1518983</code></pre>
 <pre class="r"><code>## Use `cor` to find correlation value
 with(data = iris, cor(x = Sepal.Length, y = Sepal.Width, method = &quot;pearson&quot;))</code></pre>
 <pre><code>## [1] -0.1175698</code></pre>
