@@ -52,5 +52,8 @@ data/QK_data*
 submitted_work/*
 solutions/*
 
+# Ignore exams
+exams/*
+
 # html in _posts folder
 _posts/*html
