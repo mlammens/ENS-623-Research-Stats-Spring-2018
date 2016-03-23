@@ -84,6 +84,7 @@ I do not expect you to read all of what is listed here, but rather am pointing t
 ## Data sets
 
 * M&M color counts from our bags during class 1: [class_mm_data.csv](http://mlammens.github.io/Biostats/data/class_mm_data.csv)
+* Logan (2010) datasets can be found [here](https://mlammens.github.io/Biostats/data/Logan_Examples/).
 
 ## Accommodations for Students with Disabilities
 
