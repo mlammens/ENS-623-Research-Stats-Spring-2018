@@ -1,0 +1,335 @@
+---
+title: "Lecture 8 - Linear Regression and Multiple Regression"
+author: "Matthew E. Aiello-Lammens"
+output: 
+  html_document: 
+    toc: yes
+---
+
+# Logistics
+
+* Exam check-in
+* Homework 4 will be posted by Tuesday evening
+* Schedule individual meetings to discuss project
+
+# Linear regression - review
+
+**Written notes - page XXX***
+
+## Example of linear regression
+
+Effects of starvation and humidity on water loss in the confused flour beetle.
+Here, looking at the relationship between humidity and weight loss
+
+```{r}
+flr_beetle <- read.csv(file = "https://mlammens.github.io/Biostats/data/Logan_Examples/Chapter8/Data/nelson.csv")
+flr_beetle
+```
+
+Plot these data
+
+```{r}
+library(ggplot2)
+
+ggplot() +
+  geom_point(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
+  theme_bw()
+```
+
+Run a linear regression
+
+```{r}
+flr_beetle_lm <- lm(data = flr_beetle, WEIGHTLOSS ~ HUMIDITY)
+
+summary(flr_beetle_lm)
+```
+
+Plot these data, with `lm` fit
+
+```{r}
+ggplot(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
+  geom_point() +
+  stat_smooth(method = "lm") +
+  theme_bw()
+```
+
+### Linear regression assumptions
+
+#### The big three:
+
+1. **Normality:** The $y_i$ **AND** error values ($\epsilon_i$) are normally distributed. If normality is violated, *p*-values and confidence intervals may be inaccurate and unreliable.
+2. **Homogeneity of variance:** The $y_i$ **AND** error values ($\epsilon_i$) have the same variance for each $x_i$. 
+3. **Independence:** The $y_i$ **AND** error values are independent of *each other*.
+
+#### Other assumptions:
+
+* **Linearity:** The relationship between $x_i$ and $y_i$ is linear (only important when using simple linear regression).
+* **Fixed X values:** The $x_i$ values are measured without error. In practice this means the error in the $x_i$ values is much smaller than that in the $y_i$ values.
+
+### Linear regression diagnostics
+
+* **Leverage:** a measure of how extreme a value in **x-space** is (i.e., along the x-axis) and how much of an influence each $x_i$ has on $\hat{y}_i$. High leverage values indicate that model is unduly influenced by an outlying value.
+
+* **Residuals:** the differences between the observed $y_i$ values and the predicted $\hat{y}_i$ values. Looking at the pattern between residuals and $\hat{y}_i$ values can yield important information regarding violation of model assumptions (e.g., homogeneity of variance).
+
+* **Cook's D:** a statistics that offers a measure of the influence of each data point on the fitted model that incorporates both leverage and residuals. Values $\ge 1$ are considered "suspect".
+
+
+
+```{r}
+plot(flr_beetle_lm)
+```
+
+## Standard error of regression coefficients, the regression line, and $\hat{y}_i$ predictions
+
+Regression coefficients are statistics and thus we can determine the standard error of these statistics.
+From there, we can use these values and the *t*-distribution to determine confidence intervals.
+For example, the confidence interval for $b_1$ is:
+
+$$
+b_1 \pm t_{0.05, n-2}s_{b_{1}}
+$$
+
+### $\beta_1$ standard error
+
+$$
+s_{b_{1}} = \sqrt{ \frac{MS_{Residual}}{\sum^n_{i=1}(x_i-\bar{x})^2} }
+$$
+
+### $\beta_0$ standard error
+
+$$
+s_{b_{0}} = \sqrt{ MS_{Residual} [\frac{1}{n} + \frac{\bar{x}^2}{\sum^n_{i=1}(x_i-\bar{x})^2}] }
+$$
+
+### Confidence bands for regression line 
+
+From Quinn and Keough, p. 87:
+
+> The 95% confidence band is a biconcave band that will contain the true population regression line 95% of the time.
+
+### $\hat{y}_i$ standard error
+
+$$
+s_{\hat{y}} = \sqrt{ MS_{Residual} [1 + \frac{1}{n} + \frac{x_p - \bar{x}^2}{\sum^n_{i=1}(x_i-\bar{x})^2}] }
+$$
+
+where $x_p$ is the value from $x$ we are "predicting" a $y$ value for.
+
+
+## My model looks good, but is it meaningful?
+
+In order to determine if your linear regression model is meaningful (or *significant*) you must compare the **variance explained** by your model versus the **variance unexplained**.
+
+![Logan - Figure 8.3](/Users/mlammens/Google Drive/Professional/Websites/Biostats/lectures/logan-fig-8-3.png)
+
+Note that there is a typo in this figure in panel (c). Instead of "Explained variability", the arrow tag should be "Unexplained variability".
+
+# Regression and regression-like techniques we will not be covering in depth
+
+Below is a list of techniques that are covered well in both of the class textbooks. 
+
+* Model II regression - e.g. Major axis regression. Used to deal with uncertain $x_i$ values
+* Running medians - generation of predicted values ($\hat{y}_i$) that are *medians* of the responses in the bands surrounding each observation
+* LOESS (or LOWESS) - local least-square regression fits, glued together
+* kernel smoothers - weighted average values of $y_i$'s within a band of $x_i$ values
+* splines - combined series of polynomial fits generated using windows of the data
+
+# Multiple linear regression
+
+What do we do when we have two or more predictors?
+
+**See written notes -- page 2**
+
+Also, look at this totally awesome site! [Visualizing Relations in Multiple Regression](http://www.math.yorku.ca/SCS/spida/lm/visreg.html)
+
+## Additive model
+
+Only the predictors themselves are considered.
+
+$$
+y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + ... + \beta_j x_{ij} + \epsilon_i
+$$
+
+
+## Multiplicative model
+
+The predictors **and the interactions** between predictors are considered. 
+
+$$
+y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \beta_3 x_{i1} x_{i2} + ... + \beta_j x_{ij} + \epsilon_i
+$$
+
+
+where $\beta_3 x_{i1} x_{i2}$ is the interactive effect of $X_1$ and $X_2$ on $Y$ and it examines the degree to which the effect of one of the predictor variables depends on the levels of the other (Logan p. 209).
+
+**NOTE:** There are many more coefficients that need to be estimated in the multiplicative model!
+
+## Additional assumption(s) to consider
+
+* **(Multi)collinearity** - the predictor variables should not be highly correlated.
+
+### Example of collinearity 
+
+Temperature in June and temperature in July
+
+### Example of (potentially) meaningful interaction 
+
+Temperature in June and rainfall in June
+
+### Assessing collinearity
+
+* Look at pair-wise correlation values among all predictor variables
+* calculate **tolerance**, or its inverse **Variance Inflation Factor**, for each predictor variable. For VIF, we should be cautios if values are greater than 5, and down right concerned if they are greater than 10.
+
+## Example of addative multiple linear regression
+
+Loyn (1987) investigated the effects of habitat fragmentation on abundance of forest birds. He considered multiple predictor variables associated with fragmentation or other important environmental conditions.
+
+Get data and examine.
+
+```{r}
+bird_frag <- read.csv(file = "https://mlammens.github.io/Biostats/data/Logan_Examples/Chapter9/Data/loyn.csv")
+summary(bird_frag)
+```
+
+Plot these data.
+
+```{r}
+library(GGally)
+ggpairs(bird_frag)
+```
+
+We can clearly see here that some of our predictor variables are **not normally distributed**, particularly AREA, and to a lesser extent DIST and LDIST. 
+We will try to transform these data, to see if we can get them to look a bit more normal.
+
+```{r}
+bird_frag_transform <- bird_frag
+
+bird_frag_transform$AREA <- log10(bird_frag$AREA)
+bird_frag_transform$DIST <- log10(bird_frag$DIST)
+bird_frag_transform$LDIST <- log10(bird_frag$LDIST)
+```
+
+Replot.
+
+```{r}
+ggpairs(bird_frag_transform)
+```
+
+We also see here that there are no extremely high correlations among the predictor variables.
+How we define "extremely high" is relatively arbitrary, but generally anything greater than 0.8.
+
+To be safe, we'll examine the VIFs.
+
+```{r}
+library(car)
+
+vif(lm(data = bird_frag, ABUND ~ log10(AREA) + YR.ISOL + log10(DIST) + log10(LDIST) + GRAZE + ALT))
+```
+
+And, we're good.
+
+Now run the multiple linear regression model.
+
+```{r}
+bird_frag_lm <- lm(data = bird_frag, ABUND ~ log10(AREA) + YR.ISOL + log10(DIST) + log10(LDIST) + GRAZE + ALT)
+```
+
+Diagnostic plots.
+
+```{r}
+plot(bird_frag_lm)
+```
+
+Looks good!
+
+Now look at the model summary.
+
+```{r}
+summary(bird_frag_lm)
+```
+
+What if we wanted to look at each partial regression plot? Use `av.plots` from the `car` package.
+
+```{r}
+avPlots(bird_frag_lm, ask = F)
+```
+
+Another way to **approximately visualize** these relationships.
+
+```{r}
+library(reshape)
+
+bird_frag_transform_melt <- melt(bird_frag_transform, id.vars = c("ABUND"))
+
+ggplot(data = bird_frag_transform_melt, aes(x = value, y = ABUND)) +
+  geom_point() +
+  stat_smooth(method = "lm") +
+  facet_wrap( ~variable, scales = "free" )
+
+```
+
+***
+
+## Example of multiplicative multiple linear regression
+
+Paruelo and Lauenroth (1996) examined the relationships between the abundance of $C_3$ plants (those that use $C_3$ photosynthesis) and geographic and climactic variables.
+Here we are only going to consider the geographic variables.
+
+Get data and examine.
+
+```{r}
+c3_plants <- read.csv(file = "https://mlammens.github.io/Biostats/data/Logan_Examples/Chapter9/Data/paruelo.csv")
+summary(c3_plants)
+```
+
+Again, we're only going to consider the geographic variable - lattitude and longitude (LONG and LAT).
+
+Have a look at these data in graphical format.
+
+```{r}
+ggpairs(c3_plants)
+```
+
+C3 abundance is not normally distributed. Let's convert using a `log10(C3 + 0.1)` conversion.
+The `+ 0.1` is needed because the log of 0 is negative infinity.
+
+Also, we should center the lat and long data.
+
+```{r}
+c3_plants$LAT <- scale(c3_plants$LAT, scale = FALSE)
+c3_plants$LONG <- scale(c3_plants$LONG, scale = FALSE)
+```
+
+We can create a model with an interaction term in two ways. They yield identical results.
+
+```{r}
+c3_plants_lm1 <- lm(data = c3_plants, log10(C3 + 0.1) ~ LONG + LAT + LONG:LAT)
+
+c3_plants_lm2 <- lm(data = c3_plants, log10(C3 + 0.1) ~ LONG*LAT)
+```
+
+Check out the summary results of both.
+
+```{r}
+summary(c3_plants_lm1)
+
+summary(c3_plants_lm2)
+```
+
+Look at diagnostic plots.
+
+```{r}
+plot(c3_plants_lm1)
+```
+
+Look at non-interaction model.
+
+```{r}
+c3_plants_lm_noint <- lm(data = c3_plants, log10(C3 + 0.1) ~ LONG + LAT)
+
+summary(c3_plants_lm_noint)
+
+anova(c3_plants_lm_noint,c3_plants_lm1)
+```

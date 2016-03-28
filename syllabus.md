@@ -73,7 +73,7 @@ I do not expect you to read all of what is listed here, but rather am pointing t
 |3/7  |Hypothesis Testing, Non-parametric Methods, Introduction to Linear Models |Q&K Chap. 3; Logan Chap. 6 |[Lecture notes 6](http://mlammens.github.io/Biostats/lectures/Lecture-6.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-6-InClass.R) | |
 |3/14 |Correlation and Regression| | [Lecture notes 7](http://mlammens.github.io/Biostats/lectures/Lecture-7.html); [Lecture notes 7 - addition](http://mlammens.github.io/Biostats/lectures/Lecture-7-Notes.pdf); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-7-InClass.R) |Take-home Midterm  |
 |3/21 | NO CLASS | | | |
-|3/28 | Regression, Multiple Regression and GLMs | | | |
+|3/28 | Regression, Multiple Regression, and Non-linear regression | |[Lecture notes 8](http://mlammens.github.io/Biostats/lectures/Lecture-8.html) | |
 |4/4  | ANOVA | | | |
 |4/11 |Nested and Factorial ANOVA | | | |
 |4/18 |Two-way and Multi-way ANOVA | | | |

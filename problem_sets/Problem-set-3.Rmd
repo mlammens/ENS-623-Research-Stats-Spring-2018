@@ -28,6 +28,6 @@ Plot these three histograms, preferably using `ggplot2` so that each histogram i
 
 ## Part 2 (5 pnts)
 
-Using 1000 random draws from the t-distribution (you can use your function or R’s built-in function here) and the Normal distribution, plot the QQ plot comparing them for $n = 5$, $n =50$, and $n =500$. 
+Using 1000 random draws from the t-distribution (you can use your function or R’s built-in function here) and the Normal distribution, plot the QQ plot comparing them for $n = 5$, $n =50$, and $n =500$ (NOTE: if you are using the built-in function, you will want to set `df` to $5$, $50$, and $500$, not `n`). 
 (Hint: Use the function `qqplot` and see Logan p. 118.) 
 For easy comparison, put all three scatterplots on the same plot, using different colors to distinguish the three cases.
