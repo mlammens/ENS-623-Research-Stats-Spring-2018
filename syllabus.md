@@ -73,9 +73,9 @@ I do not expect you to read all of what is listed here, but rather am pointing t
 |3/7  |Hypothesis Testing, Non-parametric Methods, Introduction to Linear Models |Q&K Chap. 3; Logan Chap. 6 |[Lecture notes 6](http://mlammens.github.io/Biostats/lectures/Lecture-6.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-6-InClass.R) | |
 |3/14 |Correlation and Regression| | [Lecture notes 7](http://mlammens.github.io/Biostats/lectures/Lecture-7.html); [Lecture notes 7 - addition](http://mlammens.github.io/Biostats/lectures/Lecture-7-Notes.pdf); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-7-InClass.R) |Take-home Midterm  |
 |3/21 | NO CLASS | | | |
-|3/28 | Regression, Multiple Regression, and Non-linear regression | |[Lecture notes 8](http://mlammens.github.io/Biostats/lectures/Lecture-8.html); [Lecture notes 8 - addition](http://mlammens.github.io/Biostats/lectures/Lecture-8-Notes.pdf) | |
-|4/4  | ANOVA | | | |
-|4/11 |Nested and Factorial ANOVA | | | |
+|3/28 | Regression and Multiple Regression |Q&K Chap. 5 & 6; Logan Chap. 8 & 9 |[Lecture notes 8](http://mlammens.github.io/Biostats/lectures/Lecture-8.html); [Lecture notes 8 - addition](http://mlammens.github.io/Biostats/lectures/Lecture-8-Notes.pdf); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-8-InClass.R) |[Problem Set 4](http://mlammens.github.io/Biostats/problem_sets/Problem-set-4.html) |
+|4/4  |Multiple and complex regression; Review of Midterm |Q&K Chap. 6; Logan Chap. 9 | | |
+|4/11 |ANOVA; Nested and Factorial ANOVA | | | |
 |4/18 |Two-way and Multi-way ANOVA | | | |
 |4/25 |ANCOVA; Analysis of Frequencies | | | |
 |5/2  |Project Presentations | | | PROJECT PAPERS DUE |
