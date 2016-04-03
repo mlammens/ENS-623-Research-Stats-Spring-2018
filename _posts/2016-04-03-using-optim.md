@@ -1,8 +1,7 @@
 ---
-title: "Using the `optim` function"
-output: 
-  html_document: 
-    keep_md: yes
+layout: post
+title: Using the `optim` function
+comments: True
 ---
 
 
@@ -13,7 +12,8 @@ Instead of writing a negative log-likelihood function for the normal distributio
 
 As in Lecture 5, in this example, we'll generate some fake “data” by drawing random samples from a $N(\mu=1,\sigma=2)$.
 
-```{r}
+
+```r
 x <- rnorm(1000, mean = 1, sd = 2)
 ```
 
@@ -26,7 +26,8 @@ Inside the function, we explicitely define the mean and std. dev. values, then c
 So this line in our function returns the **negative log-likelihood** value for the data in `x` **GIVEN** a mean and std. dev. value defined in `params`.
 
 
-```{r}
+
+```r
 neg.ll.v2 <- function(x, params) {
     mu = params[1]
     sigma = params[2]
@@ -37,9 +38,28 @@ neg.ll.v2 <- function(x, params) {
 
 Now we maximize the log-likelihood using the function `optim`:
 
-```{r}
+
+```r
 opt1 <- optim(par = c(1, 1), fn = neg.ll.v2, x = x)
 opt1
+```
+
+```
+## $par
+## [1] 0.9111144 1.9992149
+## 
+## $value
+## [1] 2111.662
+## 
+## $counts
+## function gradient 
+##       65       NA 
+## 
+## $convergence
+## [1] 0
+## 
+## $message
+## NULL
 ```
 
 In the example above, my iniitial guesses at the mean and std. dev. were 1 and 1.
