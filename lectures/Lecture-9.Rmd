@@ -6,6 +6,16 @@ output:
     toc: yes
 ---
 
+# Review of Midterm 
+
+## Poison distribution question
+
+Midterm answers on OSF site.
+
+# Linear Regression
+
+## Quick review to go over material from [Lecture 8](http://mlammens.github.io/Biostats/lectures/Lecture-8.html).
+
 ## Example of multiplicative multiple linear regression
 
 Paruelo and Lauenroth (1996) examined the relationships between the abundance of $C_3$ plants (those that use $C_3$ photosynthesis) and geographic and climactic variables.
@@ -18,11 +28,14 @@ c3_plants <- read.csv(file = "https://mlammens.github.io/Biostats/data/Logan_Exa
 summary(c3_plants)
 ```
 
-Again, we're only going to consider the geographic variable - lattitude and longitude (LONG and LAT).
+Again, we're only going to consider the geographic variable - latitude and longitude (LONG and LAT).
 
 Have a look at these data in graphical format.
 
 ```{r}
+library(ggplot2)
+library(GGally)
+
 ggpairs(c3_plants)
 ```
 
@@ -36,6 +49,17 @@ c3_plants$LAT <- scale(c3_plants$LAT, scale = FALSE)
 c3_plants$LONG <- scale(c3_plants$LONG, scale = FALSE)
 ```
 
+
+Make and look at non-interaction model.
+
+```{r}
+c3_plants_lm_noint <- lm(data = c3_plants, log10(C3 + 0.1) ~ LONG + LAT)
+
+summary(c3_plants_lm_noint)
+```
+
+
+Make and look at model **with interactions**. 
 We can create a model with an interaction term in two ways. They yield identical results.
 
 ```{r}
@@ -52,18 +76,324 @@ summary(c3_plants_lm1)
 summary(c3_plants_lm2)
 ```
 
-Look at diagnostic plots.
+
+***
+
+### Interpreting the partial regression coefficients
+
+The partial regression coefficients (i.e., partial slopes) are the slopes of specific predictor variables, holding all other predictor variables constant at their mean values.
+
+***
+
+Look at diagnostic plots for model with interaction term.
 
 ```{r}
 plot(c3_plants_lm1)
 ```
 
-Look at non-interaction model.
+## Model selection
+
+We want a model that contains enough predictor variables to explain the variation observed, but not one that is over fit.
+Also, it is important that we not lose focus of the biological questions we are asking. 
+Sometimes, it is best to keep certain predictor variables in a model, even if they are not *statistically* important, if they are essential to answering our question.
+
+### Compare the models without and with an interaction term.
+
+#### Using `anova`
+
+Compares the reduction in the residual sums of squares for **nested** models.
 
 ```{r}
-c3_plants_lm_noint <- lm(data = c3_plants, log10(C3 + 0.1) ~ LONG + LAT)
-
-summary(c3_plants_lm_noint)
-
 anova(c3_plants_lm_noint,c3_plants_lm1)
 ```
+
+#### Using AIC
+
+Akaike Information Criteria - a **relative** measure of the information content of a model. 
+Smaller values indicate a more **parimonious** model.
+Penalizes models with larger number of predictor variables.
+As a rule of thumb, differences of greater than 2 (i.e., $\Delta AIC >2$) are considered meaningful.
+
+```{r}
+AIC(c3_plants_lm1)
+AIC(c3_plants_lm_noint)
+```
+
+### The effect of the interaction
+
+Let's look at the effect of the interaction between `LAT` and `LONG` by examining the partial regression coefficient for `LONG` at different values of `LAT`.
+Here we are going to look at the mean latitude value, $\pm$ 1 and 2 standard deviations.
+
+```{r}
+## mean lat - 2SD 
+LAT_sd1 <- mean(c3_plants$LAT)-2*sd(c3_plants$LAT)
+c3_plants_LONG.lm1<-lm(log10(C3+.1)~LONG*c(LAT-LAT_sd1), data=c3_plants)
+summary(c3_plants_LONG.lm1)
+
+## mean lat - 1SD 
+LAT_sd2<-mean(c3_plants$LAT) - 1*sd(c3_plants$LAT)
+c3_plants_LONG.lm2<-lm(log10(C3+.1)~LONG*c(LAT-LAT_sd2), data=c3_plants)
+summary(c3_plants_LONG.lm2)
+
+## mean lat + 1SD 
+LAT_sd4<-mean(c3_plants$LAT) + 1*sd(c3_plants$LAT)
+c3_plants_LONG.lm4<-lm(log10(C3+.1)~LONG*c(LAT-LAT_sd4), data=c3_plants)
+summary(c3_plants_LONG.lm4)
+
+## mean lat + 2SD 
+LAT_sd5<-mean(c3_plants$LAT) + 2*sd(c3_plants$LAT)
+c3_plants_LONG.lm5<-lm(log10(C3+.1)~LONG*c(LAT-LAT_sd5), data=c3_plants)
+summary(c3_plants_LONG.lm5)
+
+```
+
+Note how the partial regression slope for `LONG` goes from -0.026 to +0.021 and remember this link from two weeks ago:
+[Visualizing Relations in Multiple Regression](http://www.math.yorku.ca/SCS/spida/lm/visreg.html)
+
+***
+
+# Linear Regression with Quadratic Term (Polynomial Regression)
+
+Some times your trend isn't quite a straight line.
+One way to deal with this is to add a quadratic term in your regression.
+
+$$
+y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x^2_{i1} + \epsilon_i
+$$
+
+
+## Example of polynomial regression
+
+As an example, let's look at an unpublished data set described in Sokal and Rholf (Biometry, 1997). 
+These data show the frequency of the *Lap^94^* allele in populations of *Mytilus edulis* and the distance from Southport.
+
+![blue mussel](/Users/mlammens/Google Drive/Professional/Websites/Biostats/lectures/blue_mussel.jpg)
+
+Get the data
+```{r}
+blue_mussel <- read.csv(file = "https://mlammens.github.io/Biostats/data/Logan_Examples/Chapter9/Data/mytilus.csv")
+summary(blue_mussel)
+```
+
+Note that the predictor variable is a **frequency**, and is bounded by 0 and 1. 
+It is common ([though controversial](http://onlinelibrary.wiley.com/doi/10.1890/10-0340.1/abstract)) to use an ArcSine transformation with frequency data.
+We'll use the arcsine-square root transformation here (Logan, p. 69).
+
+```{r}
+blue_mussel$asinLAP <- asin(sqrt(blue_mussel$LAP)) * 180/pi
+```
+
+Let's visualize the data
+
+```{r}
+ggplot(data = blue_mussel, aes(x = DIST, y = asinLAP)) +
+  geom_point() +
+  theme_bw() +
+  stat_smooth()
+```
+
+Begin by building a simple linear regression model
+
+```{r}
+blue_mussel_lm <- lm(data = blue_mussel, formula = asinLAP ~ DIST)
+summary(blue_mussel_lm)
+```
+
+```{r}
+ggplot(data = blue_mussel, aes(x = DIST, y = asinLAP)) +
+  geom_point() +
+  theme_bw() +
+  stat_smooth(method = "lm")
+```
+
+Check diagnostics
+
+```{r}
+plot(blue_mussel_lm)
+```
+
+Particularly pay attention to the residuals versus fitted values in the diagnostic plots.
+
+
+
+Now, let's build a polynomial regression model with the addition of a quadratic term
+
+```{r}
+blue_mussel_lm2 <- lm(data = blue_mussel, formula = asinLAP ~ DIST + I(DIST^2))
+summary(blue_mussel_lm2)
+```
+
+```{r}
+ggplot(data = blue_mussel, aes(x = DIST, y = asinLAP)) +
+  geom_point() +
+  theme_bw() +
+  stat_smooth(method = "lm", formula = y ~ x + I(x^2) )
+```
+
+
+Is this a better model?
+
+```{r}
+anova(blue_mussel_lm2, blue_mussel_lm)
+```
+
+Marginally.
+
+Let's look at one more polynomial (cubic).
+
+#### Challenge
+
+Make the cubic model and test if it is a better fitting model than the linear or quadratic.
+
+
+```{r}
+blue_mussel_lm3 <- lm(data = blue_mussel, formula = asinLAP ~ DIST + I(DIST^2) + I(DIST^3))
+summary(blue_mussel_lm3)
+```
+
+```{r}
+ggplot(data = blue_mussel, aes(x = DIST, y = asinLAP)) +
+  geom_point() +
+  theme_bw() +
+  stat_smooth(method = "lm", formula = y ~ x + I(x^2) + I(x^3) )
+```
+
+And is this model better?
+
+```{r}
+anova(blue_mussel_lm3, blue_mussel_lm2)
+anova(blue_mussel_lm3, blue_mussel_lm)
+```
+
+What about AIC?
+
+```{r}
+AIC(blue_mussel_lm)
+AIC(blue_mussel_lm2)
+AIC(blue_mussel_lm3)
+```
+
+We can also check the case of adding yet another polynomial factor, $x^4$.
+
+```{r}
+AIC(lm(data = blue_mussel, formula = asinLAP ~ DIST + I(DIST^2) + I(DIST^3) + I(DIST^4)))
+```
+
+***
+
+# Non-linear regression
+
+Species-area relationship curves are often observed to have some sort of **Power Law** relationship:
+
+*Number of species = a constant \* Area^z^*
+
+Peake and Quinn (1993) examined this relationship for invertebrates living in inter-tidal mussel clumps (Logan - Example 9G; Quinn and Keough - Box 6.11).
+
+Get the data.
+
+```{r}
+sar <- read.csv(file = "https://mlammens.github.io/Biostats/data/Logan_Examples/Chapter9/Data/peake.csv")
+head(sar)
+summary(sar)
+```
+
+Visualize these data.
+
+```{r}
+ggplot(data = sar, aes(x = AREA, y = SPECIES)) +
+  geom_point() +
+  theme_bw() +
+  stat_smooth()
+```
+
+Naively fit a linear model to these data.
+
+```{r}
+sar_lm <- lm(data = sar, SPECIES ~ AREA)
+plot(sar_lm)
+```
+
+Now let's use `nls` to fit a power law model.
+
+```{r}
+sar_nls <- nls(data = sar, formula = SPECIES ~ const * AREA^z, 
+               start = list(const = 0.1, z = 1))
+summary(sar_nls)
+```
+
+Make a residuals versus fitted plot for these data
+
+```{r}
+plot(resid(sar_nls) ~ fitted(sar_nls))
+```
+
+Compare the linear and non-linear models using AIC.
+
+```{r}
+AIC(sar_lm)
+AIC(sar_nls)
+```
+
+Briefly review Table 9.1 on page 212 of Logan.
+
+
+# Introduction to Analysis of Variance - ANOVA
+
+While learning about regression, we've been working with both continuous predictor and response variables. 
+But in biology there are many times when we are working with **categorical** predictor variables and continuous responses. 
+For example, let's consider a fertilizer addition experiment, where the growth of some plant species is measured under a fertilizer versus no-fertilizer treatment. 
+Here, the predictor variable (fertilizer addition or not) is a categorical variable. 
+
+#### Challenge
+
+We have worked with this kind of simple case, where we have one-predictor variable which can take two values. What did we do in this case?
+
+
+```{r}
+library(dplyr)
+
+data(iris)
+t.test( x = filter(iris, Species == "setosa")$Petal.Length,
+        y = filter(iris, Species == "versicolor")$Petal.Length )
+
+anova(lm(data = filter(iris, Species != "virginica"), formula = Petal.Length ~ Species))
+```
+
+If we have more than two values within a single predictor variable, then we cannot use a *t*-test. Here we go to an ANOVA.
+
+```{r}
+anova(lm(data = iris, formula = Petal.Length ~ Species))
+
+```
+
+## Visual understanding of ANOVA
+
+First, recall the visual understanding of linear regression:
+
+![Logan - Figure 8.3](/Users/mlammens/Google Drive/Professional/Websites/Biostats/lectures/logan-fig-8-3.png)
+
+Now, what would this look like if the **x** value (i.e., the predictor) was categorical?
+
+![Logan - Figure 10.2](/Users/mlammens/Google Drive/Professional/Websites/Biostats/lectures/logan-fig-10-2.png)
+
+## Fixed versus Random Effects
+
+**Fixed factors** are ones we have manipulated, or that we expect *a priori* to have an effect on the response. 
+From Logan, p 254 - "conclusions about the effects of a fixed factor are restricted to the specific treatment levels investigated ..."
+
+**Random factors** are, as per Logan, p. 254, "randomly chosen from all the possible levels of populations and are used as random representatives of the populations". 
+E.g., density of plants could be random. Or position of camera traps on a hillside.
+
+## Null hypotheses
+
+**Fixed effects model:** 
+
+$$
+H_0: \mu_1 = \mu_2 = ... = \mu_i = \mu
+$$
+
+**Random effects model:**
+
+$$
+H_0: \sigma^2_1 = \sigma^2_2 = ... = \sigma^2_i = \sigma^2 
+$$
