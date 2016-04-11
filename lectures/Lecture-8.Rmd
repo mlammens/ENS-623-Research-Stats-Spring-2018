@@ -14,7 +14,7 @@ output:
 
 # Linear regression - review
 
-**Written notes - page XXX***
+**Written notes - page 1***
 
 ## Example of linear regression
 
@@ -270,66 +270,3 @@ ggplot(data = bird_frag_transform_melt, aes(x = value, y = ABUND)) +
 
 ```
 
-***
-
-## Example of multiplicative multiple linear regression
-
-Paruelo and Lauenroth (1996) examined the relationships between the abundance of $C_3$ plants (those that use $C_3$ photosynthesis) and geographic and climactic variables.
-Here we are only going to consider the geographic variables.
-
-Get data and examine.
-
-```{r}
-c3_plants <- read.csv(file = "https://mlammens.github.io/Biostats/data/Logan_Examples/Chapter9/Data/paruelo.csv")
-summary(c3_plants)
-```
-
-Again, we're only going to consider the geographic variable - lattitude and longitude (LONG and LAT).
-
-Have a look at these data in graphical format.
-
-```{r}
-ggpairs(c3_plants)
-```
-
-C3 abundance is not normally distributed. Let's convert using a `log10(C3 + 0.1)` conversion.
-The `+ 0.1` is needed because the log of 0 is negative infinity.
-
-Also, we should center the lat and long data.
-
-```{r}
-c3_plants$LAT <- scale(c3_plants$LAT, scale = FALSE)
-c3_plants$LONG <- scale(c3_plants$LONG, scale = FALSE)
-```
-
-We can create a model with an interaction term in two ways. They yield identical results.
-
-```{r}
-c3_plants_lm1 <- lm(data = c3_plants, log10(C3 + 0.1) ~ LONG + LAT + LONG:LAT)
-
-c3_plants_lm2 <- lm(data = c3_plants, log10(C3 + 0.1) ~ LONG*LAT)
-```
-
-Check out the summary results of both.
-
-```{r}
-summary(c3_plants_lm1)
-
-summary(c3_plants_lm2)
-```
-
-Look at diagnostic plots.
-
-```{r}
-plot(c3_plants_lm1)
-```
-
-Look at non-interaction model.
-
-```{r}
-c3_plants_lm_noint <- lm(data = c3_plants, log10(C3 + 0.1) ~ LONG + LAT)
-
-summary(c3_plants_lm_noint)
-
-anova(c3_plants_lm_noint,c3_plants_lm1)
-```
