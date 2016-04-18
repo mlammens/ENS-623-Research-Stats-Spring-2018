@@ -281,60 +281,6 @@ AIC(lm(data = blue_mussel, formula = asinLAP ~ DIST + I(DIST^2) + I(DIST^3) + I(
 
 ***
 
-# Non-linear regression
-
-Species-area relationship curves are often observed to have some sort of **Power Law** relationship:
-
-*Number of species = a constant \* Area^z^*
-
-Peake and Quinn (1993) examined this relationship for invertebrates living in inter-tidal mussel clumps (Logan - Example 9G; Quinn and Keough - Box 6.11).
-
-Get the data.
-
-```{r}
-sar <- read.csv(file = "https://mlammens.github.io/Biostats/data/Logan_Examples/Chapter9/Data/peake.csv")
-head(sar)
-summary(sar)
-```
-
-Visualize these data.
-
-```{r}
-ggplot(data = sar, aes(x = AREA, y = SPECIES)) +
-  geom_point() +
-  theme_bw() +
-  stat_smooth()
-```
-
-Naively fit a linear model to these data.
-
-```{r}
-sar_lm <- lm(data = sar, SPECIES ~ AREA)
-plot(sar_lm)
-```
-
-Now let's use `nls` to fit a power law model.
-
-```{r}
-sar_nls <- nls(data = sar, formula = SPECIES ~ const * AREA^z, 
-               start = list(const = 0.1, z = 1))
-summary(sar_nls)
-```
-
-Make a residuals versus fitted plot for these data
-
-```{r}
-plot(resid(sar_nls) ~ fitted(sar_nls))
-```
-
-Compare the linear and non-linear models using AIC.
-
-```{r}
-AIC(sar_lm)
-AIC(sar_nls)
-```
-
-Briefly review Table 9.1 on page 212 of Logan.
 
 
 # Introduction to Analysis of Variance - ANOVA
