@@ -75,9 +75,9 @@ I do not expect you to read all of what is listed here, but rather am pointing t
 |3/21 | NO CLASS | | | |
 |3/28 | Regression and Multiple Regression |Q&K Chap. 5 & 6; Logan Chap. 8 & 9 |[Lecture notes 8](http://mlammens.github.io/Biostats/lectures/Lecture-8.html); [Lecture notes 8 - addition](http://mlammens.github.io/Biostats/lectures/Lecture-8-Notes.pdf); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-8-InClass.R) |[Problem Set 4](http://mlammens.github.io/Biostats/problem_sets/Problem-set-4.html) |
 |4/4  |Review of Midterm; Special Lecture | | | |
-|4/11 |Review of Midterm; Multiple and complex regression; ANOVA |Q&K Chap. 6; Logan Chap. 9 |[Lecture notes 9](http://mlammens.github.io/Biostats/lectures/Lecture-9.html) | Problem Set 5 |
-|4/18 |Nested and Factorial ANOVA; Two-way and Multi-way ANOVA | | | Problem Set 6 |
-|4/25 |ANCOVA; Analysis of Frequencies | | | Problem Set 7 |
+|4/11 |Review of Midterm; Multiple and complex regression; ANOVA |Q&K Chap. 6; Logan Chap. 9 |[Lecture notes 9](http://mlammens.github.io/Biostats/lectures/Lecture-9.html) | |
+|4/18 | Complex regression; ANOVA (cont'd) |[Lecture notes 10](http://mlammens.github.io/Biostats/lectures/Lecture-10.html) | | Problem Set 5 |
+|4/25 |ANCOVA; Analysis of Frequencies | | | Problem Set 6 |
 |5/2  |GLM; wrap-up | | | Take-home Final (Due May 11, 2016) |
 |5/9  |Project Presentations | [Correlation](https://xkcd.com/552/) | | PROJECT PAPERS DUE |
 
