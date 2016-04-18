@@ -1,5 +1,5 @@
 ---
-title: "Lecture 9 - Multiple And Complex Regression"
+title: "Lecture 10 - Multiple And Complex Regression"
 author: "Matthew E. Aiello-Lammens"
 output: 
   html_document: 
