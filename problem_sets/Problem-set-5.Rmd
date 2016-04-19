@@ -1,0 +1,14 @@
+Problem Set 5: Regression
+========================================================
+
+**Suggested submission: Apr 25, 2016**
+
+
+# Part 1
+
+Useing R's built-in `iris` dataset, calculate four different ANOVA models - one each for `Sepal.Length`, `Sepal.Width`, `Petal.Length`, and `Petal.Width`.
+
+# Part 2 
+
+Choose one of the traits and calculate the elements of the ANOVA table "by hand". Show all of your work as R code.
+(**Hint:** To complete this problem, calculate the results for the equations described in **Table 8.2 in Quinn and Keough**.)
