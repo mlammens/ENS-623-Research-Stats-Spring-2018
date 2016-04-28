@@ -111,17 +111,24 @@ $(document).ready(function () {
 </div>
 
 
-<div id="problem-set-5-anova" class="section level1">
-<h1>Problem Set 5: ANOVA</h1>
-<p><strong>Suggested submission: Apr 25, 2016</strong></p>
+<div id="problem-set-6-2-way-anova" class="section level1">
+<h1>Problem Set 6: 2-way ANOVA</h1>
+<p><strong>Suggested submission: May 2, 2016</strong></p>
+<p>The dataset loaded in to R in the code below reports on the success (as assessed by the column <code>Scent</code>) of luring spruce moths using different baits (<code>Bait</code>) placed at varying heights (<code>Location</code>) within a forest canopy.</p>
+<pre class="r"><code>moth &lt;- read.csv(file = &quot;https://mlammens.github.io/Biostats/data/spruce_moth_traps.csv&quot;)</code></pre>
+<div id="part-1" class="section level2">
+<h2>Part 1</h2>
+<p>Write an R script to calculate the 2-way ANOVA table (including interactions) manually (i.e. calculating all the entries including the F and p-values). Assume that Baits and Location are fixed (not random). (<strong>Hint:</strong> To complete this problem, calculate the results for the equations described in <strong>Table 9.8 in Quinn and Keough</strong> and F-ratios as described in <strong>Table 12.1 in Logan</strong>.)</p>
 </div>
-<div id="part-1" class="section level1">
-<h1>Part 1</h1>
-<p>Using R’s built-in <code>iris</code> dataset, calculate four different ANOVA models - one each for <code>Sepal.Length</code>, <code>Sepal.Width</code>, <code>Petal.Length</code>, and <code>Petal.Width</code>.</p>
+<div id="part-2" class="section level2">
+<h2>Part 2</h2>
+<p>Use the <code>anova</code> and <code>lm</code> (or <code>aov</code>) functions to analyze Scent as a function of Location and Bait.</p>
+<ul>
+<li>How should the intercept be interpreted?</li>
+<li>What determines what R uses as the model intercept?</li>
+<li>Compare your ANOVA table from <strong>Part 1</strong> against that produced by the R functions. Do you get the same answer as you calculated by hand?</li>
+</ul>
 </div>
-<div id="part-2" class="section level1">
-<h1>Part 2</h1>
-<p>Choose one of the traits and calculate the elements of the ANOVA table “by hand”. Show all of your work as R code. (<strong>Hint:</strong> To complete this problem, calculate the results for the equations described in <strong>Table 8.2 in Quinn and Keough</strong>.)</p>
 </div>
 
 

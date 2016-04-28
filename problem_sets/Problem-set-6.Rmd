@@ -1,0 +1,24 @@
+Problem Set 6: 2-way ANOVA
+========================================================
+
+**Suggested submission: May 2, 2016**
+
+The dataset loaded in to R in the code below reports on the success (as assessed by the column `Scent`) of luring spruce moths using different baits (`Bait`) placed at varying heights (`Location`) within a forest canopy.
+
+```{r}
+moth <- read.csv(file = "https://mlammens.github.io/Biostats/data/spruce_moth_traps.csv")
+```
+
+## Part 1
+
+Write an R script to calculate the 2-way ANOVA table (including interactions) manually (i.e. calculating all the entries including the F and p-values). 
+Assume that Baits and Location are fixed (not random).
+(**Hint:** To complete this problem, calculate the results for the equations described in **Table 9.8 in Quinn and Keough** and F-ratios as described in **Table 12.1 in Logan**.)
+
+## Part 2
+
+Use the `anova` and `lm` (or `aov`) functions to analyze Scent as a function of Location and Bait. 
+
+* How should the intercept be interpreted? 
+* What determines what R uses as the model intercept?
+* Compare your ANOVA table from **Part 1** against that produced by the R functions. Do you get the same answer as you calculated by hand?

@@ -1,4 +1,4 @@
-Problem Set 5: Regression
+Problem Set 5: ANOVA
 ========================================================
 
 **Suggested submission: Apr 25, 2016**
@@ -6,7 +6,7 @@ Problem Set 5: Regression
 
 # Part 1
 
-Useing R's built-in `iris` dataset, calculate four different ANOVA models - one each for `Sepal.Length`, `Sepal.Width`, `Petal.Length`, and `Petal.Width`.
+Using R's built-in `iris` dataset, calculate four different ANOVA models - one each for `Sepal.Length`, `Sepal.Width`, `Petal.Length`, and `Petal.Width`.
 
 # Part 2 
 
