@@ -78,7 +78,7 @@ I do not expect you to read all of what is listed here, but rather am pointing t
 |4/11 |Review of Midterm; Multiple and complex regression; ANOVA |Q&K Chap. 6; Logan Chap. 9 |[Lecture notes 9](http://mlammens.github.io/Biostats/lectures/Lecture-9.html) | |
 |4/18 | Complex regression; ANOVA (cont'd) |Q&K Chap. 6; Logan Chap. 9| [Lecture notes 10](http://mlammens.github.io/Biostats/lectures/Lecture-10.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-10.R)  | [Problem Set 5](http://mlammens.github.io/Biostats/problem_sets/Problem-set-5.html) |
 |4/25 |Nested and Factorial ANOVA |Q&K 8 & 9; Logan 11 & 12 |[Lecture notes 11](http://mlammens.github.io/Biostats/lectures/Lecture-11.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-11-InClass.R) | [Problem Set 6](http://mlammens.github.io/Biostats/problem_sets/Problem-set-6.html) |
-|5/2  |ANCOVA; Analysis of Frequencies; GLM; wrap-up |Logan Chap. 15-17; Q&K 12-14 |[Lecture notes 12](http://mlammens.github.io/Biostats/lectures/Lecture-12.html) | Take-home Final (Due May 11, 2016) |
+|5/2  |ANCOVA; Analysis of Frequencies; GLM; wrap-up |Logan Chap. 15-17; Q&K 12-14 |[Lecture notes 12](http://mlammens.github.io/Biostats/lectures/Lecture-12.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-12-InClass.R) | Take-home Final (Due May 11, 2016) |
 |5/9  |Project Presentations | [Correlation](https://xkcd.com/552/) | | PROJECT PAPERS DUE |
 
 
