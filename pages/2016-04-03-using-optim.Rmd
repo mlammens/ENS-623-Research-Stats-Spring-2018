@@ -1,0 +1,50 @@
+---
+title: "Using the `optim` function"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+
+R has a function `optim` which optimizes functions and is thus much better than a simple grid search 'brute force' approach we learned in [Lecture 5](http://mlammens.github.io/Biostats/lectures/Lecture-5.html). 
+This function is very handy for finding the parameters that minimize the Log-likelihood. 
+In the example below, we are trying to find the best estimates for $\mu$ and $\sigma$ for a normal distribution.
+Instead of writing a negative log-likelihood function for the normal distribution, we will take advantage of the R function that gives us the probability density function (`dnorm`), using a few optional arguments. 
+
+As in Lecture 5, in this example, we'll generate some fake “data” by drawing random samples from a $N(\mu=1,\sigma=2)$.
+
+```{r}
+x <- rnorm(1000, mean = 1, sd = 2)
+```
+
+Next, let's write a function for the **negative log-likelihood of our data**. 
+Our function has two inputs: `x`, which is our observed data; and `params`, which in this case is a vector of length two. 
+`params` contains our *guess* at the initial values of the parameters we are trying to estimate.
+So the first element is our guess for the **mean** value ($\mu$) and the second element is our guess for the **standard deviation** ($\sigma$). 
+We are passing these parameters to the function in this way because it is the syntax required to later take advantage of the `optim` function.
+Inside the function, we explicitely define the mean and std. dev. values, then calculate the sum of the density values for all of our data in `x`. Note that we use the argument `log = TRUE` in the `dnorm` function, to get the log of the probability density value, and we preface the `sum` function with a negative sign.
+So this line in our function returns the **negative log-likelihood** value for the data in `x` **GIVEN** a mean and std. dev. value defined in `params`.
+
+
+```{r}
+neg.ll.v2 <- function(x, params) {
+    mu = params[1]
+    sigma = params[2]
+    -sum(dnorm(x, mean = mu, sd = sigma, log = TRUE))
+}
+```
+
+
+Now we maximize the log-likelihood using the function `optim`:
+
+```{r}
+opt1 <- optim(par = c(1, 1), fn = neg.ll.v2, x = x)
+opt1
+```
+
+In the example above, my iniitial guesses at the mean and std. dev. were 1 and 1.
+This is what the `par = c(1, 1)` input to `optim` means. 
+In some cases, the `optim` funciton can be very sensitive to these values, and it is a good idea to use values as close to the final ones as possible.
+In this case, given that I was estimating the population mean and std. dev., I could have used the mean and std. dev. of `x` as my initial guesses.
+That is, I could have used the **sample mean and std. dev.** as my initial paramter value guesses. 
+In homework 4, you are asked to carry out a similar process, but instead of estimating the mean and sd of a normal distribution, you are asked to estimate $\beta_0$ and $\beta_1$.
