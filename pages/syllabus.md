@@ -3,23 +3,19 @@ layout: page
 title: Syllabus
 ---
 
-# Special Topics in Environmental Sciences - Biostatistics
+# ENS 623: Research and Statistical Methods
 
-**Course Number:** ENS 798  
+**Course Number:** ENS 623  
 **Credits:** 3  
 **Professor:** Dr. Matthew Aiello-Lammens  
-**Meeting day and time:** Mon 5:40 - 8:40 PM  
-**Term:** Spring 2016  
-**Location:** Environmental Center Classroom   
+**Meeting day and time:** Wed 5:40 - 8:40 PM  
+**Term:** Spring 2018  
+**Location:** TBD   
 
 ## Course description
 
-This special topics course will focus on techniques required to properly analyze ecological data. 
-Students will work with standard datasets, as well as their own data.
-The students will learn basic exploratory and descriptive statistical techniques, as well as peer-review each others work, providing feedback on analysis methods.
-Individually, each student will focus on learning advanced analysis techniques required to address the uniqueness of their research questions and datasets.
-All coursework will be carried out using the freely available R statistical programming language.
-
+This course covers issues related to the proper manner in which develop and conduct a research project.
+Statistical issues related to environmental evaluations will be discussed, including minimal detectable levels proper sample size, and determination of proper methods for evaluation of data, using both parametric and nonparametric procedures. 
 
 ## Rationale
 
@@ -38,24 +34,30 @@ Additionally, the methods of biostatistical analysis are applicable in all field
 * How to identify the most appropriate analysis techniques to use with a given dataset.
 * How to use knowledge of standard data analysis techniques to effectively choose and apply more advanced methods.
 
+## Assessment
 
-## Required materials
+I will assess your achievement of the learning objectives based on your performance on problem sets, inclass exams, and a final analysis report.
 
-* Quinn and Keough. 2009. Experimental Design and Data Analysis for Biologists. Cambridge Press
-* Logan. 2010. Biostatistical Design and Analysis Using R: A Practical Guide. Wiley-Blackwell
-
-## Grading
-
-Problem sets - 30%  
-Two exams - 40% (20% each)  
+Problem sets - 50%  
+Two exams - 20% (10% each)  
 Written analysis report - 30%  
 
 ### Written analysis report
 
-The written analysis report will be a document that describes the methods used to analyze the students data, the analysis results, and all figures and tables associated with the analysis. 
-This paper is functionally equivalent to the Methods and Results sections of a paper following standard scientific paper format.
+The written analysis report will be a document that describes the methods used to collect and analyze your data, your results, and all figures and tables associated with the analysis. 
 
 
+## Required materials
+
+* Logan. 2010. Biostatistical Design and Analysis Using R: A Practical Guide. Wiley-Blackwell
+
+## Recommended materials
+
+* Quinn and Keough. 2009. Experimental Design and Data Analysis for Biologists. Cambridge Press
+
+
+
+<!---
 ## Course schedule
 
 This is a guide for the material we will cover during the course, however it may be amended during the semester as needed. 
@@ -80,6 +82,7 @@ I do not expect you to read all of what is listed here, but rather am pointing t
 |4/25 |Nested and Factorial ANOVA |Q&K 8 & 9; Logan 11 & 12 |[Lecture notes 11](http://mlammens.github.io/Biostats/lectures/Lecture-11.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-11-InClass.R) | [Problem Set 6](http://mlammens.github.io/Biostats/problem_sets/Problem-set-6.html) |
 |5/2  |ANCOVA; Analysis of Frequencies; GLM; wrap-up |Logan Chap. 15-17; Q&K 12-14 |[Lecture notes 12](http://mlammens.github.io/Biostats/lectures/Lecture-12.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-12-InClass.R) | Take-home Final (Due May 11, 2016) |
 |5/9  |Project Presentations | [Correlation](https://xkcd.com/552/) | | PROJECT PAPERS DUE |
+--->
 
 
 ## Data sets
@@ -87,11 +90,67 @@ I do not expect you to read all of what is listed here, but rather am pointing t
 * M&M color counts from our bags during class 1: [class_mm_data.csv](http://mlammens.github.io/Biostats/data/class_mm_data.csv)
 * Logan (2010) datasets can be found [here](https://github.com/mlammens/Biostats/tree/gh-pages/data/Logan_Examples).
 
-## Accommodations for Students with Disabilities
+Course Policies
+---------------
 
-The University’s commitment to equal educational opportunities for students with disabilities includes providing reasonable accommodations for the needs of students with disabilities. 
-To request an accommodation for a qualifying disability, a student must self-identify and register with the Coordinator of Disability Services for his or her campus.  
-No one, including faculty, is authorized to evaluate the need and arrange for an accommodation except the Coordinator of Disability Services. 
-Moreover, no one, including faculty, is authorized to contact the Coordinator of Disability Services on behalf of a student.  
-For further information, please see Information for [Students with Disabilities](http://www.pace.edu/counseling/office-of-disability-services) on the University’s web site.
+### Attendance
 
+Attendance and punctuality are required. Excused absences will be
+considered, but must be discussed with Prof. Aiello-Lammens. Unexcused
+absences and/or consistent lateness will negatively impact a student’s
+final assessment and could result in failure.
+
+### Technology in the Classroom
+
+Use of computers and tablets may be necessary to complete some in-class
+assignments. However, I expect you to respectful and professional, and
+not to be “surfing the internet” during class. If I witness this
+activity, you will not be allowed to use technology in the classroom
+thereafter.
+
+### Academic integrity
+
+All members of the Pace community are expected to behave with honesty
+and integrity, as outlined in the student handbook. The following
+statement is from the Student Handbook:
+
+> Students are required to be honest and ethical in satisfying their
+> academic assignments and requirements. Academic integrity requires
+> that, except as may be authorized by the instructor, a student must
+> demonstrate independent intellectual and academic achievements.
+> Therefore, when a student uses or relies upon an idea or material
+> obtained from another source, proper credit or attribution must be
+> given. A failure to give credit or attribution to ideas or material
+> obtained from an outside source is plagiarism. Plagiarism is strictly
+> forbidden. Every student is responsible for giving the proper credit
+> or attribution for any quotation, idea, data, or other material
+> obtained from another source that is presented (whether orally or in
+> writing) in the student’s papers, reports, submissions, examinations,
+> presentations and the like.
+>
+> Individual schools and programs may have adopted additional standards
+> of academic integrity. Therefore, students are responsible for
+> familiarizing themselves with the academic integrity policies of the
+> University as well as of the individual schools and programs in which
+> they are enrolled. A student who fails to comply with the standards of
+> academic integrity is subject to disciplinary actions such as, but not
+> limited to, a reduction in the grade for the assignment or the course,
+> a failing grade in the assignment or the course, suspension and/or
+> dismissal from the University.
+
+### Accommodations for students with disabilities
+
+The University’s commitment to equal educational opportunities for
+students with disabilities includes providing reasonable accommodations
+for the needs of students with disabilities. To request an accommodation
+for a qualifying disability, a student must self-identify and register
+with the Coordinator of Disability Services for his or her campus. No
+one, including faculty, is authorized to evaluate the need and arrange
+for an accommodation except the Coordinator of Disability Services.
+Moreover, no one, including faculty, is authorized to contact the
+Coordinator of Disability Services on behalf of a student. For further
+information, please see Information for Students with Disabilities on
+the University’s web site.\
+To receive accommodation for any disability, students must contact the
+campus Counseling Center (Pace Plaza, 212-346-1526; Westchester,
+914-773-3710).
