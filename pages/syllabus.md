@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Syllabus
+description: course syllabus
 ---
 
 # ENS 623: Research and Statistical Methods
