@@ -7,8 +7,4 @@ This site is a work in progress. My intention is to post course materials, notes
 
 ## Site details
 
-This site uses the [Poole](http://getpoole.com/)
-template written by Mark Otto.
-Poole is open sourced under the MIT License.
-
-I also used modifications written by [Joshua Lande](http://joshualande.com/) that I found on [this blog post](http://joshualande.com/jekyll-github-pages-poole/).
+Thanks to [http://kbroman.org/simple_site/](http://kbroman.org/simple_site/) for the template for this site.
