@@ -39,11 +39,10 @@ Additionally, the methods of biostatistical analysis are applicable in all field
 
 I will assess your achievement of the learning objectives based on your performance on problem sets, inclass exams, and a final analysis report.
 
-Problem sets - 50%  
-Two exams - 20% (10% each)  
-Written analysis report - 30%  
+Problem sets - 60%  
+Analysis project - 40%  
 
-### Written analysis report
+### Analysis project
 
 The written analysis report will be a document that describes the methods used to collect and analyze your data, your results, and all figures and tables associated with the analysis. 
 

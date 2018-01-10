@@ -7,7 +7,7 @@ description: A website for ENS 511 at Pace University
 
 ## Course Description
 
-This course covers issues related to the proper manner in which develop and conduct a research project. Statistical issues related to environmental evaluations will be discussed, including minimal detectable levels proper sample size, and determination of proper methods for evaluation of data, using both parametric and nonparametric procedures. 
+This course covers issues related to the proper manner in which develop and conduct a research project. Statistical issues related to environmental evaluations will be discussed, including minimal detectable levels, proper sample size, and determination of proper methods for evaluation of data, using both parametric and nonparametric procedures. 
 
 ## Syllabus
 
@@ -30,9 +30,20 @@ Meeting 12
 Meeting 13  
 Meeting 14  
 
-## Assignments
+## Problem Sets
 
-Links to assignments will be posted here.
+Problem Set 1  
+Problem Set 2  
+Problem Set 3  
+Problem Set 4  
+Problem Set 5  
+Problem Set 6  
+Problem Set 7  
+Problem Set 8  
+Problem Set 9  
+Problem Set 10  
+Problem Set 11  
+Problem Set 12  
 
 
 ## Final Project Overview
