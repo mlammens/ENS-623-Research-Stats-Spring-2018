@@ -11,7 +11,7 @@ description: course syllabus
 **Professor:** Dr. Matthew Aiello-Lammens  
 **Meeting day and time:** Wed 5:40 - 8:40 PM  
 **Term:** Spring 2018  
-**Location:** TBD   
+**Location:** Environmental Center Classroom   
 
 ## Course description
 

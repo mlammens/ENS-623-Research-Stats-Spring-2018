@@ -1,29 +1,29 @@
 ---
-title: "Lecture 1"
+title: "Meeting 1"
 author: "Matthew E. Aiello-Lammens"
-date: '2016-01-25'
+date: '2018-01-23'
 output: html_document
 ---
 
 # Class expectations
 
 * Why are you taking this class?
-* What are you hoping to learn by taking this class?
+* What are you hoping to learn?
 
-See [Syllabus](http://mlammens.github.io/Biostats/syllabus/)
+See [Syllabus](http://mlammens.github.io/ENS-623-Research-Stats/syllabus/)
 
 
 # Hypothesis testing and the scientific method
 
 ### What is a theory?
 
-A proposed explanation for some event or process that is based the available evidence related to that event.
-We also call this a **model**. *Models are not necessarily equivelant to math.*
+A proposed explanation for some event or process that is based on the available evidence related to that event.
+We also call this a **model**. *Models don't necessarily mean **math**.*
 
 ### What is a hypothesis?
 
-A prediction based on our model or theory. 
-For a hypothesis to be considered **scientific** it much be **falsifable**.
+A prediction based on our model (or theory). 
+For a hypothesis to be considered **scientific** it must be **falsifable**.
 
 ## Scientific method
 
