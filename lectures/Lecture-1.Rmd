@@ -133,7 +133,7 @@ sqrt(-5)
 
 Use a script file for your work. It's easier to go back to and easy to document.
 
-**Important:** within an R file, you can use the # sign to add comments. Anything written after the # is *not* interpretted when you run the code.
+**Important:** within an R file, you can use the # sign to add comments. Anything written after the # is *not* interpreted when you run the code.
 
 **Challenge**
 
@@ -157,12 +157,12 @@ setwd(".")
 
 **Challenge**
 
-* Try to autocomplete `fil`, what do you find?
+* Try to auto-complete `fil`, what do you find?
 * Use the brief help menu that comes up to find a function that starts with `file`, and describe what you think it does.
 
 ## Rmd file
 
-Use this to intergrate text and R code into the same document.
+Use this to integrate text and R code into the same document.
 **I will expect most of your homework assignments as an Rmd file.**
 
 *Practice with Rmd file*
@@ -401,7 +401,7 @@ for (variable in collection) {
 }
 ```
 
-Let's get more specific. Say we took a bunch of measurements of temperature in Fahranheit, but want to convert them. How might we do it?
+Let's get more specific. Say we took a bunch of measurements of temperature in Fahrenheit, but want to convert them. How might we do it?
 
 #### Make our temperature data set
 

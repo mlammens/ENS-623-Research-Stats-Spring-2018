@@ -127,6 +127,7 @@ $(document).ready(function () {
 <ul>
 <li><a href="#class-expectations">Class expectations</a></li>
 <li><a href="#class-goals">Class goals</a></li>
+<li><a href="#class-format">Class format</a></li>
 <li><a href="#hypothesis-testing-and-the-scientific-method">Hypothesis testing and the scientific method</a><ul>
 <li><a href="#what-is-a-theory">What is a theory?</a></li>
 <li><a href="#what-is-a-hypothesis">What is a hypothesis?</a></li>
@@ -152,7 +153,15 @@ $(document).ready(function () {
 <li><a href="#practice-with-variables">Practice with variables</a><ul>
 <li><a href="#make-a-vector">Make a vector</a></li>
 </ul></li>
-<li><a href="#exploring-variable-elements">Exploring variable elements</a></li>
+<li><a href="#exploring-variable-elements">Exploring variable elements</a><ul>
+<li><a href="#working-with-matrices">Working with matrices</a></li>
+<li><a href="#indexing-matrices">Indexing matrices</a></li>
+</ul></li>
+<li><a href="#combinining-internal-functions-with-matrices">Combinining internal functions with matrices</a></li>
+<li><a href="#functions">Functions</a></li>
+<li><a href="#for-loops"><code>for</code> loops</a><ul>
+<li><a href="#generic-for-loop">Generic for loop</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </div>
@@ -175,6 +184,14 @@ $(document).ready(function () {
 <li>Learn and master the standard statistical analyses used in scientific studies</li>
 <li>Understand the connections between statistical analyses and study design</li>
 <li>Become familiar with resources to explore advanced analysis methods</li>
+</ul>
+</div>
+<div id="class-format" class="section level1">
+<h1>Class format</h1>
+<ul>
+<li>Some lecture - mostly about concepts</li>
+<li>Lots of <strong>live coding</strong> examples - you should follow along, but don’t have to</li>
+<li>Challenges - some will be short, some long. Some you work on alone, some with a partner or in groups</li>
 </ul>
 </div>
 <div id="hypothesis-testing-and-the-scientific-method" class="section level1">
@@ -368,6 +385,193 @@ v3 &lt;- seq(from = 1, to = 10)</code></pre>
 <pre><code>## [1] &quot;cat&quot; &quot;pig&quot;</code></pre>
 <p><strong>Challenge</strong></p>
 <p>Use what we just learned to reverse the order of the <code>pets</code> vector.</p>
+<div id="working-with-matrices" class="section level3">
+<h3>Working with matrices</h3>
+<p>Why might we want 2D data?</p>
+<p>Let’s make a matrix</p>
+<p><strong>Challenge</strong></p>
+<p>With the people next to you, break down this function, and describe each argument. What is the final product?</p>
+<pre class="r"><code>my_mat &lt;- matrix(data = runif(50), nrow = 10, byrow = TRUE)</code></pre>
+<p>What does it mean to fill <code>byrow</code>?</p>
+<pre class="r"><code>matrix(data = 1:9, nrow = 3, byrow = TRUE)</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6
+## [3,]    7    8    9</code></pre>
+<p>Versus</p>
+<pre class="r"><code>matrix(data = 1:9, nrow = 3, byrow = FALSE)</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9</code></pre>
+<p><strong>Challenge</strong></p>
+<p>What is the default value for <code>byrow</code>?</p>
+</div>
+<div id="indexing-matrices" class="section level3">
+<h3>Indexing matrices</h3>
+<p>Indexing happens by <strong>row</strong>, <strong>column</strong> notation.</p>
+<pre class="r"><code>my_mat &lt;- matrix(data = 1:50, nrow = 10, byrow = TRUE)
+
+my_mat[1,1]</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>my_mat[1,2]</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>my_mat[2,1]</code></pre>
+<pre><code>## [1] 6</code></pre>
+<pre class="r"><code>my_mat[1:4, 1:3]</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    6    7    8
+## [3,]   11   12   13
+## [4,]   16   17   18</code></pre>
+<pre class="r"><code>my_mat[c(1,3,5), ]</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    2    3    4    5
+## [2,]   11   12   13   14   15
+## [3,]   21   22   23   24   25</code></pre>
+<pre class="r"><code>my_mat[ ,c(1,3,5)]</code></pre>
+<pre><code>##       [,1] [,2] [,3]
+##  [1,]    1    3    5
+##  [2,]    6    8   10
+##  [3,]   11   13   15
+##  [4,]   16   18   20
+##  [5,]   21   23   25
+##  [6,]   26   28   30
+##  [7,]   31   33   35
+##  [8,]   36   38   40
+##  [9,]   41   43   45
+## [10,]   46   48   50</code></pre>
+</div>
+</div>
+<div id="combinining-internal-functions-with-matrices" class="section level2">
+<h2>Combinining internal functions with matrices</h2>
+<p>Make a “random” matrix (that isn’t random in this case)</p>
+<pre class="r"><code>set.seed(1)
+mat1 &lt;- matrix(data = runif(50), nrow = 10, byrow = TRUE)</code></pre>
+<p>Calculate the mean of all of the data</p>
+<pre class="r"><code>mean(mat1)</code></pre>
+<pre><code>## [1] 0.5325929</code></pre>
+<p>Calculate the standard deviation of all of the data</p>
+<pre class="r"><code>sd(mat1)</code></pre>
+<pre><code>## [1] 0.272239</code></pre>
+<p>Calculate row means and column means</p>
+<pre class="r"><code>rowMeans(mat1)</code></pre>
+<pre><code>##  [1] 0.4640751 0.6389526 0.4446999 0.6729408 0.4382595 0.3983864 0.5177556
+##  [8] 0.5411271 0.6667390 0.5429926</code></pre>
+<pre class="r"><code>colMeans(mat1)</code></pre>
+<pre><code>## [1] 0.5949241 0.4500704 0.5808290 0.5491985 0.4879423</code></pre>
+<p>Introduce the <code>apply</code> function</p>
+<pre class="r"><code>apply(mat1, MARGIN = 1, mean)</code></pre>
+<pre><code>##  [1] 0.4640751 0.6389526 0.4446999 0.6729408 0.4382595 0.3983864 0.5177556
+##  [8] 0.5411271 0.6667390 0.5429926</code></pre>
+</div>
+<div id="functions" class="section level2">
+<h2>Functions</h2>
+<p>What is a function?</p>
+<p>Why write a function?</p>
+<p><strong>Example</strong></p>
+<p><em>Note:</em> the example below is borrowed from the <a href="https://software-carpentry.org/">Software Carpentry</a> Introduction to Programming materials.</p>
+<p>Convert from Fahrenheit to Kelvin</p>
+<pre class="r"><code>fahr_to_kelvin &lt;- function(temp) {
+  kelvin &lt;- ((temp - 32) * (5 / 9)) + 273.15
+  return(kelvin)
+}</code></pre>
+<p>Convert from Kelvin to Celsius</p>
+<pre class="r"><code>kelvin_to_celsius &lt;- function(temp) {
+  celsius &lt;- temp - 273.15
+  return(celsius)
+}</code></pre>
+<p><strong>Challenge</strong></p>
+<p>Write a function to convert from Fahrenheit to Celsius.</p>
+</div>
+<div id="for-loops" class="section level2">
+<h2><code>for</code> loops</h2>
+<p>How do I do the same thing many times?</p>
+<div id="generic-for-loop" class="section level3">
+<h3>Generic for loop</h3>
+<pre><code>for (variable in collection) {
+  do things with variable
+}</code></pre>
+<p>Let’s get more specific. Say we took a bunch of measurements of temperature in Fahranheit, but want to convert them. How might we do it?</p>
+<div id="make-our-temperature-data-set" class="section level4">
+<h4>Make our temperature data set</h4>
+<pre class="r"><code>set.seed(8)
+temp_data &lt;- runif(n = 20, min = -5, max = 5) + 45</code></pre>
+<p><strong>Challenge</strong></p>
+<p>What did we just do?</p>
+</div>
+<div id="use-our-fahr_to_kelvin-function-on-each-element" class="section level4">
+<h4>Use our <code>fahr_to_kelvin</code> function on each element</h4>
+<p>Iteration 1.</p>
+<pre class="r"><code>for( x in temp_data){
+  fahr_to_kelvin(x)
+}</code></pre>
+<p>Iteration 2.</p>
+<pre class="r"><code>for( x in temp_data){
+  print(fahr_to_kelvin(x))
+}</code></pre>
+<pre><code>## [1] 280.185
+## [1] 278.749
+## [1] 282.037
+## [1] 281.216
+## [1] 279.3806
+## [1] 281.5885
+## [1] 279.2104
+## [1] 282.7737
+## [1] 281.8675
+## [1] 281.175
+## [1] 280.1336
+## [1] 278.0906
+## [1] 279.9966
+## [1] 280.622
+## [1] 278.3624
+## [1] 282.749
+## [1] 277.6017
+## [1] 279.0637
+## [1] 279.1307
+## [1] 280.4895</code></pre>
+<p>Iteration 3.</p>
+<pre class="r"><code>for( x in 1:length(temp_data)){
+  print(fahr_to_kelvin(temp_data[x]))
+}</code></pre>
+<pre><code>## [1] 280.185
+## [1] 278.749
+## [1] 282.037
+## [1] 281.216
+## [1] 279.3806
+## [1] 281.5885
+## [1] 279.2104
+## [1] 282.7737
+## [1] 281.8675
+## [1] 281.175
+## [1] 280.1336
+## [1] 278.0906
+## [1] 279.9966
+## [1] 280.622
+## [1] 278.3624
+## [1] 282.749
+## [1] 277.6017
+## [1] 279.0637
+## [1] 279.1307
+## [1] 280.4895</code></pre>
+<p>Iteration 4.</p>
+<pre class="r"><code>temp_data_kelvin &lt;- vector()
+for( x in 1:length(temp_data)){
+  temp_data_kelvin[x] &lt;- fahr_to_kelvin(temp_data[x])
+}
+
+print(temp_data_kelvin)</code></pre>
+<pre><code>##  [1] 280.1850 278.7490 282.0370 281.2160 279.3806 281.5885 279.2104
+##  [8] 282.7737 281.8675 281.1750 280.1336 278.0906 279.9966 280.6220
+## [15] 278.3624 282.7490 277.6017 279.0637 279.1307 280.4895</code></pre>
+<p><strong>Final challenge</strong></p>
+<p>Use a <code>for</code> loop to write a script to calculate the mean of a set of numbers.</p>
+<p>Recall that the mean is:</p>
+<p><span class="math display">\[
+\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n}
+\]</span></p>
+</div>
+</div>
 </div>
 </div>
 

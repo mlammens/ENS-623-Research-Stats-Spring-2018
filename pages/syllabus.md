@@ -50,16 +50,16 @@ The written analysis report will be a document that describes the methods used t
 ## Required materials
 
 * Logan. 2010. Biostatistical Design and Analysis Using R: A Practical Guide. Wiley-Blackwell
-
-## Recommended materials
-
 * Quinn and Keough. 2009. Experimental Design and Data Analysis for Biologists. Cambridge Press
 
 
 ## Data sets
 
+<!---
 * M&M color counts from our bags during class 1: [class_mm_data.csv](http://mlammens.github.io/Biostats/data/class_mm_data.csv)
-* Logan (2010) datasets can be found [here](https://github.com/mlammens/Biostats/tree/gh-pages/data/Logan_Examples).
+--->
+
+* Logan (2010) datasets can be found [here](https://github.com/mlammens/ENS-623-Research-Stats/tree/gh-pages/data/Logan_Examples).
 
 Course Policies
 ---------------
@@ -79,10 +79,10 @@ not to be “surfing the internet” during class. If I witness this
 activity, you will not be allowed to use technology in the classroom
 thereafter.
 
-### Academic integrity
+### Academic Integrity
 
 All members of the Pace community are expected to behave with honesty
-and integrity, as outlined in the student handbook. The following
+and integrity, as outlined in [Academic Integrity Code](http://www.pace.edu/sites/default/files/files/student-handbook/pace-university-academic-integrity-code.pdf). The following
 statement is from the Student Handbook:
 
 > Students are required to be honest and ethical in satisfying their
