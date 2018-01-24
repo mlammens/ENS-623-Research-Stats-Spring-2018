@@ -1,0 +1,194 @@
+---
+title: "Sandbox"
+output: html_document
+---
+
+# Probability
+
+### Frequentist perspective 
+
+The relative frequency of an event over the long term, after many trials.
+
+E.g., throwing a coin. What's the probability of a 'heads'? After one trial, two trials, ..., 1000 trials.
+
+```{r}
+(head <- runif(1) > 0.5)
+```
+
+
+### Bayes perspective
+
+Stay tuned.
+
+***
+
+
+## M&Ms
+
+Open your bag and count how many M&Ms you got. Also count how many of each color.
+
+### Assignment operator
+
+Make a new variable (object) called `tot_mm` and assign it the number of MMs in your bag.
+
+```{r}
+tot_mm <- 60
+```
+
+### `mean` number of MMs in a bag
+
+* Vector
+* `sum` function
+* `mean` function
+
+Calculate the mean number of MMs in a bag.
+
+```{r}
+tot_mm_pop_sample <- c(60, 58, 57, 63, 61, 60, 59)
+```
+
+Mean:
+
+$$
+\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n}
+$$
+
+Using the `sum` function.
+
+```{r}
+(mean_mm_1 <- sum(tot_mm_pop_sample) / length(tot_mm_pop_sample))
+```
+
+Using the `mean` function.
+
+```{r}
+mean_mm_2 <- mean(tot_mm_pop_sample)
+```
+
+### Quantify the variation in the number of MMs in a bag
+
+* `var` function
+* `sd` function
+
+What do we mean by variation? 
+In general, we mean something along the lines of 'the amount of variation around some mean value'.
+
+**How might we quantify this?**
+
+* Add up the distances from the mean. 
+
+First calculate distances from the mean for each bag.
+
+```{r}
+(dist_from_mean <- tot_mm_pop_sample - mean_mm_1)
+```
+
+Next calculate the total distances.
+
+```{r}
+(sum_dist_from_mean <- sum(dist_from_mean))
+```
+
+What information does this give us, and why might it not be useful?
+
+* Add up the *absolute* distances form the mean. 
+
+First calculate the *absolute* distances from the mean.
+
+```{r}
+(absdist_from_mean <- abs(tot_mm_pop_sample - mean_mm_1))
+```
+
+Next add up the total *absolute* distances from the mean.
+
+```{r}
+(sum_absdist_from_mean <- sum(absdist_from_mean))
+```
+
+* Add up the *squared* distances from the mean.
+
+While the absolute distance from the mean does give us a reasonable measure of variability, because of specific mathematical properties, it's more convenient to work with *squared* distances from the mean, leading to the measures of **variance** and **standard deviation**.
+
+**Challange**
+
+Calculate *squared* distances from the mean, and sum them to determine the total squared deviation.
+
+**Challange**
+
+Can you find an R function to do this in one step?
+
+**Standard deviation** can be thought of as the average deviation from the mean.
+
+## Probability and M&Ms
+
+Without looking, you chose one M&M. What colors could you have chosen?
+
+The **set** of brown, yellow, green, red, orange, blue is the **sample space**.
+
+Your selection of a single M&M is called an **event**.
+
+
+**Challange**
+
+* What's the probability of getting a "color" M&M in **your** bag?
+
+P(brown), P(yellow), etc.
+
+**Challange**
+
+What is the mean probability of getting each color across each bag?
+
+Tools to use:
+
+* `data.frames`
+* `apply`
+
+
+## Venn diagrams
+
+* What's the P(green OR blue OR red) in **your** bag? 
+
+P(green) + P(blue) + P(red)
+
+* What is the P(NOT green) in **your** bag?
+
+$$
+P(NOT Green) = 1 - P(Green) = P(G)^c
+$$
+
+
+### Sampling with replacement
+
+* What's the P(green and then blue), first putting back your first draw?
+
+Intersection: P(green intersection blue) = P(green) * P(blue) 
+
+* What's the P(green or blue)?
+
+Union: P(green) + P(blue) - P(green and blue)
+
+
+### Sampling without replacement
+
+* What is the probability of getting green, then blue, *without replacing your first draw*?
+
+**Challange**
+
+What is the sample space for drawing two M&Ms?
+
+Well work further on similar problems in future classes.
+
+
+## Draw a random bag of M&Ms using the company stated frequencies/probabilities for each color
+
+```{r}
+## Colors as a vector
+mm_colors <- c("blue", "brown", "green", "orange", "red", "yellow")
+mm_probs <- c(.24, .14, .16, .20, .13, .14)
+
+## I want to "sample" a bag of MMs
+new_bag <- sample(x = mm_colors, size = 55, replace = TRUE, prob = mm_probs)
+table(new_bag)
+
+```
+

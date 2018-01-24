@@ -2,7 +2,9 @@
 title: "Meeting 1"
 author: "Matthew E. Aiello-Lammens"
 date: '2018-01-23'
-output: html_document
+output: 
+  html_document: 
+    toc: yes
 ---
 
 # Class expectations
@@ -12,6 +14,21 @@ output: html_document
 
 See [Syllabus](http://mlammens.github.io/ENS-623-Research-Stats/syllabus/)
 
+# Class goals
+
+* Learn how to develop a research question
+* Practice systematic review of the scientific literature
+* Become proficient using the R statistical programming language
+* Learn how to explore data collected during a research project
+* Learn and master the standard statistical analyses used in scientific studies
+* Understand the connections between statistical analyses and study design
+* Become familiar with resources to explore advanced analysis methods
+
+# Class format
+
+* Some lecture - mostly about concepts
+* Lots of **live coding** examples - you should follow along, but don't have to
+* Challenges - some will be short, some long. Some you work on alone, some with a partner or in groups
 
 # Hypothesis testing and the scientific method
 
@@ -38,7 +55,19 @@ Traditional view:
 
 Checkout [Understanding Science](http://undsci.berkeley.edu/article/0_0_0/howscienceworks_02)
 
+### Analysis is iterative
+
+The process of analyzing data is often iterative. 
+That means, we may start looking at our data, applying analysis techniques that might *not* be the techniques we use in our final report (i.e., our reports and manuscripts). 
+Don't be afraid to start exploring your data, and applying analyses, before you think you're ready.
+
 # Introduction to R and RStudio
+
+## Why do I have to learn to program in R?
+
+In short, it's "industry standard". 
+But the longer answer has to do with replicability of data analyses.
+Documenting your analysis in R, using R scripts or Rmd files allows you to re-run your analysis whenever the need arises, and to share your analysis workflow with others.
 
 ## Getting started
 
@@ -61,7 +90,7 @@ Checkout [Understanding Science](http://undsci.berkeley.edu/article/0_0_0/howsci
 help.search("bar plot")
 ```
 
-**Challange**
+**Challenge**
 
 Use the `help.search` function to search for something in statistics that you think should be in R? Did you find anything?
 
@@ -86,9 +115,9 @@ There's internal control for order of operations (Please Excuse My Dear Aunt Sal
 3 * 5 + 7
 ```
 
-**Challange**
+**Challenge**
 
-Writen an example where adding parantheses matters.
+Write an example where adding parentheses matters.
 
 There are a ton of internal functions, and a lot of add-ons.
 
@@ -104,6 +133,40 @@ sqrt(-5)
 
 Use a script file for your work. It's easier to go back to and easy to document.
 
+**Important:** within an R file, you can use the # sign to add comments. Anything written after the # is *not* interpretted when you run the code.
+
+**Challenge**
+
+Create a new R script file in your `scripts` directory.
+
+### Basic file managment in R
+
+```{r}
+# What working directory am I in?
+getwd()
+
+# Move to a different director?
+setwd(".")
+```
+
+#### Things to cover
+
+* Navigating the file path
+* Tab completion of file paths
+* Tab completion of R commands
+
+**Challenge**
+
+* Try to autocomplete `fil`, what do you find?
+* Use the brief help menu that comes up to find a function that starts with `file`, and describe what you think it does.
+
+## Rmd file
+
+Use this to intergrate text and R code into the same document.
+**I will expect most of your homework assignments as an Rmd file.**
+
+*Practice with Rmd file*
+
 ## Variables and objects
 
 There are several basic types of data structures in R.
@@ -115,200 +178,286 @@ There are several basic types of data structures in R.
 * **ARRAYS**: higher dimensional matrices are called arrays in R
 * **LISTS**: lists can contain any type of object as list elements. You can have a list of numbers, a list of matrices, a list of characters, etc., or any combination of the above.
 
-Functions that are useful for understanding the different types of data structures
+### Functions that are useful for understanding the different types of data structures
 
 ```
 str()
 class()
 ```
 
-# Probability
+## Practice with variables
 
-### Frequentist perspective 
-
-The relative frequency of an event over the long term, after many trials.
-
-E.g., throwing a coin. What's the probablity of a 'heads'? After one trial, two trials, ..., 1000 trials.
+Define a variable
 
 ```{r}
-(head <- runif(1) > 0.5)
+my_var <- 8
 ```
 
-
-### Bayes perspective
-
-Stay tuned.
-
-***
-
-
-## M&Ms
-
-Open your bag and count how many M&Ms you got. Also count how many of each color.
-
-### Assignment operator
-
-Make a new variable (object) called `tot_mm` and assign it the number of MMs in your bag.
+And another
 
 ```{r}
-tot_mm <- 60
+my_var2 <- 10
 ```
 
-### `mean` number of MMs in a bag
-
-* Vector
-* `sum` function
-* `mean` function
-
-Calculate the mean number of MMs in a bag.
+Work with vars
 
 ```{r}
-tot_mm_pop_sample <- c(60, 58, 57, 63, 61, 60, 59)
+my_var + my_var2
 ```
 
-Mean:
+Make a new variable
+
+```{r}
+my_var_tot <- my_var + my_var2
+```
+
+**Challenge**
+
+Change the value of my_var2
+
+```{r}
+my_var2 <- 3
+```
+
+What is the value of `my_var_tot` now?
+
+### Make a vector
+
+Combining values into a vector
+
+```{r}
+# Vector of variables
+my_vect <- c(my_var, my_var2)
+
+# Numeric vector
+v1 <- c(10, 2, 8, 7, 11, 15)
+
+# Char vector
+pets <- c("cat", "dog", "rabbit", "pig")
+```
+
+Making a vector of numbers in sequence
+
+```{r}
+v2 <- 1:10
+v3 <- seq(from = 1, to = 10)
+```
+
+**Challenge**
+
+1. Look up the help for the `seq` function, and use this to make a vector from 1 to 100, by steps of 5.
+2. Come up with a way that you would use the `length.out` argument.
+
+## Exploring variable elements
+
+You can get specific elements from vectors and other data structures
+
+* Introduction to the square brackets `[]`
+
+```{r}
+pets[1]
+```
+
+* Getting a number of elements, in sequence
+
+```{r}
+pets[3:4]
+```
+
+* Getting a number of elements, not in sequence
+
+```{r}
+pets[c(1,4)]
+```
+
+**Challenge**
+
+Use what we just learned to reverse the order of the `pets` vector.
+
+### Working with matrices
+
+Why might we want 2D data?
+
+Let's make a matrix
+
+**Challenge**
+
+With the people next to you, break down this function, and describe each argument.
+What is the final product?
+
+```{r}
+my_mat <- matrix(data = runif(50), nrow = 10, byrow = TRUE)
+```
+
+What does it mean to fill `byrow`?
+
+```{r}
+matrix(data = 1:9, nrow = 3, byrow = TRUE)
+```
+
+Versus
+
+```{r}
+matrix(data = 1:9, nrow = 3, byrow = FALSE)
+```
+
+**Challenge**
+
+What is the default value for `byrow`?
+
+### Indexing matrices
+
+Indexing happens by **row**, **column** notation.
+
+```{r}
+my_mat <- matrix(data = 1:50, nrow = 10, byrow = TRUE)
+
+my_mat[1,1]
+my_mat[1,2]
+my_mat[2,1]
+
+my_mat[1:4, 1:3]
+
+my_mat[c(1,3,5), ]
+my_mat[ ,c(1,3,5)]
+```
+
+## Combinining internal functions with matrices
+
+Make a "random" matrix (that isn't random in this case)
+
+```{r}
+set.seed(1)
+mat1 <- matrix(data = runif(50), nrow = 10, byrow = TRUE)
+```
+
+Calculate the mean of all of the data
+
+```{r}
+mean(mat1)
+```
+
+Calculate the standard deviation of all of the data
+
+```{r}
+sd(mat1)
+```
+
+Calculate row means and column means
+
+```{r}
+rowMeans(mat1)
+colMeans(mat1)
+```
+
+Introduce the `apply` function
+
+```{r}
+apply(mat1, MARGIN = 1, mean)
+```
+
+## Functions
+
+What is a function?
+
+Why write a function?
+
+**Example**
+
+*Note:* the example below is borrowed from the [Software Carpentry](https://software-carpentry.org/) Introduction to Programming materials.
+
+Convert from Fahrenheit to Kelvin
+
+```{r}
+fahr_to_kelvin <- function(temp) {
+  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
+  return(kelvin)
+}
+```
+
+Convert from Kelvin to Celsius
+
+```{r}
+kelvin_to_celsius <- function(temp) {
+  celsius <- temp - 273.15
+  return(celsius)
+}
+```
+
+**Challenge**
+
+Write a function to convert from Fahrenheit to Celsius.
+
+
+## `for` loops
+
+How do I do the same thing many times?
+
+### Generic for loop
+
+```
+for (variable in collection) {
+  do things with variable
+}
+```
+
+Let's get more specific. Say we took a bunch of measurements of temperature in Fahranheit, but want to convert them. How might we do it?
+
+#### Make our temperature data set
+
+```{r}
+set.seed(8)
+temp_data <- runif(n = 20, min = -5, max = 5) + 45
+```
+
+**Challenge**
+
+What did we just do?
+
+#### Use our `fahr_to_kelvin` function on each element
+
+Iteration 1.
+
+```{r}
+for( x in temp_data){
+  fahr_to_kelvin(x)
+}
+```
+
+Iteration 2.
+
+```{r}
+for( x in temp_data){
+  print(fahr_to_kelvin(x))
+}
+```
+
+Iteration 3.
+
+```{r}
+for( x in 1:length(temp_data)){
+  print(fahr_to_kelvin(temp_data[x]))
+}
+```
+
+Iteration 4.
+
+```{r}
+temp_data_kelvin <- vector()
+for( x in 1:length(temp_data)){
+  temp_data_kelvin[x] <- fahr_to_kelvin(temp_data[x])
+}
+
+print(temp_data_kelvin)
+```
+
+**Final challenge**
+
+Use a `for` loop to write a script to calculate the mean of a set of numbers.
+
+Recall that the mean is:
 
 $$
 \bar{x} = \frac{\sum_{i=1}^n{x_i}}{n}
 $$
-
-Using the `sum` function.
-
-```{r}
-(mean_mm_1 <- sum(tot_mm_pop_sample) / length(tot_mm_pop_sample))
-```
-
-Using the `mean` function.
-
-```{r}
-mean_mm_2 <- mean(tot_mm_pop_sample)
-```
-
-### Quantify the variation in the number of MMs in a bag
-
-* `var` function
-* `sd` function
-
-What do we mean by variation? 
-In general, we mean something along the lines of 'the amount of variation around some mean value'.
-
-**How might we quantify this?**
-
-* Add up the distances from the mean. 
-
-First calculate distances from the mean for each bag.
-
-```{r}
-(dist_from_mean <- tot_mm_pop_sample - mean_mm_1)
-```
-
-Next calculate the total distances.
-
-```{r}
-(sum_dist_from_mean <- sum(dist_from_mean))
-```
-
-What information does this give us, and why might it not be useful?
-
-* Add up the *absolute* distances form the mean. 
-
-First calculate the *absolute* distances from the mean.
-
-```{r}
-(absdist_from_mean <- abs(tot_mm_pop_sample - mean_mm_1))
-```
-
-Next add up the total *absolute* distances from the mean.
-
-```{r}
-(sum_absdist_from_mean <- sum(absdist_from_mean))
-```
-
-* Add up the *squared* distances from the mean.
-
-While the absolute distance from the mean does give us a reasonable measure of variability, because of specific mathematical properties, it's more convenient to work with *squared* distances from the mean, leading to the measures of **variance** and **standard deviation**.
-
-**Challange**
-
-Calculate *squared* distances from the mean, and sum them to determine the total squared deviation.
-
-**Challange**
-
-Can you find an R function to do this in one step?
-
-**Standard deviation** can be thought of as the average deviation from the mean.
-
-## Probability and M&Ms
-
-Without looking, you chose one M&M. What colors could you have chosen?
-
-The **set** of brown, yellow, green, red, orange, blue is the **sample space**.
-
-Your selection of a single M&M is called an **event**.
-
-
-**Challange**
-
-* What's the probability of getting a "color" M&M in **your** bag?
-
-P(brown), P(yellow), etc.
-
-**Challange**
-
-What is the mean probablity of getting each color across each bag?
-
-Tools to use:
-
-* `data.frames`
-* `apply`
-
-
-## Venn diagrams
-
-* What's the P(green OR blue OR red) in **your** bag? 
-
-P(green) + P(blue) + P(red)
-
-* What is the P(NOT green) in **your** bag?
-
-$$
-P(NOT Green) = 1 - P(Green) = P(G)^c
-$$
-
-
-### Sampling with replacement
-
-* What's the P(green and then blue), first putting back your first draw?
-
-Intersection: P(green intersection blue) = P(green) * P(blue) 
-
-* What's the P(green or blue)?
-
-Union: P(green) + P(blue) - P(green and blue)
-
-
-### Sampling without replacement
-
-* What is the probability of getting green, then blue, *without replacing your first draw*?
-
-**Challange**
-
-What is the sample space for drawing two M&Ms?
-
-Well work further on similar problems in future classes.
-
-
-## Draw a random bag of M&Ms using the company stated frequencies/probabilities for each color
-
-```{r}
-## Colors as a vector
-mm_colors <- c("blue", "brown", "green", "orange", "red", "yellow")
-mm_probs <- c(.24, .14, .16, .20, .13, .14)
-
-## I want to "sample" a bag of MMs
-new_bag <- sample(x = mm_colors, size = 55, replace = TRUE, prob = mm_probs)
-table(new_bag)
-
-```
-
 
