@@ -6,6 +6,233 @@ output:
     toc: yes
 ---
 
+
+## Exploring variable elements
+
+You can get specific elements from vectors and other data structures
+
+* Introduction to the square brackets `[]`
+
+```{r}
+pets[1]
+```
+
+* Getting a number of elements, in sequence
+
+```{r}
+pets[3:4]
+```
+
+* Getting a number of elements, not in sequence
+
+```{r}
+pets[c(1,4)]
+```
+
+**Challenge**
+
+Use what we just learned to reverse the order of the `pets` vector.
+
+### Working with matrices
+
+Why might we want 2D data?
+
+Let's make a matrix
+
+**Challenge**
+
+With the people next to you, break down this function, and describe each argument.
+What is the final product?
+
+```{r}
+my_mat <- matrix(data = runif(50), nrow = 10, byrow = TRUE)
+```
+
+What does it mean to fill `byrow`?
+
+```{r}
+matrix(data = 1:9, nrow = 3, byrow = TRUE)
+```
+
+Versus
+
+```{r}
+matrix(data = 1:9, nrow = 3, byrow = FALSE)
+```
+
+**Challenge**
+
+What is the default value for `byrow`?
+
+### Indexing matrices
+
+Indexing happens by **row**, **column** notation.
+
+```{r}
+my_mat <- matrix(data = 1:50, nrow = 10, byrow = TRUE)
+
+my_mat[1,1]
+my_mat[1,2]
+my_mat[2,1]
+
+my_mat[1:4, 1:3]
+
+my_mat[c(1,3,5), ]
+my_mat[ ,c(1,3,5)]
+```
+
+## Combinining internal functions with matrices
+
+Make a "random" matrix (that isn't random in this case)
+
+```{r}
+set.seed(1)
+mat1 <- matrix(data = runif(50), nrow = 10, byrow = TRUE)
+```
+
+Calculate the mean of all of the data
+
+```{r}
+mean(mat1)
+```
+
+Calculate the standard deviation of all of the data
+
+```{r}
+sd(mat1)
+```
+
+Calculate row means and column means
+
+```{r}
+rowMeans(mat1)
+colMeans(mat1)
+```
+
+Introduce the `apply` function
+
+```{r}
+apply(mat1, MARGIN = 1, mean)
+```
+
+## Functions
+
+What is a function?
+
+Why write a function?
+
+**Example**
+
+*Note:* the example below is borrowed from the [Software Carpentry](https://software-carpentry.org/) Introduction to Programming materials.
+
+Convert from Fahrenheit to Kelvin
+
+```{r}
+fahr_to_kelvin <- function(temp) {
+  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
+  return(kelvin)
+}
+```
+
+Convert from Kelvin to Celsius
+
+```{r}
+kelvin_to_celsius <- function(temp) {
+  celsius <- temp - 273.15
+  return(celsius)
+}
+```
+
+**Challenge**
+
+Write a function to convert from Fahrenheit to Celsius.
+
+
+## `for` loops
+
+How do I do the same thing many times?
+
+### Generic for loop
+
+```
+for (variable in collection) {
+  do things with variable
+}
+```
+
+Let's get more specific. Say we took a bunch of measurements of temperature in Fahrenheit, but want to convert them. How might we do it?
+
+#### Make our temperature data set
+
+```{r}
+set.seed(8)
+temp_data <- runif(n = 20, min = -5, max = 5) + 45
+```
+
+**Challenge**
+
+What did we just do?
+
+#### Use our `fahr_to_kelvin` function on each element
+
+Iteration 1.
+
+```{r}
+for( x in temp_data){
+  fahr_to_kelvin(x)
+}
+```
+
+Iteration 2.
+
+```{r}
+for( x in temp_data){
+  print(fahr_to_kelvin(x))
+}
+```
+
+Iteration 3.
+
+```{r}
+for( x in 1:length(temp_data)){
+  print(fahr_to_kelvin(temp_data[x]))
+}
+```
+
+Iteration 4.
+
+```{r}
+temp_data_kelvin <- vector()
+for( x in 1:length(temp_data)){
+  temp_data_kelvin[x] <- fahr_to_kelvin(temp_data[x])
+}
+
+print(temp_data_kelvin)
+```
+
+**Final challenge**
+
+Use a `for` loop to write a script to calculate the mean of a set of numbers.
+
+Recall that the mean is:
+
+$$
+\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n}
+$$
+
+
+
+
+
+
+
+
+# Start 2016 material
+
+
+
+
+
 # Week 2 - Probability and Data Exploration
 
 ## Review from Week 1

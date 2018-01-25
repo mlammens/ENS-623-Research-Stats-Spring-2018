@@ -17,7 +17,7 @@ You can find a **DRAFT** copy of the syllabus [here](pages/syllabus.html)
 
 |Date |Meeting | Topic | Recommended Reading | Lecture Notes | Assignment |
 |-----|--------|-------|---------|---------------|------------|
-|1/24 | 1 |Introduction to Biostatistics and R |Q&K Chap. 1; Logan Chap. 1 | [Lecture notes 1](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-1.html); [In class R file]()|[Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) |
+|1/24 | 1 |Introduction to Biostatistics and R |Q&K Chap. 1; Logan Chap. 1 | [Lecture notes 1](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-1.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-1-InClass.R)|[Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) |
 |1/31  | 2 |Intro to R (cont) and Asking Research Questions|Sutherland et al. 2013| [Lecture notes 2](http://mlammens.github.io/Biostats/lectures/Lecture-2.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-2-InClass.R)|[Problem Set 2](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html) |
 |2/7  | 3 |Data Exploration |Q&K Chap. 1 & 4; Logan Chap. 3 & 5 |[Lecture notes 3](http://mlammens.github.io/Biostats/lectures/Lecture-3.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-3-InClass.R) | [Problem Set 3](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html)|
 |2/14 | 4 |Probability Distributions and Estimation |Q&K Chap. 2 ; Logan Chap. 3 | |[Problem Set 4](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html) |
