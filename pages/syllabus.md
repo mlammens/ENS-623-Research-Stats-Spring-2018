@@ -1,6 +1,7 @@
 ---
+title: "Syllabus"
 layout: page
-title: Syllabus
+output: pdf_document
 description: course syllabus
 ---
 
@@ -40,7 +41,7 @@ Additionally, the methods of biostatistical analysis are applicable in all field
 I will assess your achievement of the learning objectives based on your performance on problem sets, inclass exams, and a final analysis report.
 
 Problem sets - 60%  
-Analysis project - 40%  
+Semester project - 40%  
 
 ### Analysis project
 

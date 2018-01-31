@@ -24,7 +24,7 @@ You can find a **DRAFT** copy of the syllabus [here](pages/syllabus.html)
 |2/21 | 5 |Distributions and Hypothesis Testing |Q&K Chap. 2; Logan Chap. 3 |[Lecture notes 4](http://mlammens.github.io/Biostats/lectures/Lecture-4.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-4-InClass.R) |[Problem Set 5](http://mlammens.github.io/Biostats/problem_sets/Problem-set-3.html) |
 |2/28 | 6 |Estimation, Hypothesis Testing |Q&K Chap. 3; Logan Chap. 6  |[Lecture notes 5](http://mlammens.github.io/Biostats/lectures/Lecture-5.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-5-InClass.R) | [Problem Set 6](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html)|
 |3/7  | 7 |Hypothesis Testing, Non-parametric Methods, Introduction to Linear Models |Q&K Chap. 3; Logan Chap. 6 |[Lecture notes 6](http://mlammens.github.io/Biostats/lectures/Lecture-6.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-6-InClass.R) | [Problem Set 7](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html)|
-|3/21 | SPRING BREAK |NO CLASS |Catch-up | | |
+|3/14 | SPRING BREAK |NO CLASS |Catch-up | | |
 |3/21 | 8 |Correlation and Regression| | [Lecture notes 7](http://mlammens.github.io/Biostats/lectures/Lecture-7.html); [Lecture notes 7 - addition](http://mlammens.github.io/Biostats/lectures/Lecture-7-Notes.pdf); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-7-InClass.R) |[Problem Set 8](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html)|
 |3/28 |  9 |Regression |Q&K Chap. 5 & 6; Logan Chap. 8 & 9 |[Lecture notes 8](http://mlammens.github.io/Biostats/lectures/Lecture-8.html); [Lecture notes 8 - addition](http://mlammens.github.io/Biostats/lectures/Lecture-8-Notes.pdf); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-8-InClass.R) |[Problem Set 9](http://mlammens.github.io/Biostats/problem_sets/Problem-set-4.html) |
 |4/4  | 10 |Multiple regression | | |[Problem Set 10](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html) |
@@ -36,9 +36,16 @@ You can find a **DRAFT** copy of the syllabus [here](pages/syllabus.html)
 
 
 
-## Final Project Overview
+## Semester Project Overview
 
-More information about the final project will be posted here.
+During the semester, you will carry out an independent research and analysis project, using the skills we learn in this class. 
+The project represents 40% of your grade, but is broken up into several components. 
+
+* Research question exercise - 5% - DUE 2/14
+* Background literature search - 5% - DUE 3/21
+* Methods description - 5% - DUE 4/11
+* Mini-presentation (5 minutes in class) - 5% - DUE 4/11, 4/18, or 4/25
+* Final report - 10% - DUE 5/9
 
 
 ## Resources

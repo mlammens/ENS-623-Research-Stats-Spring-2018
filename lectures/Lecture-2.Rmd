@@ -20,6 +20,8 @@ output:
     - Peer-review is king, but not all journals are equal
     - Follow the paper trail
 
+* Grants and external funding - concentrating your thoughts
+
 # Introduction to R - continued
 
 ## Exploring variable elements
