@@ -4,42 +4,21 @@ author: "Matthew E. Aiello-Lammens"
 output: html_document
 ---
 
-# DUE Monday February 22
+*Caveat - this example is based on a real competative relationship, but all numbers are completely fictional.*
 
-# Part 1
+Red fox and arctic fox compete both directly and indirectly where their species ranges meet. 
+Direct competition usually involves fighting between individuals, while indirect competition usually involves competition for denning locations.
+Generally, red fox can out compete arctic fox in both direct and indirect competition, but cannot physically tolerate the colder temperatures that arctic fox can.
+Therefore, the red fox is primarily responsible for the southern range edge of the arctic fox.
 
-Use the `iris` dataset that comes with R to answer the following questions.
-We worked with this dataset in class during **Week 2**.
-As a reminder, you can 'load' the `iris` dataset using the following command:
+During direct competition, an individual will "attack" as long as it has the "advantage" in the fight.
+The individual maintains the "advantage" as long as it is "wins" a bout. 
+If on the other hand, an individual is attacked, it will "defend".
+An individual "wins-overall" when it scores 21 "wins" on its opponent. 
+(This setup is similar to how raquetball is scored.)
+If a red fox attacks first, it will "win" a "bout" with a probability of 0.6. 
+If a red fox is attacked by an arctic fox, it will "win" the "bout" with a probability of of 0.5. 
 
-```
-data(iris)
-```
+Estimate, by simulation, the probability that during a red fox-arctic fox interaction, **a red fox will "win-overall"**. 
 
-1. Calculate the **mean**, **standard deviation**, and an additional **measure of location** and **measuer of dispersion and variability** of your choosing for **Petal Length** for the full `iris` dataset **AND** for each species separately. 
-In words, describe the differences you observe between species, and between individual species and the full dataset. 
-Be sure to identify which measures of your choosing you are calculating. 
-You may want to consult *Logan; Table 3.3* when deciding on additional measures.
-**(5 pnts)**
 
-2. Construct a **boxplot** for **Petal Length** using the `iris` dataset. 
-Both the *Logan* and *Quinn & Keough* texts provide extensive information on boxplots.
-You can use `base` R or `ggplot2`. 
-See [this site](http://www.cookbook-r.com/Graphs/Plotting_distributions_(ggplot2)/) for a good outline of constructing a boxplot with `ggplot2`.
-In your plot, each box should represent a different species.
-Describe each component of a generic boxplot, and describe why we might be interested in each value that is represented.
-**(10 pnts)**
-
-* **BONUS** Construct separate **density histograms** for **Petal Length** for each species. 
-Overlay on top of the histograms curves for the **normal distributions** with the means and standard deviations calculated in (1) above. 
-Hint 1: check out [this site](http://www.statmethods.net/advgraphs/probability.html) for information on plotting a normal distribution.
-Hint 2: You can use `ggplot2` to overlay the normal onto your histogram, or in `base` R you can try adding `add = TRUE` to the `plot` function.
-**(5 bonus pnts)**
-
-# Part 2
-
-* Recall the M&Ms we worked with in Week 1. 
-Using the same logic we used to derive the **binomial distribution**, derive the probability of obtaining a given combination of colors in our bag.
-([Hint](https://en.wikipedia.org/wiki/Multinomial_distribution)). 
-Calculate the probability of getting your specific bag (our data are [here](http://mlammens.github.io/Biostats/data/class_mm_data.csv))
-**(5 pnts)**

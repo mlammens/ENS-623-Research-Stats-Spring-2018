@@ -3,23 +3,6 @@ title: "Sandbox"
 output: html_document
 ---
 
-*Caveat - this example is based on a real competative relationship, but all numbers are completely fictional.*
-
-Red fox and arctic fox compete both directly and indirectly where their species ranges meet. 
-Direct competition usually involves fighting between individuals, while indirect competition usually involves competition for denning locations.
-Generally, red fox can out compete arctic fox in both direct and indirect competition, but cannot physically tolerate the colder temperatures that arctic fox can.
-Therefore, the red fox is primarily responsible for the southern range edge of the arctic fox.
-
-During direct competition, an individual will "attack" as long as it has the "advantage" in the fight.
-The individual maintains the "advantage" as long as it is "wins" a bout. 
-If on the other hand, an individual is attacked, it will "defend".
-An individual "wins-overall" when it scores 21 "wins" on its opponent. 
-(This setup is similar to how raquetball is scored.)
-If a red fox attacks first, it will "win" a "bout" with a probability of 0.6. 
-If a red fox is attacked by an arctic fox, it will "win" the "bout" with a probability of of 0.5. 
-
-Estimate, by simulation, the probability that during a red fox-arctic fox interaction, **a red fox will "win-overall"**. 
-(5 pts for the answer, 5 pts for the simulation script)
 
 
 
@@ -216,4 +199,637 @@ new_bag <- sample(x = mm_colors, size = 55, replace = TRUE, prob = mm_probs)
 table(new_bag)
 
 ```
+
+
+
+
+
+# 2016 material
+
+# Week 2 - Probability and Data Exploration
+
+## Review from Week 1
+
+### Probability and Venn diagrams
+
+Recall our bag's of M&Ms. 
+I told you that Mars claims that percentages of each color M&M should be:
+
+```{r}
+## Colors as a vector
+mm_colors <- c("blue", "brown", "green", "orange", "red", "yellow")
+## Proportion/probability of each color
+mm_probs <- c(.24, .14, .16, .20, .13, .14)
+```
+
+Let's draw a Venn diagram representing the probability of getting a **blue** M&M.
+This is written algebraically as $P(Blue)$:
+
+```{r, results='hide'}
+## Load VennDiagram package - NB: you will likely have to install this package first
+library(VennDiagram)
+
+## Create a Venn diagram
+draw.single.venn(area = 0.24, category = "Blue M&M", fill = "blue", alpha = 0.5)
+```
+
+Draw a Venn diagram representing the probability of getting a **blue or red** M&M.
+This is written algebraically as $P(Blue \cup Red)$:
+
+```{r, results='hide'}
+grid.newpage()
+draw.pairwise.venn(area1 = 0.24, area2 = 0.13, cross.area = 0, 
+                   category = c("Blue M&M", "Red M&M"),
+                   fill = c("blue", "red"), alpha = rep(0.5, 2))
+```
+
+**IMPORTANT: Note that there is no overlap between these two events. We say that these events are *mutually exclusive*.**
+
+#### Adding Peanut and Almond M&Ms to the mix
+
+Let's imagine the scenario that we add an equal amount of Peanut and Almond M&Ms to our bags of M&Ms. 
+Now we can ask a question like, *what is the probability of getting a **blue AND peanut** M&M?*
+We can write this algebraically as $P(Blue \cap Peanut)$.
+
+Recall that $P(Blue) = 0.24$, and because all three types of M&Ms are represented equally, the $P(Peanut) = 0.33$.
+
+```{r, results='hide'}
+grid.newpage()
+draw.pairwise.venn(area1 = 0.24, area2 = 0.33, cross.area = 0.0792, 
+                   category = c("Blue M&M", "Peanut M&M"),
+                   fill = c("blue", "yellow"), alpha = rep(0.5, 2))
+```
+
+**IMPORTANT: Note that in this example, the color and type of M&M are *indpendent* from each other.**
+
+#### Challange
+
+**What is the probability of getting a *blue OR peanut* M&M?** I.e. $P(Blue \cup Peanut)$.
+
+Hint: Note the different between adding up the area represented in the Venn diagram versus adding the $P(Blue) + P(Peanut)$.
+
+### Conditional probability
+
+***
+
+#### Challange
+
+What is the probability of drawing a blue M&M, CONDITIONAL on it being a peanut M&M?
+
+$$
+P(Blue|Peanut) = \frac{P(Blue \cap Peanut)}{P(Peanut)}
+$$
+
+Calculate this probability. The value should be 0.24. **Why?**
+
+***
+
+#### More general thinking
+
+We can use a bit of algebra and re-write a general form of the equation above as:
+
+$$
+P(A|B) P(B) = P(A \cap B)
+$$
+
+Now, because $P(A \cap B)$ is identical to $P(B \cap A)$, we can expand this further too:
+
+$$
+P(A|B) P(B) = P(A \cap B) = P(B|A) P(A)
+$$
+
+And after a little more algebra, we arrive at **Bayes Theorem**:
+
+$$
+P(A|B) = \frac{P(B|A) P(A)}{P(B)} = \frac{P(B|A) P(A)}{P(B|A)P(A) + P(B|~A)P(~A)}
+$$
+
+***
+
+## `if`/`else` statements and `for` loops
+
+In this class, and in ecological analysis more generally, you are likely to encounter situations where you want to perform some calculation multiple times. 
+A `for` loop is standard programming method used to do this.
+
+### Example - 100 coin flips
+
+Last week we simulated coin flips using both a fair and unfair coin. 
+We used the `sample` function to do this, which is a pretty efficient method.
+What we're going to use here is much less efficient, but instructive.
+
+First, let's deal with a single coin flip of a fair coin.
+I'll do this by drawing a single number from a
+[standard uniform](https://en.wikipedia.org/wiki/Uniform_distribution_(continuous)) 
+distribution. 
+If the number is greater than 0.5, I'll call the "flip" a heads. 
+Otherwise I'll call it a "tails".
+
+#### Single coin flip using `if`/`else`
+
+```{r}
+coin_flip_number <- runif(n = 1)
+
+if(coin_flip_number > 0.5){
+  coin_flip <- "heads"
+  } else {
+    coin_flip <- "tails"
+  }
+
+coin_flip
+```
+
+***
+
+#### Challange - Single coin flip using `ifelse`
+
+Use the `ifelse` function to make this a bit cleaner. 
+**Hint: start by looking at the help for the `ifelse` function**
+
+```{r}
+coin_flip <- ifelse(runif(1) > 0.5, yes = "heads", no = "tails")
+```
+
+***
+
+#### Use a `for` loop to simulate 100 coin flips
+
+Let's dive in to a `for` loop. For more information, check out this lesson on loops from
+[Software Carpentry](http://swcarpentry.github.io/r-novice-inflammation/03-loops-R.html).
+
+**NOTE: Results are hidden for presentation here.**
+
+```{r, results='hide'}
+## Set a variable for the number of "repetitions" you want to do - here 100
+rep <- 100
+
+## Initiate for loop
+for( ind in 1:rep ){
+  
+  ## Print out a statement telling you what repetition the loop is on
+  print(paste0("Doing repetition: ", ind))
+  
+  ## Simulate the coin flip
+  coin_flip <- ifelse(runif(1) > 0.5, yes = "heads", no = "tails")
+  
+  ## Print the result of the flip
+  print(coin_flip)
+
+}
+```
+
+This is good, but if we look at `coin_flip` we see that it only saves the last simulated value, not all 100. 
+We need to add a few more things to our loop.
+
+**NOTE: Results are hidden for presentation here.**
+
+```{r, results='hide'}
+## Set a variable for the number of "repetitions" you want to do - here 100
+rep <- 100
+
+## NEW!!! Make an empty vector to save the results of our coin flips
+all_flips <- c()
+
+## Initiate for loop
+for( ind in 1:rep ){
+  
+  ## Print out a statement telling you what repetition the loop is on
+  print(paste0("Doing repetition: ", ind))
+  
+  ## Simulate the coin flip
+  coin_flip <- ifelse(runif(1) > 0.5, yes = "heads", no = "tails")
+  
+  ## Print the result of the flip
+  print(coin_flip)
+  
+  ## NEW!!! Add the coin flip to the `all_flips` vector
+  all_flips[ind] <- coin_flip
+
+}
+```
+
+Okay, now we can look at the results of our simulated coin flips.
+
+```{r}
+table(all_flips)
+
+## or heads = 
+sum(all_flips=="heads")
+
+## and tails = 
+sum(all_flips=="tails")
+
+```
+
+
+***
+
+### Major Challange (15 minutes): How likely was my bag of M&Ms?
+
+Write a short R script to simulate the combinations of colors that would have been possible from your bag of M&Ms assuming the company-stated color distribution (24% blue, 14% brown, 16% green, 20% orange, 13% red, 14% yellow) and use this script to calculate the probability of obtaining the combination in your bag. 
+
+Needed:
+* `for` loop
+* `if` statement
+* `sample` function
+
+Recall that you can sample a bag of M&Ms using the following:
+
+```{r}
+## Colors as a vector
+mm_colors <- c("blue", "brown", "green", "orange", "red", "yellow")
+
+## Proportion/probability of each color
+mm_probs <- c(.24, .14, .16, .20, .13, .14)
+
+## I want to "sample" a bag of MMs
+new_bag <- sample(x = mm_colors, size = 55, replace = TRUE, prob = mm_probs)
+```
+
+Also, here's how to read in our saved dataset, assuming it's in your `data` folder.
+
+```{r}
+mm_dataset <- read.csv("/Users/mlammens/Google Drive/Professional/Websites/Biostats/data/class_mm_data.csv", row.names = 1)
+```
+
+I can then get my bag of M&Ms using:
+
+```{r}
+my_bag <- mm_dataset["Matt",]
+```
+
+
+```{r}
+## Set up a counter to count the number of times the simulated bag matches my bag,
+## and start it at 0
+count<-0
+
+## Set the number of replications to try
+replications<-3000
+
+for(i in 1:replications){
+  
+  ## Draw a new bag
+  new_bag <- sample(x = mm_colors, size = sum(my_bag), replace = TRUE, prob = mm_probs)
+
+  ## Count the number of each color
+  new_bag_counts <- c(sum(new_bag == "blue"),
+                      sum(new_bag == "brown"),
+                      sum(new_bag == "green"),
+                      sum(new_bag == "orange"),
+                      sum(new_bag == "red"),
+                      sum(new_bag == "yellow"))
+
+  ## Check to see if my bag is the same as the new bag
+  if( all(my_bag == new_bag_counts) ){
+    count<-count+1
+    }
+  }
+
+  ## Calculate the probability of my bag based on the number of replications done
+  probability<-count/replications
+
+print(paste0("Likelihood of my bag: ", probability))
+```
+
+***
+
+## Data exploration
+
+The first step to any data analysis is to interrogate your data by calculating some standard statistics and by visualizing it it various ways. 
+In future classes we will look more closely at standard statistics.
+Today, we'll focus on data visualization.
+
+### Iris dataset
+
+We're going to work with a dataset that comes built in to R, commonly 
+called the
+[iris dataset](https://stat.ethz.ch/R-manual/R-patched/library/datasets/html/iris.html).
+It is also sometimes called Fisher's Iris dataset (but should more appropriately
+be called Anderson's Iris dataset). Because it comes pre-packaged with R, we 
+can load it into our environment using the `data` function.
+
+```{r}
+data( iris )
+```
+
+Let's have a look at this dataset
+
+```{r}
+head( iris )
+tail( iris )
+```
+
+The dataset contains measurements of four characteristics of three
+different species of Iris (plants!). 
+
+#### `summary` function
+
+Let's begin by using the `summary` function to examine this dataset.
+`summary` returns many of the standard statistics.
+When doing data exploration, a few things you want to look at are:
+
+* How to the mean and median values within a variable compare?
+* Do the min and max values suggest there are outliers?
+* Which variables (i.e., columns) are quantitative (numeric) versus categorical (factors or characters)
+
+```{r}
+summary(iris)
+```
+
+#### Aside: Differences between characters and factors
+
+Factors 'appear' to be similar to characters, but are in fact coded numerically in R. 
+Think of **factors** like **categories**. 
+Here's a quick example that demonstrates the difference in these two variable types that shows up when using `summary`.
+
+```{r}
+## Make a new iris dataset
+iris_new <- iris
+
+## Create a new column that treats species as a character, rather than a factor
+iris_new$species_char <- as.character(iris_new$Species)
+
+## Run summary command
+summary(iris_new)
+```
+
+
+#### Aside: A (very) brief introduction to navigating a `data.frame`
+
+We will be very brief here. 
+I recommend checking out 
+[this Data Carpentry lesson](http://www.datacarpentry.org/R-ecology/03-data-frames.html) for more information.
+
+* Looking at specific `data.frame` elements. Use the *row* and *column* notation.
+
+Here is the 5th row, 3rd column (Petal.Length).
+**Note: We are using square brackets to index the `data.frame` and we *always* use row, column notation.**
+
+```{r}
+iris[5, 3]
+```
+
+* Looking at an entire column.
+
+Here are two ways to get the `Petal.Length` column.
+
+First, **note: we leave the row part blank, but still add the comma.**
+
+```{r}
+iris[ ,3]
+```
+
+Second, **use only the variable (column) name. Note the use of the `$` operator**
+
+```{r}
+iris$Petal.Length
+```
+
+* Looking at specific column entry
+
+This is another way to look at the 5th entry in the `Petal.Length` column.
+
+```{r}
+iris$Petal.Length[5]
+```
+
+* Looking at all entries for a given row.
+
+Here's all the entries for the 5th row.
+**Note: here we leave the column part blank, but still add the comma.**
+
+```{r}
+iris[5, ]
+```
+
+* Looking at a set of rows and/or columns.
+
+Here's all the entries in the 5th through 10th rows, 1st through 3rd columns.
+**Note: we use the `:` operator to look at a range of value.**
+
+```{r}
+iris[5:10, 1:3]
+```
+
+* For `data.frame`s, if you do not use row, column notation, you will get only the columns back.
+
+```{r}
+head(iris[2:3])
+```
+
+***
+
+#### Challange
+
+What am I going to get if I execute the command below?
+
+```{r, results='hide'}
+head(iris[c("Sepal.Width","Petal.Length")])
+```
+
+***
+
+### Visualization using `base` R functions
+
+Let's add a habitat type variable to the iris dataset. We'll use this later. 
+*Caveat - I made up these habitat type preferences.*
+
+```{r}
+iris_habitat <- data.frame( Species = c( "setosa", "versicolor", "virginica" ),
+                            Habitat = c( "forest", "wetland", "meadow" ) )
+
+iris_full <- merge( x = iris, y = iris_habitat, by = "Species" )
+
+head( iris_full )
+tail( iris_full )
+```
+
+#### Visualizing the measurements of a single variable
+
+Perhaps the most common way to look at data for a single variable is a histogram.
+This essentially is a bar plot, where each bar represents the number of times a value falls within a particular *bin*.
+
+Example: let's look at the distribution of `Petal.Length` values
+
+```{r}
+hist(iris_full$Petal.Length)
+```
+
+***
+
+#### Challange - use `?hist` to determine how to change the number of bins used
+
+Hint: bins are sometimes called breaks
+
+```{r}
+?hist
+hist(iris_full$Petal.Length, breaks = 30)
+```
+
+***
+
+#### Visualizing relationships between two variables
+
+We would like to plot Sepal.Length versus Petal.Length. We'll first do this using
+**base R** functions.
+
+```{r plot1}
+plot( x = iris_full$Sepal.Length, y = iris_full$Petal.Length )
+```
+
+Note, we could save a little typing by using the `with` function. This 
+sets up a temporary environment where all of the variables (columns) 
+in my dataset are defined individually.
+
+```{r plot1-with}
+with( data = iris_full, plot( x = Sepal.Length, y = Petal.Length ) )
+```
+
+
+### Visualization using the `ggplot2` package
+
+Now we're going to introduce a data visualization package called **ggplot2**.
+This package is great for producing publication quality graphics, but the syntax
+used to create a plot is a little more involved.
+
+#### Aside: Installing and loading packages
+
+First, let's install the `ggplot2` package:
+
+```{r installggplot2, eval=FALSE}
+# Only need to do this once
+install.packages("ggplot2")
+```
+
+Then load it:
+
+```{r loadggplot2, message=FALSE}
+library(ggplot2)
+```
+
+
+OK, let's fire up ggplot.
+
+```{r plot1-ggplot}
+ggplot() + # First make an empty ggplot canvas. Notice the trailing plus sign
+  geom_point( data = iris_full, aes( x = Sepal.Length, y = Petal.Length ) )
+```
+
+Let's break down that call to introduce a few key things about ggplot
+
+* ggplot: the initial canvas we're working on
+* geom: geometric objects (i.e. the type of plot - histogram, points, line, etc) 
+* aes: aesthetic mapping 
+
+**THAT SEEMS SO COMPLICATED!**
+
+It's true, for simple plots, ggplot can be much more complicated
+than simply using the base functions. But the power of ggplot lies
+in the ability to lay several geometries (geoms) over each other.
+Also, each geometry has a rich set of options. For example,
+let's say I want to create the plot we just made, but have 
+each species represented by a different color.
+
+```{r plot2}
+ggplot() + # First make an empty ggplot canvas. Notice the trailing plus sign
+  geom_point( data = iris_full, aes( x = Sepal.Length, y = Petal.Length, colour = Species ) )
+```
+
+Let's add more information - how about habitat type as well.
+
+```{r}
+ggplot() + # First make an empty ggplot canvas. Notice the trailing plus sign
+  geom_point( data = iris_full, aes( x = Sepal.Length, y = Petal.Length, colour = Species, shape = Habitat), size = 2.5 ) +
+  theme_bw()
+```
+
+
+**facets** - a way to separate data into different subplots
+
+Let's say we wanted different plots for each species. We can do that in ggplot using
+`facets`.
+
+```{r plot2-facets}
+ggplot( data = iris_full, aes( x = Sepal.Length, y = Petal.Length ) ) + 
+  geom_point() +
+  facet_grid( Species ~ . )
+```
+
+**NOTE**: I moved the `data ...` stuff into the initial `ggplot` call here.
+
+*** 
+
+#### Challange
+
+1. `ggplot2` has many geometries, allowing us to make lot's of different 
+types of plots. Let's make two new plots - one **boxplot** of `Petal.Length`, 
+with one boxplot for each species. Use `geom_boxplot` for this.
+
+```{r}
+ggplot(data = iris_full, aes(x = Species, y = Petal.Length)) +
+  geom_boxplot(aes(fill = Species)) +
+  theme_bw()  
+```
+
+2. Make a histogram of Petal.width. 
+
+```{r}
+ggplot() +
+  geom_histogram(data = iris_full, aes(x = Petal.Length)) +
+  theme_bw()  
+```
+
+
+Use facets to separate the three species.
+
+```{r}
+ggplot() +
+  geom_histogram(data = iris_full, aes(x = Petal.Length, fill = Species)) +
+  facet_grid( Species ~ . ) +
+  theme_bw()  
+```
+
+3. Second, let's make density plots of Petal.Width. Use `geom_density` and
+`colour` to make different colored density lines for iris in each 
+habitat type. 
+**Note: the area under the curve is equal to 1.**
+
+```{r}
+ggplot() +
+  geom_density(data = iris_full, aes(x = Petal.Length, colour = Species)) +
+  theme_bw()
+```
+
+4. Use histogram to plot density instead of counts.
+
+```{r}
+ggplot() +
+  geom_histogram(data = iris_full, 
+                 aes(x = Petal.Length, y = ..density.., fill = Species)) +
+  facet_grid( Species ~ . ) +
+  geom_density(data = iris_full, aes(x = Petal.Length, colour = Species)) +
+  theme_bw()  
+```
+
+
+***
+
+### More `ggplot2` resources
+
+* <http://docs.ggplot2.org/current/>: The official **ggplot2** documentation.
+* <http://www.amazon.com/o/ASIN/0387981403/ref=nosim/gettgenedone-20>: The **ggplot2** book, by the developer, Hadley Wickham.
+* <https://groups.google.com/forum/#!forum/ggplot2>: The **ggplot2** Google Group (mailing list, discussion forum).
+* <https://github.com/swcarpentry/bc/tree/master/intermediate/r/data-visualization>: Intermediate Software Carpentry lesson on data visualization with **ggplot2**.
+* <http://learnr.wordpress.com/>: A blog with a good number of posts describing how to reproduce various kind of plots using **ggplot2**.
+* <http://stackoverflow.com/questions/tagged/ggplot2>: Thousands of questions and answers tagged with "ggplot2" on Stack Overflow, a programming Q&A site.
+
+***
+
+
+## Logistics
+
+* **Office hours:** Two hours scheduled, Thursdays 4:00 to 6:00 PM. 
+* **Additional hours:** Can meet by appointment on Mondays or Thursdays in person. By Skype/ Google Hangouts another day.
+* **Homework:** Due by 5:39 PM the week *after* it was assigned, unless otherwise noted.
+
 
