@@ -1,24 +1,63 @@
 ---
 title: "Problem Set 2"
 author: "Matthew E. Aiello-Lammens"
+date: "2018-02-01"
 output: html_document
 ---
 
-*Caveat - this example is based on a real competative relationship, but all numbers are completely fictional.*
+**Please submit this homework as an R Markdown (Rmd) file.**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
 
-Red fox and arctic fox compete both directly and indirectly where their species ranges meet. 
-Direct competition usually involves fighting between individuals, while indirect competition usually involves competition for denning locations.
-Generally, red fox can out compete arctic fox in both direct and indirect competition, but cannot physically tolerate the colder temperatures that arctic fox can.
-Therefore, the red fox is primarily responsible for the southern range edge of the arctic fox.
+#### File name
 
-During direct competition, an individual will "attack" as long as it has the "advantage" in the fight.
-The individual maintains the "advantage" as long as it is "wins" a bout. 
-If on the other hand, an individual is attacked, it will "defend".
-An individual "wins-overall" when it scores 21 "wins" on its opponent. 
-(This setup is similar to how raquetball is scored.)
-If a red fox attacks first, it will "win" a "bout" with a probability of 0.6. 
-If a red fox is attacked by an arctic fox, it will "win" the "bout" with a probability of of 0.5. 
+Your file should use the following naming scheme
 
-Estimate, by simulation, the probability that during a red fox-arctic fox interaction, **a red fox will "win-overall"**. 
+**`[last name]_ENS623_SP18_PS2.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP18_PS2.Rmd`
+
+#### Grading note
+
+Problems 1 and 3 are each worth 10 points, Problem 2 is worth 5.
 
 
+## Problem 1
+
+Write a **function** that uses a `for` loop to calculate the mean of a vector of numbers.
+
+Recall that the mean is:
+
+$$
+\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n}
+$$
+
+Compare the results of your function with that of the `mean` function in base R.
+
+## Problem 2
+
+### `while` loops
+
+`while` loops are not necessarily as common as `for` loops introduced in class Wednesday, but they are quite important. 
+One key difference between `for` loops and `while` loops is that the former is usually set to repeat a given number of times, while the later repeats until some condition is met.
+Incidentally, this also means it's easy to get into an [infinite loop](https://en.wikipedia.org/wiki/Infinite_loop) when writing `while` loops. Be careful!
+
+Here is a basic `while` loop.
+
+```{r}
+foo <- 0
+while(foo < 10){
+  print(foo)
+  foo <- foo + 1
+}
+```
+
+**Describe in words, what is happening in this loop.**
+
+## Problem 3
+
+Imagine you are flipping a fair coin (i.e., there is a 0.5 chance of getting a heads and a 0.5 chance of getting a tails).
+You want to continue flipping the coin *until* you get 100 heads.
+**Write a script that simulates coin flips, and counts the number of times you need to flip the coin until you get 100 heads.**
+Note that since the coin flip is a random process, it will not necessarily take you the same number of flips if you re-run the script.

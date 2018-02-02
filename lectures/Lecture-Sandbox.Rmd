@@ -6,11 +6,6 @@ output: html_document
 
 
 
-
-
-
-
-
 # Probability
 
 ### Frequentist perspective 

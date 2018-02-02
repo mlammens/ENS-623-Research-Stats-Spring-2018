@@ -335,47 +335,4 @@ if (num > 0) {
 Make the above into a function, that takes in any value, and returns whether it is positive, negative, or equal to 0.
 
 
-### `while`
 
-`while` loops are not necessarily as common as `for` loops introduced above, but they are quite important. 
-One key difference between `for` loops and `while` loops is that the former is usually set to repeat a given number of times, while the later repeats until some condition is met.
-Incidentally, this also means it's easy to get into an [infinite loop](https://en.wikipedia.org/wiki/Infinite_loop) when writing `while` loops. Be careful!
-
-```{r}
-foo <- 0
-while(foo < 10){
-  print(foo)
-  foo <- foo + 1
-}
-```
-
-**Challenge** 
-
-What is the value of `foo` right now!
-
-**Important concept:** Note that I used the variable `foo` on both sides of the `<-` operator above. 
-
-We can also use indexs to loop through vectors (and other objects).
-
-```{r}
-bar <- 1:10
-ind <- 1
-while(bar[ind] < 10){
-  print(bar[ind])
-  ind <- ind + 1
-}
-```
-
-What happens here?
-
-```{r, eval=FALSE}
-foo <- 0
-foo <- 0
-while(foo < 10){
-  print("I'm stuck!")
-}
-```
-
-# Problem Set 2
-
-For the remainder of class, we will work on [Problem Set 2](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-2.html)
