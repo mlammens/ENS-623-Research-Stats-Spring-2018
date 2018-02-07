@@ -4,6 +4,22 @@ author: "Matthew E. Aiello-Lammens"
 date: "2018-02-07"
 output: html_document
 ---
+**Please submit this homework as an R Markdown (Rmd) file.**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+
+#### File name
+
+Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP18_PS2.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP18_PS2.Rmd`
+
+#### Grading note
+
+This is a single problem worth 25 points, but partial credit will be given.
 
 *Caveat - this example is based on a real competative relationship, but all numbers are completely fictional.*
 
