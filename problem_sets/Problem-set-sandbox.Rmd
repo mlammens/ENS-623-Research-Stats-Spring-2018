@@ -5,27 +5,6 @@ date: "1/31/2018"
 output: html_document
 ---
 
-*Caveat - this example is based on a real competative relationship, but all numbers are completely fictional.*
-
-Red fox and arctic fox compete both directly and indirectly where their species ranges meet. 
-Direct competition usually involves fighting between individuals, while indirect competition usually involves competition for denning locations.
-Generally, red fox can out compete arctic fox in both direct and indirect competition, but cannot physically tolerate the colder temperatures that arctic fox can.
-Therefore, the red fox is primarily responsible for the southern range edge of the arctic fox.
-
-During direct competition, an individual will "attack" as long as it has the "advantage" in the fight.
-The individual maintains the "advantage" as long as it is "wins" a bout. 
-If on the other hand, an individual is attacked, it will "defend".
-An individual "wins-overall" when it scores 21 "wins" on its opponent. 
-(This setup is similar to how raquetball is scored.)
-If a red fox attacks first, it will "win" a "bout" with a probability of 0.6. 
-If a red fox is attacked by an arctic fox, it will "win" the "bout" with a probability of of 0.5. 
-
-Estimate, by simulation, the probability that during a red fox-arctic fox interaction, **a red fox will "win-overall"**. 
-
-
-**Challenge - 20 minutes**
-
-
 ***
 
 # 2016 PS 2
@@ -71,3 +50,36 @@ Calculate the probability of getting your specific bag (our data are [here](http
 **(5 pnts)**
 
 ***
+
+Problem Set xxx: Probability Distributions
+========================================================
+
+
+## Part 1 (10 pnts for function; 5 pnts for figures)
+
+Write a function in R that:
+
+1. draws a sample ${X_1,X_2,…,X_{n}}$ of size $n$ from the normal distribution $N(\mu, \sigma^2 )$ (you are free to choose $\mu$ and $\sigma^2 \gt 0$), 
+2. calculates the standard error of the mean, and 
+3. calculates 
+
+$$
+\frac{ \bar{X} - \mu }{ s.e.mean }
+$$
+
+This function should have three inputs $(\mu,\sigma^2,n)$ and 
+one output, the value of $\frac{ \bar{X} - \mu }{ s.e.mean }$
+
+**NB:** See Logan pp. 34-35 for an explination of how to write your own function.
+
+Your function takes samples from the t-distribution. 
+Draw a large number (10,000 is probably fine, but you can play around with it) of samples from this distribution for $n = 5$, $n =50$, and $n =500$. 
+(Remember, $n$ is the number of draws from the normal distribution used to draw one sample from the t-distribution.) 
+Plot these three histograms, preferably using `ggplot2` so that each histogram is on the same plot.
+(You could also use the `hist` function with the option `add = T`, which will allow you to plot them all on the same plot).
+
+## Part 2 (5 pnts)
+
+Using 1000 random draws from the t-distribution (you can use your function or R’s built-in function here) and the Normal distribution, plot the QQ plot comparing them for $n = 5$, $n =50$, and $n =500$ (NOTE: if you are using the built-in function, you will want to set `df` to $5$, $50$, and $500$, not `n`). 
+(Hint: Use the function `qqplot` and see Logan p. 118.) 
+For easy comparison, put all three scatterplots on the same plot, using different colors to distinguish the three cases.

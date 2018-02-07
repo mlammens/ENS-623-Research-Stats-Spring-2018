@@ -19,8 +19,8 @@ You can find a **DRAFT** copy of the syllabus [here](pages/syllabus.html)
 |-----|--------|-------|---------|---------------|------------|
 |1/24 | 1 |Introduction to Biostatistics and R |Karban et al. 2014, Chapter 1; Sutherland et al. 2013| [Lecture notes 1](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-1.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-1-InClass.R)|[Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) |
 |1/31  | 2 |Intro to R (cont) and Asking Research Questions|[Software Carpentry - Intro to Programming](http://swcarpentry.github.io/r-novice-inflammation/)| [Lecture notes 2](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-2.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Meeting-2-InClass.R)|[Problem Set 2](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-2.html) |
-|2/7  | 3 |Data Exploration |Q&K Chap. 1 & 4; Logan Chap. 3 & 5 |[Lecture notes 3](http://mlammens.github.io/Biostats/lectures/Lecture-3.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-3-InClass.R) | [Problem Set 3](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html)|
-|2/14 | 4 |Probability Distributions and Estimation |Q&K Chap. 2 ; Logan Chap. 3 | |[Problem Set 4](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html) |
+|2/7  | 3 |Snow day: On-line Meeting |Review - Karban et al. 2014, Chapter 1|[Lecture notes 3](http://mlammens.github.io/Biostats/lectures/Lecture-3.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-3-InClass.R) | [Problem Set 3](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html); [Research Question Exercise](pages/research-question-exercise.html)|
+|2/14 | 4 |Data Exploration; Probability Distributions and Estimation |Q&K Chap. 1 & 4; Logan Chap. 3 & 5; Q&K Chap. 2 ; Logan Chap. 3 | |[Problem Set 4](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html) |
 |2/21 | 5 |Distributions and Hypothesis Testing |Q&K Chap. 2; Logan Chap. 3 |[Lecture notes 4](http://mlammens.github.io/Biostats/lectures/Lecture-4.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-4-InClass.R) |[Problem Set 5](http://mlammens.github.io/Biostats/problem_sets/Problem-set-3.html) |
 |2/28 | 6 |Estimation, Hypothesis Testing |Q&K Chap. 3; Logan Chap. 6  |[Lecture notes 5](http://mlammens.github.io/Biostats/lectures/Lecture-5.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-5-InClass.R) | [Problem Set 6](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html)|
 |3/7  | 7 |Hypothesis Testing, Non-parametric Methods, Introduction to Linear Models |Q&K Chap. 3; Logan Chap. 6 |[Lecture notes 6](http://mlammens.github.io/Biostats/lectures/Lecture-6.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-6-InClass.R) | [Problem Set 7](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html)|
@@ -41,7 +41,7 @@ You can find a **DRAFT** copy of the syllabus [here](pages/syllabus.html)
 During the semester, you will carry out an independent research and analysis project, using the skills we learn in this class. 
 The project represents 40% of your grade, but is broken up into several components. 
 
-* Research question exercise - 5% - DUE 2/14
+* [Research question exercise](pages/research-question-exercise.html) - 5% - DUE 2/14
 * Background literature search - 5% - DUE 3/21
 * Methods description - 5% - DUE 4/11
 * Mini-presentation (5 minutes in class) - 5% - DUE 4/11, 4/18, or 4/25
