@@ -1,0 +1,10 @@
+---
+title: "Meeting 3 - Psuedo-code and R Programming"
+author: "Matthew E. Aiello-Lammens"
+output:
+  html_document:
+    toc: yes
+---
+
+**Special Note: This lecture was delivered using BlackBoard Collaborate Ultra, due to weather closure.**
+

@@ -1,5 +1,5 @@
 ---
-title: "Lecture 2"
+title: "Meeting 2 - R Programming Cont'd"
 author: "Matthew E. Aiello-Lammens"
 output:
   html_document:
