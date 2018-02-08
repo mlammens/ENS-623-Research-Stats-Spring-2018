@@ -70,3 +70,5 @@ Here are some useful resources for leanring R, biostats, research methods, and g
 * [Torrey Botanical Society Andrew M. Greller Graduate Student Research Award for Conservation of Local Flora and Ecosystems](http://www.torreybotanical.org/grants-awards/torrey-botanical-society-andrew-m-greller-graduate-student-research-award-for-conservation-of-local-flora-and-ecosystems/)
 
 * [Environmental Consortium of Colleges and University- Hudson Valley Specific](http://environmentalconsortium.org/resources/scholarships/scholarships.html)
+
+* [Hudson River Environmental Society - McKeon Research Grant Application](http://www.hres.org/joomla/images/mckeon_research_grant_application_2018.pdf)
