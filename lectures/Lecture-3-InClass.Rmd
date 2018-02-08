@@ -1,0 +1,162 @@
+Problem Set 2: Problem 3
+
+Start with pseudocode
+
+Toss a coin, multiple times.
+Count the number of tosses required to get to 100 heads.
+
+You should be using a while loop for this.
+
+
+Start pseudo coding
+
+start a head counter
+start a toss counter
+
+while my head counter < 100
+  toss_coin <- uniform random variable from 0 to 1, assign > 0.5 as a heads
+  check if it's heads
+    if it's heads, then add 1 to my heads counter
+    if it's not head (tails), don't do anything
+  add 1 to my toss counter
+
+how many tosses
+how many heads
+
+
+```{r}
+Coin_Flip <- function(){
+  Coin <- runif(1)
+  if (Coin > 0.5) {
+    Results <- "Heads"
+  } else {
+    Results <- "Tails"
+  }
+  return(Results)
+}
+
+Coin_Flip()
+```
+
+
+```{r}
+head_count <- 0
+flip_count <- 0
+
+while(head_count < 100){
+  if(Coin_Flip() == "Heads"){
+    head_count <- head_count + 1
+  }
+  flip_count <- flip_count + 1
+}
+
+print(head_count)
+print(flip_count)
+```
+
+## Skip the intuitive `Coin_Flip` function
+
+```{r}
+head_count <- 0
+flip_count <- 0
+
+while(head_count < 100){
+  if(runif(1) > 0.5){
+    head_count <- head_count + 1
+  }
+  flip_count <- flip_count + 1
+}
+
+print(head_count)
+print(flip_count)
+```
+
+## Use sample instead
+
+```{r}
+head_count <- 0
+flip_count <- 0
+
+while(head_count < 100){
+  coin_toss <- sample(x = c("Heads","Tails"), size = 1, replace = TRUE)
+  if(coin_toss == "Heads"){
+    head_count <- head_count + 1
+  }
+  flip_count <- flip_count + 1
+}
+
+print(head_count)
+print(flip_count)
+```
+
+```{r}
+head_count <- 0
+tail_count <- 0
+
+while(head_count < 100){
+  ifelse(runif(1) > 0.5, yes = (head_count <- head_count + 1), no = (tail_count <- tail_count + 1))
+}
+
+print(head_count)
+print(head_count + tail_count)
+```
+
+# Arctic fox - red fox problem
+
+attacker <- "red fox"
+red_fox_wins <- 0
+arctic_fox_wins <- 0
+
+draw a random value for the attack outcome
+
+while red_fox_wins < 21 or arctic_fox_wins < 21
+  if attacker == red fox 
+    if rand val is <= 0.6
+      red fox wins
+      increase number of red_fox_wins
+      attacker <- "red fox"
+    else rand val > 0.6
+      arctic fox wins
+      increase number of arctic_fox_wins
+      attacker <- "arctic fox"
+  
+  if attacker == arctic fox
+    if rand val is <= 0.5
+      red fox wins
+      increase number of red_fox_wins
+      attacker <- "red fox"
+    else rand val > 0.5
+      arctic fox wins
+      increase number of arctic_fox_wins
+      attacker <- "arctic fox"
+      
+```{r}
+attacker <- sample(c("red fox", "arctic fox"), size = 1)
+red_fox_wins <- 0
+arctic_fox_wins <- 0
+
+while(red_fox_wins < 21 & arctic_fox_wins < 21){
+  if(attacker == "red fox"){ 
+    if( runif(1) <= 0.6){
+      print("red fox wins bout")
+      red_fox_wins <- red_fox_wins + 1
+      attacker <- "red fox"
+    } else {
+      print("arctic fox wins")
+      arctic_fox_wins <- arctic_fox_wins + 1
+      attacker <- "arctic fox"
+    }
+  } else if(attacker == "arctic fox"){ 
+    if( runif(1) <= 0.5){
+      print("red fox wins bout")
+      red_fox_wins <- red_fox_wins + 1
+      attacker <- "red fox"
+    } else {
+      print("arctic fox wins")
+      arctic_fox_wins <- arctic_fox_wins + 1
+      attacker <- "arctic fox"
+    }
+  }
+}
+```
+
