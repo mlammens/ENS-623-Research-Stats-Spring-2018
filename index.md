@@ -45,7 +45,7 @@ The project represents 40% of your grade, but is broken up into several componen
 * Background literature search - 5% - DUE 3/21
 * Methods description - 5% - DUE 4/11
 * Mini-presentation (5 minutes in class) - 5% - DUE 4/11, 4/18, or 4/25
-* Final report - 10% - DUE 5/9
+* Final report - 20% - DUE 5/9
 
 
 ## Resources
