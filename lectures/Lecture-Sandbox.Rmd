@@ -6,7 +6,7 @@ output: html_document
 
 
 
-# Probability
+# 2016 Week 1 - Probability
 
 ### Frequentist perspective 
 
@@ -197,13 +197,7 @@ table(new_bag)
 
 
 
-
-
-# 2016 material
-
-# Week 2 - Probability and Data Exploration
-
-## Review from Week 1
+# 2016 Week 2 - Probability and Data Exploration
 
 ### Probability and Venn diagrams
 
@@ -488,7 +482,7 @@ print(paste0("Likelihood of my bag: ", probability))
 
 ***
 
-## Data exploration
+# 2016 Week 3 - Data exploration
 
 The first step to any data analysis is to interrogate your data by calculating some standard statistics and by visualizing it it various ways. 
 In future classes we will look more closely at standard statistics.
@@ -819,12 +813,5 @@ ggplot() +
 * <http://stackoverflow.com/questions/tagged/ggplot2>: Thousands of questions and answers tagged with "ggplot2" on Stack Overflow, a programming Q&A site.
 
 ***
-
-
-## Logistics
-
-* **Office hours:** Two hours scheduled, Thursdays 4:00 to 6:00 PM. 
-* **Additional hours:** Can meet by appointment on Mondays or Thursdays in person. By Skype/ Google Hangouts another day.
-* **Homework:** Due by 5:39 PM the week *after* it was assigned, unless otherwise noted.
 
 
