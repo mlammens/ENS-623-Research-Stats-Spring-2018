@@ -1,0 +1,319 @@
+---
+title: "Meeting 4 - Introduction to Probability"
+author: "Matthew E. Aiello-Lammens"
+output:
+  html_document:
+    toc: yes
+---
+
+# Probability
+
+> *We usually talk about probabilities in terms of events; the probability of event A occurring is written P(A). Probabilities can be between zero and one; if P(A) equals zero, then the event is impossible; if P(A) equals one, then the event is certain.* - Quinn and Keough 2002
+
+# Frequentist statistics 
+
+The relative frequency of an event over the long term, after many trials.
+
+E.g., throwing a coin. What's the probability of a 'heads'? After one trial, two trials, ..., 1000 trials.
+
+```{r}
+(head <- runif(1) > 0.5)
+```
+
+
+## Bayesian statistics
+
+For now, all I will say is that there are other perspectives in statistics. We'll cover a bit of Bayes at another time.
+
+***
+
+# Probability through M&Ms
+
+Open your bag(s) and count how many M&Ms you got. Also count how many of each color.
+
+Make a new variable called `tot_mm` and assign it the number of MMs in your bag.
+
+```{r}
+tot_mm <- 60
+```
+
+## `mean` number of MMs in a bag
+
+Calculate the mean number of MMs in a bag.
+
+```{r}
+tot_mm_pop_sample <- c(60, 58, 57, 63, 61, 60, 59)
+```
+
+Mean:
+
+$$
+\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n}
+$$
+
+Using the `sum` function.
+
+```{r}
+(mean_mm_1 <- sum(tot_mm_pop_sample) / length(tot_mm_pop_sample))
+```
+
+Using the `mean` function.
+
+```{r}
+(mean_mm_2 <- mean(tot_mm_pop_sample))
+```
+
+## Quantify the variation in the number of MMs in a bag
+
+* `var` function
+* `sd` function
+
+**What do we mean by variation?**
+
+In general, we mean something along the lines of 'the amount of variation around some mean value'.
+
+**How might we quantify this?**
+
+* Add up the distances from the mean. 
+
+First calculate distances from the mean for each bag.
+
+```{r}
+(dist_from_mean <- tot_mm_pop_sample - mean_mm_1)
+```
+
+Next calculate the total distances. We could also call this the **sums of distances**
+
+```{r}
+(sum_dist_from_mean <- sum(dist_from_mean))
+```
+
+What information does this give us, and why might it not be useful?
+
+* Add up the *absolute* distances form the mean. 
+
+First calculate the *absolute* distances from the mean.
+
+```{r}
+(absdist_from_mean <- abs(tot_mm_pop_sample - mean_mm_1))
+```
+
+Next add up the total *absolute* distances from the mean.
+
+```{r}
+(sum_absdist_from_mean <- sum(absdist_from_mean))
+```
+
+* Add up the *squared* distances from the mean.
+
+While the absolute distance from the mean does give us a reasonable measure of variability, because of specific mathematical properties, it's more convenient to work with *squared* distances from the mean, leading to the measures of **variance** and **standard deviation**.
+
+**Challenge**
+
+Calculate *squared* distances from the mean, and sum them to determine the total squared deviation.
+
+**Standard deviation** can be thought of as the average deviation from the mean.
+
+**Challenge**
+
+1. Calcualte the **variance** of the number of M&Ms in a bag, considering all of the bags in the class. Do this without using the `var` function.
+
+2. Calculate the **standard deviation** of the number of M&Ms in a bag. Do this without using the `sd` function.
+
+## Probability and M&Ms
+
+Without looking, you chose one M&M. What colors could you have chosen?
+
+The **set** of brown, yellow, green, red, orange, blue is the **sample space**.
+
+Your selection of a single M&M is called an **event**.
+
+
+**Challenge**
+
+* What's the probability of getting a "color" M&M in **your** bag?
+
+P(brown), P(yellow), etc.
+
+### Putting our data together into a `data.frame`
+
+Here we will collate the classes data into a single data set.
+
+**Challenge**
+
+What is the mean probability of getting each color across each bag?
+
+Tools to use:
+
+* `data.frames`
+* `apply`
+
+
+## Probability of events
+
+* What's the P(green OR blue OR red) in **your** bag? 
+
+P(green) + P(blue) + P(red)
+
+* What is the P(NOT green) in **your** bag?
+
+$$
+P(\sim Green) = 1 - P(Green) = P(G)^c
+$$
+
+
+### Sampling with replacement
+
+I draw one M&M from my bag, put it back, then draw another.
+
+* What's the P(green and then blue)?
+
+<!---
+P(green) * P(blue) 
+--->
+
+* What's the P(green or blue)?
+
+<!---
+P(green) + P(blue)
+--->
+
+### Sampling without replacement
+
+* What is the probability of getting green, then blue, *without replacing your first draw*?
+
+**Challenge**
+
+What is the sample space when drawing two M&Ms?
+
+
+## Draw a random bag of M&Ms using the company stated frequencies/probabilities for each color
+
+**Challenge**
+
+How would you create a random bag of M&Ms, assuming that each M&M has an equal probability of being in any given bag?
+
+
+
+Mars claims that percentages of each color M&Ms are slightly different.
+
+```{r}
+## Colors as a vector
+mm_colors <- c("blue", "brown", "green", "orange", "red", "yellow")
+mm_probs <- c(.24, .14, .16, .20, .13, .14)
+
+## I want to "sample" a bag of MMs
+new_bag <- sample(x = mm_colors, size = 55, replace = TRUE, prob = mm_probs)
+table(new_bag)
+
+```
+
+
+# Visualizing probability - Venn Diagrams
+
+### Aside: getting and loading R packages
+
+One of the biggest advantages to R is that it has a rich ecosystem of *add-ons*, also known as packages.
+These packages are written my members of the R community (for the most part), and freely available on [CRAN](https://cran.r-project.org/). 
+As a class, let's navigate to CRAN and have a look at the packages section of the site.
+
+Now, to install and load a package.
+
+```{r, eval=FALSE}
+install.packages("VennDiagram")
+```
+
+Then to load it into my workspace, and make the functions available:
+
+```{r}
+library(VennDiagram)
+```
+
+
+
+Let's draw a Venn diagram representing the probability of getting a **blue** M&M.
+This is written algebraically as $P(Blue)$:
+
+```{r, results='hide'}
+## Load VennDiagram package - NB: you will likely have to install this package first
+library(VennDiagram)
+
+## Create a Venn diagram
+draw.single.venn(area = 0.24, category = "Blue M&M", fill = "blue", alpha = 0.5)
+```
+
+Draw a Venn diagram representing the probability of getting a **blue or red** M&M.
+This is written algebraically as $P(Blue \cup Red)$:
+
+```{r, results='hide'}
+grid.newpage()
+draw.pairwise.venn(area1 = 0.24, area2 = 0.13, cross.area = 0, 
+                   category = c("Blue M&M", "Red M&M"),
+                   fill = c("blue", "red"), alpha = rep(0.5, 2))
+```
+
+**IMPORTANT: Note that there is no overlap between these two events. We say that these events are *mutually exclusive*.**
+
+#### Adding Peanut and Almond M&Ms to the mix
+
+Let's imagine the scenario that we add an equal amount of Peanut and Almond M&Ms to our bags of M&Ms. 
+Now we can ask a question like, *what is the probability of getting a **blue AND peanut** M&M?*
+We can write this algebraically as $P(Blue \cap Peanut)$.
+
+Recall that $P(Blue) = 0.24$, and because all three types of M&Ms are represented equally, the $P(Peanut) = 0.33$.
+
+```{r, results='hide'}
+grid.newpage()
+draw.pairwise.venn(area1 = 0.24, area2 = 0.33, cross.area = 0.0792, 
+                   category = c("Blue M&M", "Peanut M&M"),
+                   fill = c("blue", "yellow"), alpha = rep(0.5, 2))
+```
+
+**IMPORTANT: Note that in this example, the color and type of M&M are *indpendent* from each other.**
+
+#### Challange
+
+**What is the probability of getting a *blue OR peanut* M&M?** I.e. $P(Blue \cup Peanut)$.
+
+Hint: Note the difference between adding up the area represented in the Venn diagram versus adding the $P(Blue) + P(Peanut)$.
+
+### Conditional probability
+
+***
+
+#### Challange
+
+What is the probability of drawing a blue M&M, CONDITIONAL on it being a peanut M&M?
+
+$$
+P(Blue|Peanut) = \frac{P(Blue \cap Peanut)}{P(Peanut)}
+$$
+
+Calculate this probability.[^1] 
+
+[^1]:The value should be 0.24. **Why?**
+
+***
+
+#### More general thinking
+
+We can use a bit of algebra and re-write a general form of the equation above as:
+
+$$
+P(A|B) P(B) = P(A \cap B)
+$$
+
+Now, because $P(A \cap B)$ is identical to $P(B \cap A)$, we can expand this further too:
+
+$$
+P(A|B) P(B) = P(A \cap B) = P(B|A) P(A)
+$$
+
+And after a little more algebra, we arrive at **Bayes Theorem**:
+
+$$
+P(A|B) = \frac{P(B|A) P(A)}{P(B)} = \frac{P(B|A) P(A)}{P(B|A)P(A) + P(B|~A)P(~A)}
+$$
+
+***
+
