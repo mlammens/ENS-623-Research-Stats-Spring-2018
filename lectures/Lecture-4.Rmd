@@ -200,120 +200,35 @@ Mars claims that percentages of each color M&Ms are slightly different.
 ```{r}
 ## Colors as a vector
 mm_colors <- c("blue", "brown", "green", "orange", "red", "yellow")
-mm_probs <- c(.24, .14, .16, .20, .13, .14)
+mm_probs <- c(.23, .14, .16, .20, .13, .14)
 
 ## I want to "sample" a bag of MMs
-new_bag <- sample(x = mm_colors, size = 55, replace = TRUE, prob = mm_probs)
+new_bag <- sample(x = mm_colors, size = 15, replace = TRUE, prob = mm_probs)
 table(new_bag)
 
 ```
 
 
-# Visualizing probability - Venn Diagrams
+Because it is possible to draw a bag that is completely missing some of the colors, we need to explicitely check how many of each color is in the new bag, if we want to compare with our original bag.
 
-### Aside: getting and loading R packages
-
-One of the biggest advantages to R is that it has a rich ecosystem of *add-ons*, also known as packages.
-These packages are written my members of the R community (for the most part), and freely available on [CRAN](https://cran.r-project.org/). 
-As a class, let's navigate to CRAN and have a look at the packages section of the site.
-
-Now, to install and load a package.
-
-```{r, eval=FALSE}
-install.packages("VennDiagram")
-```
-
-Then to load it into my workspace, and make the functions available:
 
 ```{r}
-library(VennDiagram)
+## Count the number of each color
+new_bag_counts <- c(sum(new_bag == "blue"),
+                    sum(new_bag == "brown"),
+                    sum(new_bag == "green"),
+                    sum(new_bag == "orange"),
+                    sum(new_bag == "red"),
+                    sum(new_bag == "yellow"))
+new_bag_counts
 ```
 
+And now to check if my bag is the same as the new bag I can look at a series of logical tests.
 
+```{r, eval=FALSE}
+individual_color_compare <- new_bag_counts == my_orig_bag
 
-Let's draw a Venn diagram representing the probability of getting a **blue** M&M.
-This is written algebraically as $P(Blue)$:
-
-```{r, results='hide'}
-## Load VennDiagram package - NB: you will likely have to install this package first
-library(VennDiagram)
-
-## Create a Venn diagram
-draw.single.venn(area = 0.24, category = "Blue M&M", fill = "blue", alpha = 0.5)
+# The bags match if all of these are true
+all(individual_color_compare)
 ```
-
-Draw a Venn diagram representing the probability of getting a **blue or red** M&M.
-This is written algebraically as $P(Blue \cup Red)$:
-
-```{r, results='hide'}
-grid.newpage()
-draw.pairwise.venn(area1 = 0.24, area2 = 0.13, cross.area = 0, 
-                   category = c("Blue M&M", "Red M&M"),
-                   fill = c("blue", "red"), alpha = rep(0.5, 2))
-```
-
-**IMPORTANT: Note that there is no overlap between these two events. We say that these events are *mutually exclusive*.**
-
-#### Adding Peanut and Almond M&Ms to the mix
-
-Let's imagine the scenario that we add an equal amount of Peanut and Almond M&Ms to our bags of M&Ms. 
-Now we can ask a question like, *what is the probability of getting a **blue AND peanut** M&M?*
-We can write this algebraically as $P(Blue \cap Peanut)$.
-
-Recall that $P(Blue) = 0.24$, and because all three types of M&Ms are represented equally, the $P(Peanut) = 0.33$.
-
-```{r, results='hide'}
-grid.newpage()
-draw.pairwise.venn(area1 = 0.24, area2 = 0.33, cross.area = 0.0792, 
-                   category = c("Blue M&M", "Peanut M&M"),
-                   fill = c("blue", "yellow"), alpha = rep(0.5, 2))
-```
-
-**IMPORTANT: Note that in this example, the color and type of M&M are *indpendent* from each other.**
-
-#### Challange
-
-**What is the probability of getting a *blue OR peanut* M&M?** I.e. $P(Blue \cup Peanut)$.
-
-Hint: Note the difference between adding up the area represented in the Venn diagram versus adding the $P(Blue) + P(Peanut)$.
-
-### Conditional probability
-
-***
-
-#### Challange
-
-What is the probability of drawing a blue M&M, CONDITIONAL on it being a peanut M&M?
-
-$$
-P(Blue|Peanut) = \frac{P(Blue \cap Peanut)}{P(Peanut)}
-$$
-
-Calculate this probability.[^1] 
-
-[^1]:The value should be 0.24. **Why?**
-
-***
-
-#### More general thinking
-
-We can use a bit of algebra and re-write a general form of the equation above as:
-
-$$
-P(A|B) P(B) = P(A \cap B)
-$$
-
-Now, because $P(A \cap B)$ is identical to $P(B \cap A)$, we can expand this further too:
-
-$$
-P(A|B) P(B) = P(A \cap B) = P(B|A) P(A)
-$$
-
-And after a little more algebra, we arrive at **Bayes Theorem**:
-
-$$
-P(A|B) = \frac{P(B|A) P(A)}{P(B)} = \frac{P(B|A) P(A)}{P(B|A)P(A) + P(B|~A)P(~A)}
-$$
-
-***
 

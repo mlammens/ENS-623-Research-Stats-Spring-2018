@@ -1,57 +1,23 @@
-Problem Set 4: Linear Regression
-========================================================
+---
+title: "Problem Set 4"
+author: "Matthew E. Aiello-Lammens"
+date: "2018-02-15"
+output: html_document
+---
 
-**Suggested submission: Apr 4, 2016**
+**Please submit this homework as an R Markdown (Rmd) file.**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
 
-For this problem set we will use data on cell survival for fourteen plates exposed to different levels of radiation.
-You can acquire these data by using the following command:
+#### File name
 
-```{r}
-cell_survival <- read.csv(file = "https://mlammens.github.io/Biostats/data/cell_survival.csv")
-```
+Your file should use the following naming scheme
 
-## Part 1
+**`[last name]_ENS623_SP18_PS4.Rmd`**
 
-1. Use the `lm` function to fit a linear regression model to these data. 
-Report the results and plot the data and the best-fit line. (5 pnts)
+For example, 
 
-2. Are there any data points that may be considered outliers? 
-Use the regression diagnostics we learned about in class to examine these data.
-If there are outliers, how does the regression slope change if it/they were to be removed from the dataset? 
-Be sure to clearly state which data points you are considering "outliers" and why. (5 pnts)
+`Lammens_ENS623_SP18_PS4.Rmd`
 
-3. Do these data fit the assumptions of linear regression?
-Consider each of the "big 3" assumptions separately. (5 pnts)
+#### Grading note
 
-## Part 2
-
-Instead of using `lm`, we can write a function to calculate the negative log-likelihood associated with fitting a linear regression model. 
-In order to do this, let's consider the linear regression model as we introduced it on page 1 of the written notes from Lecture 7:
-
-$$
-Y \sim a + bX + \epsilon
-$$
-
-where $\epsilon = N(0,\sigma^2)$, and this can be equivalently written as:
-
-$$
-Y \sim N( a + bX, \sigma^2)
-$$
-
-To write the negative log-likelihood function for our observed data, we can use the following R code:
-
-```{r}
-survival <- cell_survival$log_survival_prob
-dose <- cell_survival$dose_rads_per_100
-neg.ll <- function( params ){
-  -sum( dnorm( survival, mean=(params[1]+params[2]*dose), sd = params[3], log=TRUE) )
-}
-```
-
-1. Describe in words what this function is "doing". 
-That is, in what ways is this function providing us with the negative log-likelihood of these data? 
-(**Hint:** You might want to describe what each piece of the R code is for.) (5 pnts)
-
-2. Using the `optim` function in R, minimize the negative log-likelihood to obtain the maximum likelihood regression parameter estimates for ($\beta_0$), ($\beta_1$), and ($\sigma^2$).
-(**Hint 1:** Have a look back at [Lecture Notes - 5](http://mlammens.github.io/Biostats/lectures/Lecture-5.html) for an example of using `optim`.
-**Hint 2:** You will need starting values for optim; the results of the `lm` calculation would be reasonable starting points.) (5 pts)
+This is a single problem worth 25 points, but partial credit will be given.
