@@ -20,4 +20,41 @@ For example,
 
 #### Grading note
 
-This is a single problem worth 25 points, but partial credit will be given.
+Problem 1 is worth 15 points (partial credit given) and Problem 2 is worth 10 points.
+
+# Problem 1 - How likely was my bag of M&Ms?
+
+Write a short R script to simulate the combinations of colors that would have been possible from your bag of M&Ms assuming the company-stated color distribution (23% blue, 14% brown, 16% green, 20% orange, 13% red, 14% yellow) and use this script to calculate the probability of obtaining the combination in your bag. 
+
+Needed:
+* `for` loop
+* `if` statement
+* `sample` function
+
+Recall that you can sample a bag of M&Ms using the following:
+
+```{r}
+## Colors as a vector
+mm_colors <- c("blue", "brown", "green", "orange", "red", "yellow")
+
+## Proportion/probability of each color
+mm_probs <- c(.23, .14, .16, .20, .13, .14)
+
+## I want to "sample" a bag of MMs
+new_bag <- sample(x = mm_colors, size = 15, replace = TRUE, prob = mm_probs)
+```
+
+## Hints and tips
+
+* You can read in your data from Wednesday's class in order to use **one** of your bags from class. If you do not recall how to read in a data set, look over the [Meeting 4 - In Class Notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-4-InClass.R), or you can look at the file and manually write a new vector.
+
+* Your bag is pretty unlikely, so it may take **many** iterations in your `for` loop.
+
+* As we did in the [fox problem](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-3.html), you will need to have a **counter** of some sort, to count the number of times your original bag matches the random bag.
+
+* Make sure you have the M&M counts in the order for the original bag and the new bag.
+
+# Problem 2 - Research Approach
+
+Read Chapter 2 of the Karban et al. 2014 text (posted on BlackBoard as of Friday afternoon) and write a response of approximately 200 - 300 words to the following prompt - given your current thoughts on your course project, which approach do you think is most appropriate for you to pursue, observational, experimental, or modeling? Why? What are some of the advantages and disadvantages to the approach you chose?
+
