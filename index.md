@@ -78,3 +78,5 @@ Here are some useful resources for leanring R, biostats, research methods, and g
 * [Environmental Consortium of Colleges and University- Hudson Valley Specific](http://environmentalconsortium.org/resources/scholarships/scholarships.html)
 
 * [Hudson River Environmental Society - McKeon Research Grant Application](http://www.hres.org/joomla/images/mckeon_research_grant_application_2018.pdf)
+
+* [Hudson River Foundation - Tibor T. Polgar Fellowship](http://www.hudsonriver.org/?x=polgar)
