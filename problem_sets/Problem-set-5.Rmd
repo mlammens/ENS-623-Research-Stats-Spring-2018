@@ -1,14 +1,126 @@
-Problem Set 5: ANOVA
-========================================================
+---
+title: "Problem Set 5"
+author: "Matthew E. Aiello-Lammens"
+date: "2018-02-22"
+output: html_document
+---
 
-**Suggested submission: Apr 25, 2016**
+---
+title: "Problem Set 4"
+author: "Matthew E. Aiello-Lammens"
+date: "2018-02-15"
+output: html_document
+---
+
+**Please submit this homework as an R Markdown (Rmd) file.**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+
+#### File name
+
+Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP18_PS5.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP18_PS5.Rmd`
+
+#### Grading note
+
+Problem 1 and 3 are worth 10 points (partial credit given) and Problem 2 and the Bonus are worth 5 points.
+
+# Problem 1 - Plotting relationships between variables
+
+In class on Wednesday, I demonstrated how to use `ggplot2` to make an x-y scatter plot comparing `Sepal.Length` and `Petal.Length` in the `iris` data set.
+
+Recall that you must first install `ggplot2` if you have not done so already:
+
+```{r, eval=FALSE}
+install.packages("ggplot2")
+```
+
+Then load it into your environment:
+
+```{r}
+library(ggplot2)
+```
+
+Then the code to create the actual plot looks like this:
+
+```{r}
+data(iris)
+
+ggplot(data = iris, aes( x = Sepal.Length, y = Petal.Length, colour = Species )) + 
+  geom_point()
+```
+
+I very briefly showed you that you can add the term `geom_smoth(method = "lm")` to add linear regression lines onto your plot, as such:
 
 
-# Part 1
+```{r}
+ggplot(data = iris, aes( x = Sepal.Length, y = Petal.Length, colour = Species )) + 
+  geom_point() +
+  geom_smooth(method = "lm")
 
-Using R's built-in `iris` dataset, calculate four different ANOVA models - one each for `Sepal.Length`, `Sepal.Width`, `Petal.Length`, and `Petal.Width`.
+```
 
-# Part 2 
+**Use the code above, but replace `Petal.Length` with `Sepal.Width`. Make a new x-y scatter plot with linear regression lines. Describe how accounting for the three different species might influence how you interpret your data, in comparison to an x-y scatter plot where you do not seperate the species.**
 
-Choose one of the traits and calculate the elements of the ANOVA table "by hand". Show all of your work as R code.
-(**Hint:** To complete this problem, calculate the results for the equations described in **Table 8.2 in Quinn and Keough**.)
+***Hint:* You might want to make an x-y scatter plot that does not color the different species.**
+
+```{r, eval=FALSE, echo=FALSE}
+ggplot(data = iris, aes( x = Sepal.Length, y = Sepal.Width, colour = Species )) + 
+  geom_point() +
+  geom_smooth(method = "lm")
+
+```
+
+
+# Problem 2 - Working with syntax in `ggplot2`
+
+Below are two code chunks, both which create histograms and density plots using the `iris` data set.
+
+## Chunk 1
+
+```{r, eval=FALSE}
+ggplot() +
+  geom_histogram(data = iris, aes(x = Petal.Length, y = ..density.., fill = Species), 
+                 position = "dodge") +
+  geom_density(data = iris, aes(x = Petal.Length, colour = Species)) +
+  theme_bw() 
+```
+
+## Chunk 2
+
+```{r, eval=FALSE}
+ggplot(data = iris, aes(x = Petal.Length)) +
+  geom_histogram( aes(y = ..density.., fill = Species), 
+                 position = "dodge") +
+  geom_density( aes(colour = Species)) +
+  theme_bw() 
+```
+
+**Describe the differences between the code chunks.**
+
+**Do Chunks 1 and 2 produce the same plots?**
+
+**Based on the answers to the above two questions, what do you think the role of defining arguments in the `ggplot()` function is?**
+
+## Bonus
+
+How do you interpret the figure produced by the code below?
+
+```{r, eval=FALSE}
+ggplot(data = iris, aes(x = Petal.Length)) +
+  geom_histogram( aes(y = ..density.., fill = Species), 
+                 position = "dodge") +
+  #facet_grid( Species ~ . ) +
+  geom_density() +
+  theme_bw() 
+```
+
+# Problem 3 - Systematic Review
+
+Read the Pullin and Stewart 2006 article posted on BlackBoard. 
+During our next class, we will discuss systematic reviews. 
+In preparation for that discussion, write a reading response of about 200 words explaining the ways a systematic review of the literature differs from how you have approached writing reviews in the past (e.g., term papers, final papers, etc.).
