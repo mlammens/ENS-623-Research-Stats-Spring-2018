@@ -4,19 +4,18 @@ author: "Matthew E. Aiello-Lammens"
 output:
   html_document:
     toc: yes
+    code_folding: hide
 ---
 
-# Lecture 3 - Probability Distributions
 
-## Review of homework 1
+# The return of the red fox!
 
-Review code for homework 1.
+** What is the probability that a red fox wins *x* bouts**
 
-## The probability that a red fox wins *x* bouts
-
+Recall [problem set 3](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-3.html) (i.e., the red fox versus arctic fox simulation).
 What if we wanted to know what the probability of a red fox winning 60 out of 100 bouts is? 
 How might we figure that out?
-Let's start by using a small part of the solution to homework 1. 
+Let's start by using *a modified portion* of the solution to problem set 3. 
 Specifically, let's simulate the number of bouts a red fox wins, given some number of total bouts.
 
 * Given the stated probability of a red fox winning, how many bouts do you think the red fox shoud win?
@@ -135,7 +134,7 @@ ggplot() +
 
 ### Probability distribution of red fox wins - part 1
 
-How might we visualize the probability for the numbers of red fox bout wins?
+How might we visualize the **probability** for the numbers of red fox bout wins?
 
 <!--
 ```{r}
