@@ -1,5 +1,5 @@
 ---
-title: "Meeting 3 - Psuedo-code and R Programming"
+title: "Meeting 3 - Pseudo-code and R Programming"
 author: "Matthew E. Aiello-Lammens"
 output:
   html_document:

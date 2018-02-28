@@ -1,329 +1,407 @@
 ---
-title: "Lecture 6 - Hypothesis Testing and Introduction to Linear Models"
+title: "Meeting 6 - Probability Distributions"
 author: "Matthew E. Aiello-Lammens"
-output: 
-  html_document: 
+output:
+  html_document:
     toc: yes
 ---
 
-# Hypothesis testing
+# Lecture 3 - Probability Distributions
 
-#### Challenge
+## Review of homework 1
 
-What are the general steps to hypothesis testing?
+Review code for homework 1.
 
-See p. 33-34 in Q&K. Fisher's approach below:
+## The probability that a red fox wins *x* bouts
 
-* Construct null hypothesis ($H_0$)
-* Choose a test stat that measures deviation from null
-* Collect data and compare the value of the test stat to the known distribution of that stat.
-* Determine p-val
-* Accept or reject null
+What if we wanted to know what the probability of a red fox winning 60 out of 100 bouts is? 
+How might we figure that out?
+Let's start by using a small part of the solution to homework 1. 
+Specifically, let's simulate the number of bouts a red fox wins, given some number of total bouts.
 
-What are some of the potential problems with this approach?
+* Given the stated probability of a red fox winning, how many bouts do you think the red fox shoud win?
 
-### Our data or something more extreme
+```{r, results='hide'}
+## Start a `for` loop, to replicate a known number of bouts
 
-When we use a sampling distribution for our test statistic (e.g., the *t* distribution), we are asking "what is the probability of observing our data, or something more extreme, in the long run, if $H_0$ is true."
-Mathematically, this can be written as:
+## Set the probability that a red fox wins the bout
+prob_redfox_win <- 0.6
 
-$$
-P(data|H_0)
-$$
+## Set the number of bouts
+bouts <- 100 
 
-## Examples of parametric hypothesis testing
+## Initiate the number of redfox bout wins
+redfox_bout_win <- 0
 
-In [Lecture 5](http://mlammens.github.io/Biostats/lectures/Lecture-5.html) we discussed the generic form of the *t* statistic:
 
-$$
-t_s = \frac{St - \theta}{S_{St}}
-$$
+for(ind in 1:bouts){
+  
 
-where $St$ is the value of some statistic (e.g., the mean) from our **sample**, $\theta$ is the **population** value for that statistic, and $S_{St}$ is the estimated standard error of the statistic $St$ (based on our sample).
+  ## Draw a random number to simulate the outcome of the bout
+  bout_outcome <- runif(1)
+  
+  ## Use an if statement to determine who won
+  if(bout_outcome < prob_redfox_win){ # red fox wins
+    ## Print the outcome to the console, so we know who won
+    print("red fox wins")
+    
+    ## Increase the number of redfox_bout_win by 1
+    redfox_bout_win <- redfox_bout_win + 1
+    
+  } else { # arctic fox wins
+    ## Print the outcome to the console
+    print("arctic fox wins")
+    
+    ## NOTE: We're only interested in the number of redfox wins, so 
+    ## we're not going to bother keeping track of the arctic fox wins.
+  }  
+} # End the `for` loop
 
-How can we use this formula to test whether two samples are drawn from the same population?
+print(paste("Red fox won", redfox_bout_win, "bouts!"))
 
-Imagine the case where we have two different samples, and for each we're testing whether the means are different from the population means.
-We then have:
+```
 
-$$
-t = \frac{\bar{y_1}-\mu_1}{s_{\bar{y}_1}}
-$$
+* How does your guess from the point above compare to the results of the simulation?
 
-and
 
-$$
-t = \frac{\bar{y_2}-\mu_2}{s_{\bar{y}_2}}
-$$
+Next, let's run the simulation multiple times and monitor the different values for the number of red fox bout wins.
 
-If the two samples are drawn from the same population, then $\mu_1 = \mu_2$, or $\mu_1 - \mu_2 = 0$.
+```{r, results='hide'}
+## Set the probability that a red fox wins the bout
+prob_redfox_win <- 0.6
 
-We can then write our *t* stat as:
+## Set the number of replicates
+reps <- 100
 
-$$
-t = \frac{(\bar{y_1} - \bar{y_2}) - (\mu_1 - \mu_2)}{s_{\bar{y}_1 - \bar{y}_2}}
-$$
+## Initiate a vector to store the number of red fox wins for each replicate
+redfox_bout_wins_vector <- c()
 
-which simplifies to:
-
-$$
-t = \frac{\bar{y_1} - \bar{y_2}}{s_{\bar{y}_1 - \bar{y}_2}}
-$$
-
-where $s_{\bar{y}_1 - \bar{y}_2}$ is the standard error of the difference between the means and is equal to:
-
-$$
-s_{\bar{y}_1 - \bar{y}_2} = 
-\sqrt{
-\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 -2}
-(\frac{1}{n_1} + \frac{1}{n_2})
+## Start a for loop to go through the desired number of replicates
+for(rep in 1:reps){ 
+  
+  ## Set the number of bouts
+  bouts <- 100 
+  
+  ## Initiate the number of redfox bout wins
+  redfox_bout_win <- 0
+  
+  ## Start for loop to go through the number of bouts
+  for(ind in 1:bouts){
+    
+    
+    ## Draw a random number to simulate the outcome of the bout
+    bout_outcome <- runif(1)
+    
+    ## Use an if statement to determine who won
+    if(bout_outcome < prob_redfox_win){ # red fox wins
+      ## Print the outcome to the console, so we know who won
+      #print("red fox wins")
+      
+      ## Increase the number of redfox_bout_win by 1
+      redfox_bout_win <- redfox_bout_win + 1
+      
+      } else { # arctic fox wins
+        ## Print the outcome to the console
+        #print("arctic fox wins")
+        
+        ## NOTE: We're only interested in the number of redfox wins, so 
+        ## we're not going to bother keeping track of the arctic fox wins.
+        }  
+    } # End the `for` loop
+  
+  print(paste("Red fox won", redfox_bout_win, "bouts!"))
+  
+  ## Add the number of redfox_bout_win to redfox_bout_wins_vector
+  redfox_bout_wins_vector <- c(redfox_bout_wins_vector, redfox_bout_win)
+  
 }
-$$
-
-
-### Differences in fecundity of intertidal gastropods in two different intertidal zones (Example 6A in Logan, Box 3.1 in Q&K)
-
-Ward and Quinn (1988) investigated the differences in fecundity of *Lepsiella vinosa* in two different intertidal zones (mussel zone and littorinid zone). 
-
-Get the data and have a quick look
-
-```{r}
-gastro <- read.csv(file = "https://mlammens.github.io/Biostats/data/Logan_Examples/Chapter6/Data/ward.csv")
-summary(gastro)
-View(gastro)
-```
-
-Make a box plot to help assess differences in variance and deviations from normality.
-
-```{r}
-library(ggplot2)
-
-ggplot() +
-  geom_boxplot(data = gastro, aes(x = ZONE, y = EGGS)) +
-  theme_bw()
-
-```
-
-Calculate means and standard deviations of each group separatley. We will be using `dplyr` for this.
-
-```{r}
-library(dplyr)
-
-gastro %>%
-  group_by(ZONE) %>%
-  summarise(Mean = mean(EGGS), Var = var(EGGS))
-
-```
-
-
-Run *t* test.
-
-```{r}
-(gastro_t_test <- t.test(data = gastro, EGGS ~ ZONE, var.equal = TRUE))
-
-gastro_t_test$estimate[1] - gastro_t_test$estimate[2]
-
-```
-
-
-### Metabolic rates of northern fulmars (sea-bird)
-
-Furness and Bryant (1996) measured the metabolic rates of male and female breeding northern fulmars, and tested if there were any observalbe differences in these rates.
-
-Get the data and have a look
-
-```{r}
-fulmars <- read.csv(file = "https://mlammens.github.io/Biostats/data/Logan_Examples/Chapter6/Data/furness.csv")
-fulmars
-summary(fulmars)
-```
-
-Make a box plot to help assess differences in variance and deviations from normality.
-
-```{r}
-ggplot() +
-  geom_boxplot(data = fulmars, aes(x = SEX, y = METRATE)) +
-  theme_bw()
-
 ```
 
 #### Challange
 
-Are the variances the same?
+How might we visualize the number of red fox bout wins?
 
-Calculate means and standard deviations of each group separatley. We will be using `dplyr` for this.
+<!--
+```{r}
+library(ggplot2)
+
+ggplot() +
+  geom_histogram(data = NULL, 
+                 aes(x = redfox_bout_wins_vector), 
+                 binwidth = 1) +
+  theme_bw()
+```
+--->
+
+### Probability distribution of red fox wins - part 1
+
+How might we visualize the probability for the numbers of red fox bout wins?
+
+<!--
+```{r}
+library(ggplot2)
+
+ggplot() +
+  geom_histogram(data = NULL, 
+                 aes(x = redfox_bout_wins_vector, y = ..density.. ), 
+                 binwidth = 1) +
+  theme_bw()
+```
+--->
+
+#### Challange
+
+Using our last plot, estimate the probability of the red fox winning exactly 60 bouts.
+
+### Probability of 60 wins - analytically
+
+Using what we learned in Weeks 1 and 2, let's determine the exact probability of the redfox winning exactly 60 bouts.
+
+1. What's the probability of a redfox winning 60 bouts, then losing 40?
+
+$$
+P(\text{red fox wins})^{60} * P(\text{red fox loses})^{40}
+$$
+
+2. How many different ways can there be 60 wins?
+
+Think about the result of each bout as an *indpendent event*.
+How many ways can you line up 100 indpendent events?
+
+$$
+n \cdot (n-1) \cdot (n-2) \cdot \text{...} \cdot 1 = n!
+$$
+
+, where $n = 100$.
+
+Next, how many ways can you line up 60 wins and 40 losses?
+
+$$
+x! \cdot (n-x)!
+$$
+
+, where $x = 60$, or the number of wins.
+
+3. Putting this all together we have the following:
+
+$$
+\frac{n!}{x! \cdot (n-x)!} P(\text{red fox wins})^{x} * P(\text{red fox loses})^{n-x}
+$$
+
+#### Challange
+
+* Plug in the number using R, and calculate the probability of getting exactly 60 wins.
 
 ```{r}
-fulmars %>%
-  group_by(SEX) %>%
-  summarise(Mean = mean(METRATE), Var = var(METRATE))
-
+(factorial(100)/(factorial(60)*factorial(100-60))) * 0.6^60 * 0.4^(100-60)
 ```
 
-Based on inequality of variances, use Welch's *t*-test.
+* How does this compare to your estimate from above?
 
-```{r}
-(fulmars_t_test <- t.test(data = fulmars, METRATE ~ SEX, var.equal = FALSE))
-```
+## Binomial probability distribution
 
-# Non-parametric tests
+We just derived the bionomial probability distribution.
+In fact, the equation above is what's called the **probability density function** for the **Bionomial Distribution**.
+The Binomial distribution can be thought of as the 
+sum of $n$ Bernoulli distributions (see below), all with the same 
+parameterization (i.e., probability of success = $p$).  
+This is useful if we want to find the probability of getting a certain number
+of successes if your repeat some experiment many times.
 
-Let's say our data don't fit the assumptions of the *t* test. What are our options?
+$$
+{pdf} = P(x | N,h) = \binom{N}{x} h^x (1-h)^{N-x}
+$$
 
-## Rank based tests - Mann-Whitney test
-
-Look at ranks, rather than actual values.
-
-From Q&K p. 47:
-
-1. Rank all observations, ignoring groups. Tied observations get the average of their ranks.
-2. Calculate the sum of the ranks for both samples. If $H_0$ is true, then you should expect similar sums.
-3. Compare the smaller rank sum to the probability distribution of rank sums, based on repeated randomization of observations to groups.
-4. If sample sizes are large, the probability distribution of rank sums approximates a normal distribution and the *z* statistic can be used.
-
-## Randomization tests
-
-Powell and Russel (1984, 1985) investigated differences in bettle consumption between two size classes of eastern horned lizards.
+*Question:* What is the number of successes, $x$, in $N$ trials,
+where the probability of a success is $h$
 
 
-Get the data and look at it
 
-```{r}
-lizard <- read.csv(file = "https://mlammens.github.io/Biostats/data/Logan_Examples/Chapter6/Data/beetle.csv")
-head(lizard)
-summary(lizard)
-```
+### Bernoulli Distribution:
 
-Have a look at the box plots for these data.
+The Bernoulli distribution is a very simple distribution that
+can be used if we have a single event (or experiment)
+that has two possible outcomes, governed by some probability. 
+For example, the probability of the outcome of a 
+single coin toss with a fair coin 
+can be described using a Bernoulli distribution.
+
+${pdf} = P(x) = p$ if $x=1$ and $(1-p)$ if $x=0$, where
+$x$ is the event outcome (i.e., heads or tails)
+
+***
+
+## Probability distributions - helping us deal with uncertainty in biology
+
+Fact: there is a lot of uncertainty associated with biological data.
+
+### Uncertainty in biological data
+
+There are two types of uncertainty:
+
+* **Process uncertainty:** A result of our imperfect knowledge of things.
+Example: we may get two different mean values for petal length for a particular Iris species if we go out to a field and measure two different sets of 50 flowers.
+
+* **Observation uncertainty:** Inaccuracies resulting during measurement. 
+Example: our petal lengths values may be "off" if we used two different rulers, which were not exactly the same.
+
+We will focus more on **Process uncertainty**, than on **Observation uncertainty** in this class.
+**We try to understand uncertainty and uncertain outcomes by using probability distributions.**
+
+
+
+### Histograms and density plots as probability distributions
+
+Let's go back to the plots of petal length from last class. 
+**Recall that when considering density plots the area under the curve or the area of the bins is equal to 1.**
 
 ```{r}
 ggplot() +
-  geom_boxplot(data = lizard, aes(x = SIZE, y = BEETLES) ) +
-  theme_bw()
+  geom_histogram(data = iris, 
+                 aes(x = Petal.Length, y = ..density.., fill = Species)) +
+  facet_grid( Species ~ . ) +
+  geom_density(data = iris, aes(x = Petal.Length, colour = Species)) +
+  theme_bw()  
 ```
 
+**Key idea: We can think of the area for a particular bin as the probability of getting a value that falls into that bin.**
 
-Let's also look at the histograms of these data
+
+
+### Emperical distributions versus defined probability distributions
+
+There are *many* defined probability distributions that have specific properties.
+Above we derived the Binomial Distribution and were introduced to the Bernoulli Distribution. 
+It is beyond the scope of this week's class to discuss the specific statistical properties of distributions, but for today know that:
+
+* The area under the curve, or cumulative area of the bins is equal to 1
+* Different values of the variable described by a distribution are on the x-axis
+* The corresponding probability value for that particular variable value is on the y-axis (or expressed by the total area of the bin in a histogram plot).
+* We often want to focus on the probability distribution(s) that are related to our specific questions. Many of the most common distributions, though not all, can be interpreted as providing the answer to particular questions. Below I have outlined a number of distributions and the questions we might use them to answer.
+
+### Generic Distribution:
+
+A probability distribution is simply a way to describe the probability that some event occurs, given a set of rules (i.e., a function).
+Mathematically we can write this as:
+
+$$
+P( a < x < b) = \int_a^b f(x|params)dx
+$$
+
+#### Challange
+
+Go back to our emperical probability distribution function for red fox bout wins.
+What's the probability that the red fox wins between 58 and 62 bouts?
+
+### Normal Distribution:
+
+The normal distribution is perhaps the most widely used distribution in life science. 
+It is also probably the most familiar.
+
+The probability density function for the normal is:
+
+$$
+f(x|\mu,\sigma) ~ \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+$$
+
+Let's dive into working with the Normal in R.
+
+In R, there are several things you can do with all kinds of distributions (not just the normal).
+Start by looking for help on `rnorm`
 
 ```{r}
-ggplot() +
-  geom_histogram(data = lizard, aes(x = BEETLES, fill = SIZE) ) +
-  facet_grid( . ~ SIZE ) +
-  theme_bw()
+?rnorm
 ```
 
-#### Challenge
-
-What do you observe here that seems like a strong violation to the assumptions of a *t* test?
-
-
-#### Major Challenge
-
-1. Calculate the *t*-statistic for differences in number of beetles consumed the two size classes of lizards.
-2. Randomize/ shuffle the data.
-3. Calculate the **new** *t*-statistic. Repeat this 999 times.
-4. How does the observed *t*-stat compare to the generated *t*-stats?
-
+Note that there is `dnorm`, `pnorm`, `qnorm`, and `rnorm`. 
+For now, know that `rnorm` generates random variables from the distribution.
 
 ```{r}
-## Run t-test
-t.test(data = lizard, BEETLES ~ SIZE)
-
-## Record the original t-stat
-t_orig <- t.test(data = lizard, BEETLES ~ SIZE)$statistic
-
-## Initiate vector of new t-stat values
-t_rand <- c()
-
-## Set the number of reps (shuffles) we want to use
-reps <- 1000
-
-## Begin for loop to randomize data
-for ( int in 1:reps){
-  
-  ## Shuffle the data
-  lizard_shuffled <- data.frame(SIZE = sample(lizard$SIZE), BEETLES = lizard$BEETLES)
-  
-  ## Run the t-test on the new data, and save the t-stat to the t_rand vector
-  t_rand <- c( t_rand,
-               t.test(data = lizard_shuffled, BEETLES ~ SIZE)$statistic )
-  
-}
+normal_rvs <- rnorm(n = 100, mean = 0, sd = 1)
 
 ggplot() + 
-  geom_histogram(data = NULL, aes(x = t_rand)) +
-  geom_vline(xintercept = t_orig, colour = "red") +
+  geom_histogram( data = NULL, aes(x = normal_rvs) ) +
   theme_bw()
-
 ```
 
+#### Challange
 
-To calculate how likely our original *t* statistic is, look at how many values are more extreme.
-Remember to check both tails.
-
-```{r}
-t_rand_extreme <- sum(abs(t_rand) > t_orig)
-
-(p_t_orig <- t_rand_extreme/ reps)
-
-```
-
-## Multiple testing
-
-* If you perform a singly hypothesis test, using $\alpha = 0.05$, what is the probability that you reject the null hypothesis, even though the null is correct?
-
-* If you perform 20 hypothesis tests, using $\alpha = 0.05$, what is the probability that in at least one of those cases, you will reject the null hypothesis, even though it is correct?
+1. Increase the number of random varialbes drawn.
+2. Change the `mean` and `sd` parameters.
 
 
-### Example of problems with multiple comparisons
 
-Make some random data - 10 sets of 10 observations from the standard normal.
-**We know that all of these sets are from the exact same population!**
 
-```{r}
-my_data <- list()
-for (i in 1:20) {
-    my_data[[i]] <- rnorm(10)  #Note the double brackets for a list
-}
-```
+<!--
+### Log-normal Distribution:
 
-Run a *t* test for all possible pair-wise comparisons.
+Add more here!
 
-```{r}
-p_vals <- matrix(ncol = 20, nrow = 20)
-for (i in 1:19) {
-    for (j in (i + 1):20) {
-        p_vals[i, j] <- t.test(my_data[[i]], my_data[[j]])$p.value
-    }
-}
-p_vals
-```
+--->
 
-How many are false possitives?
+### Negative Binomial Distribution:
 
-```{r}
-sum(p_vals < 0.05, na.rm = TRUE)
-```
-
-# Introduction to Linear Models
-
-## Statistical Models
-
-From Logan, p. 151:
-
-> A **statistical model** is an expression that attempts to explain patterns in the observed values of a *response variable* by relating the response variable to a set of *predictor variables* and parameters.
-
-A generic model looks like:
-
-response variable = model + error
-
-### Simple linear model
+We briefly talked about this distribution in class. Thinking about how 
+this distribution is related to the Binomial distribution, where as
+for the latter setting the number of trials, $N$, as fixed, and asking
+about the number of successes, $x$, for the **Negative** binomial we 
+are setting the number of successes as fixed, $x$, and asking how many
+trials, $N$, it takes to get that number of successes.
 
 $$
-y = bx + a
+{pdf} = P(N|x,h) = \binom{N-1}{x-1} h^x (1-h)^{N-x}
 $$
 
-where $b$ is the slope and $a$ is the y-intercept.
+*Question:* What is the number of trials, $N$, needed to reach the
+$x$ th success.
 
-**Board material**
+### Geometric Distribution:
+
+The Geometric distribution is a special case of the Negative
+Binomial, where we are asking specifically about the number
+of trials to reach the **first** success (i.e. the case of
+the negative binomial where $x=1$.
+
+$$
+{pdf} = P(N|h) = h (1-h)^{N-1}
+$$
+
+*Question:* What is the number of trials, $N$, needed to reach the
+1st success.
+
+### Poisson Distribution:
+
+There are many questions we may ask that are related
+to the Poisson distribution. Usually we think of the 
+Poisson when we have some process that usually results
+in a small number most of the times and produces larger 
+numbers less frequently. Think about the number of eggs produced
+by some bird, or the number of off spring for some animal. 
+By substituting the ususal $\lambda$ value in the Poisson 
+with $\lambda T$, where $T$ is some defined time period, and 
+$\lambda$ is some rate value, we can use the Poisson to address 
+questions concerning the number of successes in some time 
+period T.
+
+$$
+{pdf} = P(x|T,\lambda) = \frac{ e^{-(\lambda T)} (\lambda T)^x }{ x! }
+$$
+
+***
+
+## Measures of location, dispersion, and variability 
+
+When we are looking at the distribution of any dataset, we want to have a measure of the center of the distribution.
+Usually our first step will be to look at the **arithmetic mean**, but each distribution has it's own **Expected Value**.
+
+Similarly, we want to have a measure of dispersion and variability. 
+Again, we usually would do something like calculate the **standard deviation**, but each distribution has it's own measure of **variance**.
+
+## Why use distributions?
+
+If you measure the height of 100 individuals, and no body is 5' 2", what can you say about the probability of being 5' 2"?
+
+**Discuss population mean versus sample mean.**
+
+
 
