@@ -22,7 +22,7 @@ You can find a **DRAFT** copy of the syllabus [here](pages/syllabus.html)
 |2/7  | 3 |Snow day: On-line Meeting |Review - Karban et al. 2014, Chapter 1|[Lecture notes 3](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-3.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-3-InClass.html) | [Problem Set 3](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-3.html); [Research Question Exercise](pages/research-question-exercise.html)|
 |2/14 | 4 |Introduction to Probability|Q&K Chap 1; Logan Chap 3|[Lecture notes 4](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-4.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-4-InClass.R) |[Problem Set 4](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-4.html) |
 |2/21 | 5 |Probability and Data Visualization |Q&K Chap. 1 & 4; Logan Chap. 5 |[Lecture notes 5](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-5.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-5-InClass.R) |[Problem Set 5](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-5.html) |
-|2/28 | 6 |Estimation, Hypothesis Testing |Q&K Chap. 3; Logan Chap. 6  |[Lecture notes 6](http://mlammens.github.io/Biostats/lectures/Lecture-5.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-5-InClass.R) | [Problem Set 6](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html)|
+|2/28 | 6 |Probability Distributions |Q&K Chap. 3; Logan Chap. 6  |[Lecture notes 6](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-6.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-5-InClass.R) | [Problem Set 6](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html)|
 |3/7  | 7 |Hypothesis Testing, Non-parametric Methods, Introduction to Linear Models |Q&K Chap. 3; Logan Chap. 6 |[Lecture notes 7](http://mlammens.github.io/Biostats/lectures/Lecture-6.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-6-InClass.R) | [Problem Set 7](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html)|
 |3/14 | SPRING BREAK |NO CLASS |Catch-up | | |
 |3/21 | 8 |Correlation and Regression| | [Lecture notes 8](http://mlammens.github.io/Biostats/lectures/Lecture-7.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-7-InClass.R) |[Problem Set 8](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html)|
@@ -39,6 +39,7 @@ You can find a **DRAFT** copy of the syllabus [here](pages/syllabus.html)
 
 * Probability Distributions and Estimation 
 * Distributions and Hypothesis Testing - Q&K Chap. 2; Logan Chap. 3
+* Estimation, Hypothesis Testing
 * [Correlation](https://xkcd.com/552/)
 --->
 

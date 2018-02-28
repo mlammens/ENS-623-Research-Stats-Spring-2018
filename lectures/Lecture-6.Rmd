@@ -116,11 +116,10 @@ for(rep in 1:reps){
 }
 ```
 
-#### Challange
+#### Challenge
 
 How might we visualize the number of red fox bout wins?
 
-<!--
 ```{r}
 library(ggplot2)
 
@@ -130,13 +129,11 @@ ggplot() +
                  binwidth = 1) +
   theme_bw()
 ```
---->
 
-### Probability distribution of red fox wins - part 1
+## Probability distribution of red fox wins - simulated
 
 How might we visualize the **probability** for the numbers of red fox bout wins?
 
-<!--
 ```{r}
 library(ggplot2)
 
@@ -146,15 +143,15 @@ ggplot() +
                  binwidth = 1) +
   theme_bw()
 ```
---->
 
-#### Challange
+
+#### Challenge
 
 Using our last plot, estimate the probability of the red fox winning exactly 60 bouts.
 
-### Probability of 60 wins - analytically
+## Probability of 60 wins - analytically
 
-Using what we learned in Weeks 1 and 2, let's determine the exact probability of the redfox winning exactly 60 bouts.
+Thinking about probability and counting (see [Meeting 4](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-4.html)), let's determine the exact probability of the redfox winning exactly 60 bouts.
 
 1. What's the probability of a redfox winning 60 bouts, then losing 40?
 
@@ -227,6 +224,27 @@ can be described using a Bernoulli distribution.
 
 ${pdf} = P(x) = p$ if $x=1$ and $(1-p)$ if $x=0$, where
 $x$ is the event outcome (i.e., heads or tails)
+
+### Binomial distribution in R
+
+Let's look at R's internal Binomial distribution function.
+
+```{r}
+?rbinom()
+
+new_data <- rbinom(n = 100, size = 100, prob = 0.6)
+
+ggplot() +
+  geom_histogram(data = NULL, 
+                 aes(x = new_data, y = ..density.. ), 
+                 binwidth = 1) +
+  theme_bw()
+```
+
+#### Challenge
+
+What happens to the historgram if you increase the observations, i.e. `n`?
+
 
 ***
 
