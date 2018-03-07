@@ -5,3 +5,106 @@ output: html_document
 
 
 
+```{r}
+library(ggplot2)
+
+# Set the number of samples
+n_samples <- 100
+
+# Set the number of observations for each sample set
+n_obs <- 10
+
+# Create a vector of means for each of the n_samples observations
+n_samples_means <- c()
+
+for (int in 1:n_samples){
+  # draw observations from a standard normal (note, these could also be called samples)
+  obs <- rnorm(n_obs)
+  
+  # calculate the mean of the observations
+  obs_mean <-mean(obs)
+  
+  # add these means to the vector of means
+  n_samples_means <- c(n_samples_means, obs_mean)
+  
+}
+
+ggplot(data = NULL) +
+  geom_histogram(aes(x = n_samples_means))
+
+```
+
+
+
+```{r}
+# Set the number of samples
+n_samples <- 100
+
+# Set the number of observations for each sample set
+n_obs <- 10
+
+# Create a vector of means for each of the n_samples observations
+n_samples_means <- c()
+
+for (int in 1:n_samples){
+  # draw observations from a standard normal (note, these could also be called samples)
+  obs <- rpois(n_obs, lambda = 1)
+  
+  # calculate the mean of the observations
+  obs_mean <-mean(obs)
+  
+  # add these means to the vector of means
+  n_samples_means <- c(n_samples_means, obs_mean)
+  
+}
+
+ggplot(data = NULL) +
+  geom_histogram(aes(x = n_samples_means))
+
+```
+
+
+Generate 100 samples from a standard normal distribution of 10 observations each.
+Calculate the mean and confidence interval for each. 
+Plot each mean and confidence interval, using the `geom_errorbar` function in `ggplot2`.
+
+
+```{r}
+# Set the number of samples
+n_samples <- 100
+
+# Set the number of observations for each sample set
+n_obs <- 10
+
+# Create a vector of means for each of the n_samples observations
+n_samples_means <- c()
+n_samples_vars <- c()
+
+for (int in 1:n_samples){
+  # draw observations from a standard normal (note, these could also be called samples)
+  obs <- rnorm(n_obs)
+  
+  # calculate the mean of the observations
+  obs_mean <-mean(obs)
+  
+  # add these means to the vector of means
+  n_samples_means <- c(n_samples_means, obs_mean)
+  
+  # calculate the variances of the observations
+  obs_vars <- var(obs)
+  
+  # add these to the vector of variances
+  n_samples_vars <- c(n_samples_vars, obs_vars)
+  
+}
+
+se_df <- data.frame(means = n_samples_means, vars = n_samples_vars, n = n_obs)
+
+se_df$se_upper <- se_df$means + (1.96*sqrt(se_df$vars))
+se_df$se_lower <- se_df$means - (1.96*sqrt(se_df$vars))
+
+ggplot(data = se_df) +
+  geom_errorbarh(aes(xmin = se_lower, xmax = se_upper, x = means, y = 1:nrow(se_df)))
+
+```
+
