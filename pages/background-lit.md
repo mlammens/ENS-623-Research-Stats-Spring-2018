@@ -7,7 +7,7 @@ description: finding related literature
 
 ## DUE: 2018-03-28
 
-Continue work on your Semester Project, I would like you to submit the results of a backgroun literature search as an [annotated bibliography](http://users.clas.ufl.edu/msscha/ThesisCSS/thesis_ab.html).
+Continuing to work on your Semester Project, I would like you to submit the results of a background literature search as an [annotated bibliography](http://users.clas.ufl.edu/msscha/ThesisCSS/thesis_ab.html).
 For this assignment, I expect to see 10 to 15 references to peer reviewed journal articles or peer reviewed book chapters. 
 You can certainly include more than 10 to 15 refs if you'd like.
 You need to rely on peer reviewed literature.

@@ -14,7 +14,7 @@ output:
 
 ## Measures of location, dispersion, and variability 
 
-When we are looking at the distribution of any dataset, we want to have a measure of the center of the distribution.
+When we are looking at the distribution of any data set, we want to have a measure of the center of the distribution.
 Usually our first step will be to look at the **arithmetic mean**, but each statistical distribution has its own **Expected Value**.
 
 Similarly, we want to have a measure of dispersion and variability. 
@@ -29,7 +29,7 @@ $$
 P( a < x < b) = \int_a^b f(x|params)dx
 $$
 
-(or an analygous PMF). This distribution has a number of properties that could be described.
+(or an analogous PMF). This distribution has a number of properties that could be described.
 
 * Parameters
     + Location - where
