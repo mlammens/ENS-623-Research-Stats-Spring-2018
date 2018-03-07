@@ -50,7 +50,7 @@ During the semester, you will carry out an independent research and analysis pro
 The project represents 40% of your grade, but is broken up into several components. 
 
 * [Research question exercise](pages/research-question-exercise.html) - 5% - DUE 2/14
-* Background literature search - 5% - DUE 3/21
+* [Background literature search](pages/background-lit.html) - 5% - DUE 3/28
 * Methods description - 5% - DUE 4/11
 * Mini-presentation (5 minutes in class) - 5% - DUE 4/11, 4/18, or 4/25
 * Final report - 20% - DUE 5/9
