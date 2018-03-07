@@ -7,6 +7,9 @@ output:
     code_folding: hide
 ---
 
+**Special Note: This lecture was delivered using BlackBoard Collaborate Ultra, due to weather closure.**
+
+
 # Important properties of distributions
 
 ## Measures of location, dispersion, and variability 
