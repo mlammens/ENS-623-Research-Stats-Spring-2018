@@ -1,0 +1,76 @@
+---
+title: "Problem Set 6"
+author: "Matthew E. Aiello-Lammens"
+date: "2018-03-12"
+output: html_document
+---
+
+**Please submit this homework as an R Markdown (Rmd) file.**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+
+#### File name
+
+Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP18_PS6.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP18_PS6.Rmd`
+
+#### Grading note
+
+Problem 1, 3, 4 and the Bonus are worth 5 points; Problem 2 is worth 10 points.
+
+# Problem 1 - Poisson Distribution
+
+Use the `rpois` function to draw 1000 samples from a **Poisson Distribution**, with $\lambda = 1$ (set as `lambda = 1`).
+**Make a histogram of the resulting data and describe the shape of the histogram.**
+
+
+# Problem 2 - Exploring the Central Limit Theorem
+
+Below is a piece of uncommented code.
+**Go through this code, run it, and add a comment that explains each step where I have placed a `#` sign.**
+Your comments should reflect that you understand what is happening in this code.
+
+```{r, eval = FALSE}
+# 
+n_samples <- 1000
+
+# 
+n_obs <- 1000
+
+# 
+n_samples_means <- c()
+
+for (int in 1:n_samples){
+  # 
+  obs <- rpois(n_obs, lambda = 1)
+  
+  # 
+  obs_mean <-mean(obs)
+  
+  # 
+  n_samples_means <- c(n_samples_means, obs_mean)
+  
+}
+
+# 
+ggplot(data = NULL) +
+  geom_histogram(aes(x = n_samples_means, y = ..density..))
+
+```
+
+# Problem 3 
+
+**Describe the shape of the histogram resulting from the code in Problem 2. Based on this exercise, what can you say about the distributional form of the *sample mean*?**
+
+# Problem 4 - Standard Error of the Mean
+
+Review Chapter 2.3 in Quinn and Keough. **In your own words, describe what the standard error of the mean is.**
+
+# Bonus
+
+**How do the results of Problem 2 and 3 relate to the calculation of a Confidence Interval?**
+

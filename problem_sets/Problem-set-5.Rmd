@@ -5,13 +5,6 @@ date: "2018-02-22"
 output: html_document
 ---
 
----
-title: "Problem Set 4"
-author: "Matthew E. Aiello-Lammens"
-date: "2018-02-15"
-output: html_document
----
-
 **Please submit this homework as an R Markdown (Rmd) file.**
 See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
 
