@@ -25,13 +25,13 @@ You can find a **DRAFT** copy of the syllabus [here](pages/syllabus.html)
 |2/28 | 6 |Probability Distributions |Q&K Chap. 2; Logan Chap. 3; Bolker Chap. 4.1, 4.4., 4.5  |[Lecture notes 6](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-6.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-6-InClass.R) | No problem set this week |
 |3/7  | 7 |Probability Distributions and Estimation  |Q&K Chap. 2; Logan Chap. 3; Bolker Chap. 4.1, 4.4., 4.5 |[Lecture notes 7](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-7.html) | [Problem Set 6](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-6.html)|
 |3/14 | SPRING BREAK |NO CLASS |Catch-up | | |
-|3/21 | 8 |Estimation and Hypothesis Testing| | [Lecture notes 8](http://mlammens.github.io/Biostats/lectures/Lecture-7.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-7-InClass.R) |[Problem Set 7](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html)|
-|3/28 |  9 |Correlation and Regression |Q&K Chap. 5 & 6; Logan Chap. 8 & 9 |[Lecture notes 9](http://mlammens.github.io/Biostats/lectures/Lecture-8.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-8-InClass.R) |[Problem Set 8](http://mlammens.github.io/Biostats/problem_sets/Problem-set-4.html); [Background literature search](pages/background-lit.html) |
-|4/4  | 10 |Regression | | |[Problem Set 9](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html) |
-|4/11 | 11 | Multiple and complex regression; ANOVA |Q&K Chap. 6; Logan Chap. 9 |[Lecture notes 10](http://mlammens.github.io/Biostats/lectures/Lecture-9.html) |[Problem Set 10](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html) |
-|4/18 |  12 |Complex regression; ANOVA (cont'd) |Q&K Chap. 6; Logan Chap. 9| [Lecture notes 11](http://mlammens.github.io/Biostats/lectures/Lecture-10.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-10.R)  | [Problem Set 11](http://mlammens.github.io/Biostats/problem_sets/Problem-set-5.html); Method Description |
-|4/25 | 13 |Nested and Factorial ANOVA |Q&K 8 & 9; Logan 11 & 12 |[Lecture notes 12](http://mlammens.github.io/Biostats/lectures/Lecture-11.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-11-InClass.R) |  |
-|5/2  | 14 |ANCOVA; Analysis of Frequencies; GLM; wrap-up |Logan Chap. 15-17; Q&K 12-14 |[Lecture notes 13](http://mlammens.github.io/Biostats/lectures/Lecture-12.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-12-InClass.R) |  |
+|3/21 | 8 |Snow Day|NO CLASS | ||
+|3/28 | 9 |Estimation and Hypothesis Testing|[Lecture notes 8](http://mlammens.github.io/Biostats/lectures/Lecture-7.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-7-InClass.R) |[Problem Set 7](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html)|
+|4/4  | 10 |Correlation and Regression |Q&K Chap. 5 & 6; Logan Chap. 8 & 9 |[Lecture notes 9](http://mlammens.github.io/Biostats/lectures/Lecture-8.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-8-InClass.R) |[Problem Set 8](http://mlammens.github.io/Biostats/problem_sets/Problem-set-4.html); [Background literature search](pages/background-lit.html) |
+|4/11 | 11 | Regression | | |[Problem Set 9](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html) |
+|4/18 |  12 |Multiple and complex regression; ANOVA |Q&K Chap. 6; Logan Chap. 9 |[Lecture notes 10](http://mlammens.github.io/Biostats/lectures/Lecture-9.html) |[Problem Set 10](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html) |
+|4/25 | 13 |Nested and Factorial ANOVA |Q&K 8 & 9; Logan 11 & 12 | [Lecture notes 11](http://mlammens.github.io/Biostats/lectures/Lecture-10.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-10.R)  | [Problem Set 11](http://mlammens.github.io/Biostats/problem_sets/Problem-set-5.html); Method Description |
+|5/2  | 14 |ANCOVA; Analysis of Frequencies; GLM; wrap-up |Logan Chap. 15-17; Q&K 12-14 |[Lecture notes 12](http://mlammens.github.io/Biostats/lectures/Lecture-11.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-11-InClass.R) |  |
 
 
 <!---
@@ -40,6 +40,8 @@ You can find a **DRAFT** copy of the syllabus [here](pages/syllabus.html)
 * 
 * Hypothesis Testing, Non-parametric Methods, Introduction to Linear Models
 * [Correlation](https://xkcd.com/552/)
+* 
+* 
 --->
 
 ## Semester Project Overview
