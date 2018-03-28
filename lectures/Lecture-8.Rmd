@@ -7,7 +7,16 @@ output:
     code_folding: hide
 ---
 
-# Other important distributions we'll discuss in this class
+# Refresh
+
+What is a statistical distribution?
+
+What are some of the distributions we talked about in the past?
+
+What characteristics of distributions are we often interested in?
+
+
+# Other important distributions in data analysis
 
 * Standard Normal
 * Student's $t$ distribution
@@ -42,7 +51,7 @@ ggplot(data = stdnorm_samps, aes(x = samps)) +
 ```
 
 * How well does the density plot represent the standard normal distribution?
-* Can we add the normal distribution?
+* Can we add the functional form of the normal distribution?
 
 ```{r, fig.show='hide'}
 ggplot(data = stdnorm_samps, aes(x = samps)) +
@@ -108,9 +117,9 @@ From Q&K p. 18:
 
 In the limit as $n \to \infty$, the probability distribution of means of samples from ***any distribution*** will approach a normal distribution.
 
-#### Challenge
+#### Problem Set 6 - review
 
-First, plot a histogram of 100 observations that are **Poisson distributed** with a $\lambda$ value $= 1$.
+Plot a histogram of 100 observations that are **Poisson distributed** with a $\lambda$ value $= 1$.
 Describe the shape of the distribution. 
 Does it look normal?
 
@@ -137,7 +146,7 @@ From Q&K p. 18:
 
 We just demonstrated that **sample means are normally distributed**. 
 What can we do with this?
-To start, we can say something about the precision and accuracy of our estimates of the population mean based on the sample mean.
+To start, we can say something about the precision and accuracy of our estimates of the *population* mean based on the *sample* mean.
 
 **Standard error of the mean** - the expected value of the standard deviation of the sample mean:
 
@@ -218,9 +227,6 @@ which is no longer standard normal distributed, but rather ***t* distributed**.
 #### Challenge
 
 Use whatever resource available to you, and look-up the ***t* distribution**.
-
-#### Challenge
-
 What is/are the parameter(s) of the *t* distribution?
 
 
@@ -235,10 +241,6 @@ If I have calculated the mean, how many observations, out of a total of *n*, are
 General rule regarding df's:
 
 > the df is the number of observations minus the number of parameters included in the formula for the variance (Q&K p.20; Box 2.1).
-
-
-***
-***
 
 
 ## Standard error of other statistics
@@ -280,7 +282,9 @@ Start with the pseudo-code.
 
 Briefly mention this example, but we will return to it in the future.
 
-## Maximum-likelihood
+***
+
+## Maximum-likelihood - NOTE: Maximum-likelihood will be discussed in a video supplement
 
 The ML approach estimates population parameters by **maximizing** the (log) likelihood of obtaining the observed sample values, assuming you have knowledge of what the probability distribution is.
 
@@ -498,7 +502,7 @@ fitdistr(x, "normal")
 
 Notice that this function outputs the standard errors of the MLE values as well, whereas our function and `optim` only give the MLE.
 
-
+***
 
 # Hypothesis Testing
 
@@ -510,7 +514,7 @@ The answers to these questions, with respect to this course, are primarily based
 
 ## Example
 
-Let's say we have a sample of observations that we want to know if they come from some population with a known value for $\mu$. 
+Let's say we have a sample of observations that we want to know if they come from some population with a known value for $\mu$ (i.e., we know the population mean). 
 We can see how (un)likely it is that the sample estimates come from this particular population, by looking at where these values fall in a *t* distribution. That is, calculate the *t* statistic:
 
 $$
