@@ -1,0 +1,255 @@
+---
+title: "Parameter Estimation - Ordinary Least Squares and Maximum Likelihood"
+author: "Matthew E. Aiello-Lammens"
+output:
+  html_document:
+    toc: yes
+    code_folding: hide
+---
+
+# Parameter estimation revisited
+
+There are two common methods used to estimate distribution parameters. 
+**Ordinary least-squares (OLS)** and **maximum likelihood (ML)**.
+Let's start by introducing OLS.
+
+## Ordinary least-squares
+
+Minimize the observed differences between sample values and the estimated parameter(s).
+
+### Example - least squares estimate of the population mean
+
+> [T]he least squares estimate of the population mean is a value that minimizes the differences between the sample values and this estimated mean (Logan p. 73).
+
+#### Challenge
+
+Work through an example of the least squares estimate of a population mean.
+Start with the pseudo-code.
+
+### Example - linear regression
+
+Briefly mention this example, but we will return to it in the future.
+
+***
+
+## Maximum-likelihood - NOTE: Maximum-likelihood will be discussed in a video supplement
+
+The ML approach estimates population parameters by **maximizing** the (log) likelihood of obtaining the observed sample values, assuming you have knowledge of what the probability distribution is.
+
+### Likelihood
+
+Maximum likelihood and probability distributions are intimately related, for reasons that will become apparent. 
+To serve as an example, we'll use the Normal Distribution $N(\mu,\sigma^{2})$:
+
+The probability density of the normal distribution is given by
+
+$$
+f(x|\mu, \sigma) = \frac{1}{\sqrt{2\pi\sigma^{2}}} \exp{\left(-\frac{1}{2}\frac{(x-\mu)^{2}}{\sigma^{2}}\right)}
+$$
+
+For variables that are **independent and identically distributed** (i.i.d.), the joint probability $(X_{1},X_{2})$ is simply the product of the two p.d.f.s
+
+$$
+P(A\cap B \cap C)=P(A)\times P(B)\times P(C)
+$$
+
+Extending this to the case of several random variables drawn from a normal distribution, we can write:
+
+$$
+f(X_{1},X_{2},...,X_{n}|\mu, \sigma) = \prod^{n}_{i=1}\frac{1}{\sqrt{2\pi\sigma^{2}}} \exp{\left(-\frac{1}{2}\frac{(X_{i}-\mu)^{2}}{\sigma^{2}}\right)}
+$$
+
+Taken as a probability density, this equation denotes the probability of getting unknown data ${X_{1},X_{2},...,X_{n}}$ given (|) the known distribution parameters $\mu$ and $\sigma$. 
+
+However, this can be rewritten as a likelihood simply by reversing the conditionality:
+
+$$
+L(|\mu, \sigma) = \prod^{n}_{i=1}\frac{1}{\sqrt{2\pi\sigma^{2}}} \exp{\left(-\frac{1}{2}\frac{(X_{i}-\mu)^{2}}{\sigma^{2}}\right)}
+$$
+
+The likelihood specifies the probability of obtaining the known data ${X_{1},X_{2},...,X_{n}}$ by a certain combination of the unknown parameters $\mu$ and $\sigma$.
+
+### Relationship of *PDF* and *Likelihood*
+
+**PDF:** Parameters are known, data varies  
+**Likelihood:** Data are known, parameters vary
+
+
+### Maximizing the Likelihood
+
+Parameter estimates may be found by maximum likelihood simply by finding those parameters that make your data most likely (among all possible data sets).
+
+Conceptually, it helps to remember our examples from working with M&Ms. 
+The likelihood of obtaining your exact set of colors was very small even when using the true underlying probabilities of each color. 
+Likelihoods are always VERY SMALL - even the maximum likelihood estimates (MLEs) are very unlikely to produce your dataset, simply because there are so many possible datasets that could be produced. 
+The MLEs are simply those parameters that make your dataset more likely than any other dataset.
+
+The magnitude of the likelihood means NOTHING. 
+The actual value of the likelihood depends on the size of the “sample space” (how many possible datasets could you imagine getting?), so we can only assign meaning to the relative size of likelihoods among different combinations of parameter values. 
+We can say whether one set of parameter values is more likely to be the “true” population values than other possible sets of parameter values.
+
+So how do we find the MLEs?
+
+First we will calculate the MLE for the normal parameters by hand, and then we will use two different methods of calculating the maximum likelihood estimators using R. 
+
+#### Manual calculation of Maximum Likelihood
+
+The likelihood function for X drawn from $N(\mu,\sigma^{2})$ is:
+
+$$
+L(\mu,\sigma|X_{1},X_{2},...,X_{n})= \prod^{n}_{i=1}\frac{1}{\sqrt{2\pi\sigma^{2}}} \exp{\left(-\frac{1}{2}\frac{(X_{i}-\mu)^{2}}{\sigma^{2}}\right)}
+$$
+
+Because likelihoods are very small, and we are only interested in relative values, we use the log-likelihood values which are easier to work with (for reasons that will become clear).
+
+The log-likelihood (LL) is:
+
+$$
+LL = \sum_{i}\left(-\frac{1}{2}log(2\pi\sigma^{2})-\frac{1}{2}\frac{(X_{i}-\mu)^{2}}{\sigma^{2}}\right)
+$$
+
+We want to maximize the LL, which is usually done by minimizing the negative-LL (NLL).
+To make the algebra easier, we will define $A=\sigma^{2}$.
+
+$$
+NLL=\sum_{i}\left(\frac{1}{2}log(2\pi A)+\frac{1}{2}\frac{(X_{i}-\mu)^{2}}{A}\right)
+$$
+
+In order to find the minimum negative log-likelihood value, we must first take the partial derivative of the above equation and set it to 0, as:
+
+$$
+\frac{\partial NLL}{\partial \mu} = \sum_{i}\left(\frac{-(X_{i}-\hat{\mu})}{\sigma^{2}}\right)=0
+$$
+
+Notice that when I set the left-hand side to 0, the notation changes from $\mu$ to $\hat{\mu}$ because the MLE $\hat{\mu}$ is that value that makes that statement true. Solving for $\hat{\mu}$, we get:
+
+$$
+\frac{\partial NLL}{\partial \mu} =\sum_{i}-(X_{i}-\hat{\mu})=0=\Sigma_{i}(X_{i}-\hat{\mu})
+$$
+
+$$
+n\hat{\mu}-\sum_{i}X_{i}=0
+$$
+
+$$
+\hat{\mu}=\frac{1}{n}\sum_{i}X_{i}
+$$
+
+Now we do the same for $A=\sigma^{2}$
+
+$$
+NLL=\sum_{i}\left(\frac{1}{2}log(2\pi A)+\frac{1}{2}\frac{(X_{i}-\mu)^{2}}{A}\right)
+$$
+
+$$
+\frac{\partial NLL}{\partial A} = \sum_{i}\left(\frac{1}{2}\frac{2\pi}{2\pi\hat{A}}-\frac{1}{2}\frac{(X_{i}-\mu)^{2}}{\hat{A}^{2}}\right)=0
+$$
+
+$$
+\sum_{i}\left(1-\frac{(X_{i}-\mu)^{2}}{\hat{A}}\right)=0
+$$
+
+$$
+n-\frac{1}{\hat{A}}\sum_{i}\left((X_{i}-\mu)^{2}\right)=0
+$$
+
+$$
+\hat{A}=\hat{\sigma^{2}}=\frac{1}{n}\sum_{i}(X_{i}-\mu)^{2}
+$$
+
+**NOTE** that the MLEs are not necessarily the best estimates, or even unbised estimates. 
+In this case the MLE for $\sigma^{2}$ is biased (the unbiased estimator replaces n with n-1).
+
+#### R based estimate of Maximum Likelihoods - 1
+
+To estimate the Maximum Likelihood values in R, we first *write a function to define the NLL*:
+
+```{r}
+neg.ll <- function(x, mu, sigma2) {
+    sum(0.5 * log(2 * pi * sigma2) + 0.5 * ((x - mu)^2)/sigma2)
+}
+```
+
+For the purposes of a simple exmaple, lets generate some fake “data” by drawing random samples from a $N(\mu=1,\sigma=2)$.
+
+```{r}
+x <- rnorm(1000, mean = 1, sd = 2)
+mu.test.values <- seq(-2, 4, 0.1)
+sigma2.test.values <- seq(1, 11, 0.1)
+```
+
+Next, we will make a matrix to store the values of the likelihood for a grid of potential $\mu$ and $\sigma^{2}$ values.
+
+```{r}
+likelihood.matrix <- matrix(nrow = length(mu.test.values), ncol = length(sigma2.test.values))
+```
+
+
+Now we will search parameter space by brute force, calculating the likelihood on a grid of potential $\mu$ and $\sigma^{2}$ values.
+
+```{r}
+for (i in 1:length(mu.test.values)) {
+    for (j in 1:length(sigma2.test.values)) {
+        likelihood.matrix[i, j] <- neg.ll(x, mu.test.values[i], sigma2.test.values[j])
+    }
+}
+```
+
+We can plot the results using the functions `image` and `contour`, and place on top of this plot the maximum likelihood as found by the grid search as well as the known parameter values.
+
+```{r}
+image(mu.test.values, sigma2.test.values, likelihood.matrix, col = topo.colors(100))
+contour(mu.test.values, sigma2.test.values, likelihood.matrix, nlevels = 30, 
+    add = T)
+
+max.element <- which(likelihood.matrix == min(likelihood.matrix), arr.ind = T)
+points(mu.test.values[max.element[1]], sigma2.test.values[max.element[2]], pch = 16, 
+    cex = 2)
+points(1, 4, pch = "x", cex = 2)
+```
+
+Now we can plot the likelihood “slices”, which show cross sections across the search grid for fixed values of $\mu$ or $\sigma^{2}$.
+
+```{r}
+par(mfrow = c(1, 2))
+plot(mu.test.values, likelihood.matrix[, max.element[2]], typ = "b")
+plot(sigma2.test.values, likelihood.matrix[max.element[1], ], typ = "b")
+```
+
+#### R based estimate of Maximum Likelihoods - 2
+
+R has a function 'optim' which optimizes functions (and is thus much better than a simple grid search 'brute force' approach we just did) and is very handy for minimizing the LL. 
+We take advantage of the R function that gives us the probability density function, which saves us having to hard code that into R. 
+Make sure the use of `dnorm` in the code below makes sense!
+
+```{r}
+neg.ll.v2 <- function(x, params) {
+    mu = params[1]
+    sigma = params[2]
+    -sum(dnorm(x, mean = mu, sd = sigma, log = TRUE))
+}
+```
+
+Notice that we are using the “log-TRUE” option to take the log inside the `dnorm` command, which saves us taking it later. 
+We also had to pass the parameters as one variable since that is what `optim` is expecting. 
+Take a second to convince yourself that the `neg.ll` and `neg.ll.v2` functions give the same answer.
+
+We still need a way to maximize the log-likelihood and for this we use the function `optim`:
+
+```{r}
+opt1 <- optim(par = c(1, 1), fn = neg.ll.v2, x = x)
+opt1
+```
+
+An even easier way is to use the `fitdistr` command, but the `optim` function comes in handy all the time and is the only option you have when fitting non-tranditional distributions not covered by `fitdistr`.
+
+```{r}
+library(MASS)
+fitdistr(x, "normal")
+```
+
+Notice that this function outputs the standard errors of the MLE values as well, whereas our function and `optim` only give the MLE.
+
+# Attributions
+
+* Much of the Maximum Likelihood section of this lecture is adapted from material developed by Prof. Heather Lynch at Stony Brook University for teaching BEE 552: Biometry.
