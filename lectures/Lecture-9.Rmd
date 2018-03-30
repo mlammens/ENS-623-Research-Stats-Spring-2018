@@ -1,0 +1,64 @@
+---
+title: "Meeting 9 - Hypothesis Testing and Correlation"
+author: "Matthew E. Aiello-Lammens"
+output:
+  html_document:
+    toc: yes
+    code_folding: hide
+---
+
+# Hypothesis Testing
+
+* What is a hypothesis? 
+* How do we test our hypothesis?
+
+The answers to these questions, with respect to this course, are primarily based on frequentist statistics.
+
+
+## Example
+
+Let's say we have a sample of observations that we want to know if they come from some population with a known value for $\mu$ (i.e., we know the population mean). 
+We can see how (un)likely it is that the sample estimates come from this particular population, by looking at where these values fall in a *t* distribution. That is, calculate the *t* statistic:
+
+$$
+t_s = \frac{St - \theta}{S_{St}}
+$$
+
+
+## *t*-test
+
+* Looking at differences between two samples of data. 
+The *differences* should be *t* distributed.
+* **Major assumptions** - the samples are drawn from populations that are:
+    1. Normally Distributed
+    2. Equally varied (i.e. equal variance)
+    3. Each observation is *independent*
+    
+## We select the error rate
+
+General concencus is $p = 0.05$. This is known as Type-I error, or $\alpha$.
+
+### Type-I versus Type-II error
+
+* **Type-I error: $\alpha$** - our test suggests there is an effect, but there really is not one
+* **Type-II error: $\beta$** - when you fail to detect an effect that really occurs
+
+### Statistical power
+
+The reciprical of Type-II error ($\beta$) is **power**. 
+
+$$
+power(1-\beta) \propto \frac{ES \sqrt{n} \alpha}{\sigma}
+$$
+
+#### How do we increase statistical power?
+
+Increase the sample size.
+
+* Distribution of the mean becomes narrower
+* Acceptance region becomes narrower
+* Curves overlap less
+* Type II error rate becomes smaller
+
+![power](https://www.dropbox.com/s/joh0kxc7ygsq9xw/power.png?dl=1)
+
