@@ -1,0 +1,54 @@
+---
+title: "Problem Set 7"
+author: "Matthew E. Aiello-Lammens"
+date: "2018-03-30"
+output: html_document
+---
+
+**Please submit this homework as an R Markdown (Rmd) file.**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+
+#### File name
+
+Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP18_PS7.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP18_PS7.Rmd`
+
+#### Grading note
+
+Problem 1 is worth 10 points and problem 2 is worth 15 points.
+
+
+# Problem 1
+
+Generate 100 samples of $n = 10$ observations each from a standard normal distribution.
+Calculate the mean and confidence interval for each sample. 
+Plot each mean and confidence interval, using the `geom_errorbar` function in `ggplot2`.
+
+# Problem 2
+
+Write a function in R that:
+
+1. draws a sample ${X_1,X_2,…,X_{n}}$ of size $n$ from the normal distribution $N(\mu, \sigma^2 )$ (you are free to choose $\mu$ and $\sigma^2 \gt 0$), 
+2. calculates the standard error of the mean, and 
+3. calculates 
+
+$$
+\frac{ \bar{X} - \mu }{ s.e.mean }
+$$
+
+This function should have three inputs $(\mu,\sigma^2,n)$ and 
+one output, the value of $\frac{ \bar{X} - \mu }{ s.e.mean }$
+
+**NB:** See Logan pp. 34-35 for an explination of how to write your own function.
+
+This function takes samples from the t-distribution!
+
+Using your function, draw a large number (10,000 is probably fine, but you can play around with it) of samples from this distribution for $n = 5$, $n =50$, and $n =500$ observations. 
+(Remember, $n$ is the number of draws from the normal distribution used to draw one sample from the t-distribution.) 
+Plot these three histograms, preferably using `ggplot2` so that each histogram is on the same plot.
+(You could also use the `hist` function with the option `add = T`, which will allow you to plot them all on the same plot).
