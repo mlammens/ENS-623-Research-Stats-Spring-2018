@@ -1,0 +1,30 @@
+---
+title: "Meeting 10 - Correlation and Regression"
+author: "Matthew E. Aiello-Lammens"
+output:
+  html_document:
+    toc: yes
+    code_folding: hide
+---
+
+# Introduction to Linear Models
+
+## Statistical Models
+
+From Logan, p. 151:
+
+> A **statistical model** is an expression that attempts to explain patterns in the observed values of a *response variable* by relating the response variable to a set of *predictor variables* and parameters.
+
+A generic model looks like:
+
+response variable = model + error
+
+### Simple linear model
+
+$$
+y = bx + a
+$$
+
+where $b$ is the slope and $a$ is the y-intercept.
+
+**Board material**
