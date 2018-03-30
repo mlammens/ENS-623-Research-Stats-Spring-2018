@@ -29,6 +29,8 @@ Generate 100 samples of $n = 10$ observations each from a standard normal distri
 Calculate the mean and confidence interval for each sample. 
 Plot each mean and confidence interval, using the `geom_errorbar` function in `ggplot2`.
 
+Your final figure should look similar to that of Figure 4.8 on page 175 of the [OpenIntro Stats textbook](https://www.openintro.org/stat/textbook.php?stat_book=os).
+
 # Problem 2
 
 Write a function in R that:
