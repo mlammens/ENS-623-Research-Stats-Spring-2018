@@ -21,7 +21,7 @@ Let's say we have a sample of observations that we want to know if they come fro
 We can see how (un)likely it is that the sample estimates come from this particular population, by looking at where these values fall in a *t* distribution. That is, calculate the *t* statistic:
 
 $$
-t_s = \frac{St - \theta}{S_{St}}
+t_s = \frac{\bar{y} - \mu}{s_{\bar{y}}}
 $$
 
 
@@ -85,7 +85,7 @@ $$
 
 ## Examples of parametric hypothesis testing
 
-Above we discussed the generic form of the *t* statistic:
+Below is the generic form of the *t* statistic:
 
 $$
 t_s = \frac{St - \theta}{S_{St}}
@@ -271,7 +271,7 @@ What do you observe here that seems like a strong violation to the assumptions o
 
 #### Major Challenge
 
-1. Calculate the *t*-statistic for differences in number of beetles consumed the two size classes of lizards.
+1. Calculate the *t*-statistic for differences in number of beetles consumed by the two size classes of lizards.
 2. Randomize/ shuffle the data.
 3. Calculate the **new** *t*-statistic. Repeat this 999 times.
 4. How does the observed *t*-stat compare to the generated *t*-stats?

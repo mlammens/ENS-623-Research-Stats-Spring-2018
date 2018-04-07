@@ -1,0 +1,48 @@
+---
+title: "Problem Set 8"
+author: "Matthew E. Aiello-Lammens"
+date: "2018-04-06"
+output: html_document
+---
+
+**Please submit this homework as an R Markdown (Rmd) file.**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+
+#### File name
+
+Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP18_PS8.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP18_PS8.Rmd`
+
+***
+
+For this problem set, use the `iris` dataset that comes with R to answer the following questions.
+As a reminder, you can 'load' the `iris` dataset using the following command:
+
+```
+data(iris)
+```
+
+# Problem 1
+
+Calculate the **mean**, **standard deviation**, and **standard error of the mean** for *both* **Sepal Length** and **Sepal Width** for the full `iris` dataset **AND** for each species separately. 
+In words, describe the differences you observe between the individual species, and between the individual species and the full dataset. 
+
+# Problem 2
+
+Construct **boxplots** for *both* **Sepal Length** and **Sepal Width** using the `iris` dataset. 
+Both the *Logan* and *Quinn & Keough* texts provide extensive information on boxplots.
+You can use `base` R or `ggplot2`. 
+See [this site](http://www.cookbook-r.com/Graphs/Plotting_distributions_(ggplot2)/) for a good outline of constructing a boxplot with `ggplot2`.
+Describe each component of a generic boxplot, and describe why we might be interested in each value that is represented.
+
+# Problem 3
+
+For *both* **Sepal Length** and **Sepal Width** carry out a *t-test* between each pair-wise comparison of species (i.e., there should be **three** tests each for Sepal Length and Width). 
+Show the results of these tests.
+
+In words, briefly describe the results of your analysis.
