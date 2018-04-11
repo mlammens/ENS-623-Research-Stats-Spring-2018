@@ -29,7 +29,7 @@ You can find a **DRAFT** copy of the syllabus [here](pages/syllabus.html)
 |3/28 | 8 |Central Limit Theorem|Q&K Chap. 2; Logan Chap. 3; [OpenIntro Stats text](https://www.openintro.org/stat/textbook.php?stat_book=os) Chap. 4|[Lecture notes 8](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-8.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-8-InClass.R) |[Problem Set 7](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-7.html); [Background literature search](pages/background-lit.html)|
 |4/4  | 9 |Hypothesis Testing |Q&K Chap. 3; Logan Chap. 6 |[Lecture notes 9](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-9.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-9-InClass.R) |[Problem Set 8](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-8.html)|
 |4/11 | 10 | Non-parametric Tests; Correlation and Regression |[Lecture notes 10](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-10.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-10-InClass.R) | | |
-|4/18 |  11 |Multiple and complex regression; ANOVA |Q&K Chap. 6; Logan Chap. 9 |[Lecture notes 10](http://mlammens.github.io/Biostats/lectures/Lecture-9.html) |[Problem Set 10](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html); Method Description  |
+|4/18 |  11 |Multiple and complex regression; ANOVA |Q&K Chap. 6; Logan Chap. 9 |[Lecture notes 10](http://mlammens.github.io/Biostats/lectures/Lecture-9.html) |[Problem Set 10](http://mlammens.github.io/Biostats/problem_sets/Problem-set-2.html); [Methods description](pages/Methods-Description.html)  |
 |4/25 | 12 |Nested and Factorial ANOVA |Q&K 8 & 9; Logan 11 & 12 | [Lecture notes 11](http://mlammens.github.io/Biostats/lectures/Lecture-10.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-10.R)  | [Problem Set 11](http://mlammens.github.io/Biostats/problem_sets/Problem-set-5.html)|
 |5/2  | 13 |ANCOVA; Analysis of Frequencies; GLM; wrap-up |Logan Chap. 15-17; Q&K 12-14 |[Lecture notes 12](http://mlammens.github.io/Biostats/lectures/Lecture-11.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-11-InClass.R) |  |
 
@@ -51,8 +51,8 @@ The project represents 40% of your grade, but is broken up into several componen
 
 * [Research question exercise](pages/research-question-exercise.html) - 5% - DUE 2/14
 * [Background literature search](pages/background-lit.html) - 5% - DUE 3/28
-* Methods description - 5% - DUE 4/18
-* Mini-presentation (5 minutes in class) - 5% - DUE 4/18, 4/25, or 5/2
+* [Methods description](pages/Methods-Description.html) - 5% - DUE 4/18
+* Mini-presentation (5 minutes in class) - 5% - DUE 4/25 or 5/2
 * Final report - 20% - DUE 5/9
 
 
