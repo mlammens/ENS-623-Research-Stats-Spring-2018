@@ -7,6 +7,151 @@ output:
     code_folding: hide
 ---
 
+# Non-parametric tests
+
+Let's say our data don't fit the assumptions of the *t* test. What are our options?
+
+## Rank based tests - Mann-Whitney test
+
+Look at ranks, rather than actual values.
+
+From Q&K p. 47:
+
+1. Rank all observations, ignoring groups. Tied observations get the average of their ranks.
+2. Calculate the sum of the ranks for both samples. If $H_0$ is true, then you should expect similar sums.
+3. Compare the smaller rank sum to the probability distribution of rank sums, based on repeated randomization of observations to groups.
+4. If sample sizes are large, the probability distribution of rank sums approximates a normal distribution and the *z* statistic can be used.
+
+## Randomization tests
+
+Powell and Russel (1984, 1985) investigated differences in bettle consumption between two size classes of eastern horned lizards.
+
+
+Get the data and look at it
+
+```{r}
+lizard <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter6/Data/beetle.csv")
+head(lizard)
+summary(lizard)
+```
+
+Have a look at the box plots for these data.
+
+```{r}
+library(ggplot2)
+
+ggplot() +
+  geom_boxplot(data = lizard, aes(x = SIZE, y = BEETLES) ) +
+  theme_bw()
+```
+
+
+Let's also look at the histograms of these data
+
+```{r}
+ggplot() +
+  geom_histogram(data = lizard, aes(x = BEETLES, fill = SIZE) ) +
+  facet_grid( . ~ SIZE ) +
+  theme_bw()
+```
+
+#### Challenge
+
+What do you observe here that seems like a strong violation to the assumptions of a *t* test?
+
+
+#### Major Challenge
+
+1. Calculate the *t*-statistic for differences in number of beetles consumed by the two size classes of lizards.
+2. Randomize/ shuffle the data.
+3. Calculate the **new** *t*-statistic. Repeat this 999 times.
+4. How does the observed *t*-stat compare to the generated *t*-stats?
+
+
+```{r}
+## Run t-test
+t.test(data = lizard, BEETLES ~ SIZE)
+
+## Record the original t-stat
+t_orig <- t.test(data = lizard, BEETLES ~ SIZE)$statistic
+
+## Initiate vector of new t-stat values
+t_rand <- c()
+
+## Set the number of reps (shuffles) we want to use
+reps <- 1000
+
+## Begin for loop to randomize data
+for ( int in 1:reps){
+  
+  ## Shuffle the data
+  lizard_shuffled <- data.frame(SIZE = sample(lizard$SIZE), BEETLES = lizard$BEETLES)
+  
+  ## Run the t-test on the new data, and save the t-stat to the t_rand vector
+  t_rand <- c( t_rand,
+               t.test(data = lizard_shuffled, BEETLES ~ SIZE)$statistic )
+  
+}
+
+ggplot() + 
+  geom_histogram(data = NULL, aes(x = t_rand)) +
+  geom_vline(xintercept = t_orig, colour = "red") +
+  theme_bw()
+
+```
+
+
+To calculate how likely our original *t* statistic is, look at how many values are more extreme.
+Remember to check both tails.
+
+```{r}
+t_rand_extreme <- sum(abs(t_rand) > t_orig)
+
+(p_t_orig <- t_rand_extreme/ reps)
+
+```
+
+# Multiple testing
+
+* If you perform a singly hypothesis test, using $\alpha = 0.05$, what is the probability that you reject the null hypothesis, even though the null is correct?
+
+* If you perform 20 hypothesis tests, using $\alpha = 0.05$, what is the probability that in at least one of those cases, you will reject the null hypothesis, even though it is correct?
+
+
+### Example of problems with multiple comparisons
+
+Make some random data - 10 sets of 10 observations from the standard normal.
+**We know that all of these sets are from the exact same population!**
+
+```{r}
+my_data <- list()
+for (i in 1:20) {
+    my_data[[i]] <- rnorm(10)  #Note the double brackets for a list
+}
+```
+
+Run a *t* test for all possible pair-wise comparisons.
+
+```{r}
+p_vals <- matrix(ncol = 20, nrow = 20)
+for (i in 1:19) {
+    for (j in (i + 1):20) {
+        p_vals[i, j] <- t.test(my_data[[i]], my_data[[j]])$p.value
+    }
+}
+p_vals
+```
+
+How many are false possitives?
+
+```{r}
+sum(p_vals < 0.05, na.rm = TRUE)
+```
+
+
+***
+
+
 # Introduction to Linear Models
 
 ## Statistical Models
@@ -27,4 +172,105 @@ $$
 
 where $b$ is the slope and $a$ is the y-intercept.
 
-**Board material**
+**Written Notes - pages 1-3**
+
+## Co-variation
+
+Calcualte covariation between sepal length and sepal width, using the `iris` dataset.
+
+```{r}
+data(iris)
+head(iris)
+
+library(ggplot2)
+ggplot(data = iris) +
+  geom_point(aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
+  theme_bw()
+
+covar <- sum((iris$Sepal.Length - mean(iris$Sepal.Length)) * (iris$Sepal.Width - mean(iris$Sepal.Width)))/ (nrow(iris) - 1)
+
+## Confirm
+var(x = iris$Sepal.Length, y = iris$Sepal.Width)
+
+```
+
+
+**Written Notes - Page 4**
+
+## Correlation
+
+Calculate the correlation between sepal length and sepal width, and calculate whether $r$ is significantly different from 0 or not.
+
+```{r}
+cor_iris <- covar / (sd(iris$Sepal.Length)*sd(iris$Sepal.Width))
+
+se_cor_iris <- sqrt((1 - cor_iris^2)/(nrow(iris) - 2))
+
+t_cor_iris <- cor_iris/se_cor_iris
+
+## Calculate the probability of getting our t value, or one more extreme
+pt(q = t_cor_iris, df = (nrow(iris)-2))*2
+
+## Use `cor` to find correlation value
+with(data = iris, cor(x = Sepal.Length, y = Sepal.Width, method = "pearson"))
+
+## Test the correlation
+with(data = iris, cor.test(x = Sepal.Length, y = Sepal.Width, method = "pearson"))
+
+
+```
+
+
+## Robust correlation
+
+For Pearson's correlation coefficient to be appropriate, the data should have:
+
+1. A linear relationship
+2. A bivariate normal distribution
+
+* Spearman's Rank Correlation - calculates correlation on ranks of observed values
+* Kendall's Rank Correlation
+
+
+# Linear regression
+
+Now we assume that any change in **y** is due to a change in **x**.
+
+## Example of linear regression
+
+Effects of starvation and humidity on water loss in the confused flour beetle.
+Here, looking at the relationship between humidity and weight loss
+
+```{r}
+flr_beetle <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter8/Data/nelson.csv")
+flr_beetle
+```
+
+Plot these data
+
+```{r}
+ggplot() +
+  geom_point(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
+  theme_bw()
+```
+
+Run a linear regression
+
+```{r}
+flr_beetle_lm <- lm(data = flr_beetle, WEIGHTLOSS ~ HUMIDITY)
+
+## This will give us a multitude of diagnostic plots
+plot(flr_beetle_lm)
+
+summary(flr_beetle_lm)
+```
+
+Plot these data, with `lm` fit
+
+```{r}
+ggplot(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
+  geom_point() +
+  stat_smooth(method = "lm") +
+  theme_bw()
+```
+
