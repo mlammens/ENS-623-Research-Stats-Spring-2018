@@ -232,45 +232,4 @@ For Pearson's correlation coefficient to be appropriate, the data should have:
 * Kendall's Rank Correlation
 
 
-# Linear regression
-
-Now we assume that any change in **y** is due to a change in **x**.
-
-## Example of linear regression
-
-Effects of starvation and humidity on water loss in the confused flour beetle.
-Here, looking at the relationship between humidity and weight loss
-
-```{r}
-flr_beetle <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter8/Data/nelson.csv")
-flr_beetle
-```
-
-Plot these data
-
-```{r}
-ggplot() +
-  geom_point(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
-  theme_bw()
-```
-
-Run a linear regression
-
-```{r}
-flr_beetle_lm <- lm(data = flr_beetle, WEIGHTLOSS ~ HUMIDITY)
-
-## This will give us a multitude of diagnostic plots
-plot(flr_beetle_lm)
-
-summary(flr_beetle_lm)
-```
-
-Plot these data, with `lm` fit
-
-```{r}
-ggplot(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
-  geom_point() +
-  stat_smooth(method = "lm") +
-  theme_bw()
-```
 
