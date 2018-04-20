@@ -254,7 +254,7 @@ What if we wanted to look at each partial regression plot? Use `av.plots` from t
 avPlots(bird_frag_lm, ask = F)
 ```
 
-Another way to **approximately visualize** these relationships.
+An alterantive way to **approximately visualize** the relationships between each predictor and the response variable is to look at marginal regression plots.
 
 ```{r}
 library(reshape)

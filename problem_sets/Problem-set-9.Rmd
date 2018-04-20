@@ -1,0 +1,28 @@
+Problem Set 9: Linear Regression
+========================================================
+
+For this problem set we will use data on cell survival for fourteen plates exposed to different levels of radiation.
+You can acquire these data by using the following command:
+
+```{r}
+cell_survival <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/cell_survival.csv")
+```
+
+# Problem 1
+
+Use the `lm` function to fit a linear regression model to these data. 
+Report the results and plot the data and the best-fit line. (10 pnts)
+
+# Problem 2
+
+Use the regression diagnostics we learned about in class to examine these data.
+Identify the outlier(s). 
+Remove the outlier(s) and run a new `lm`. 
+How does the regression slope change if it/they were to be removed from the dataset? 
+Be sure to clearly state which data points you are considering "outliers" and why. (10 pnts)
+
+# Problem 3
+
+Do these data fit the assumptions of linear regression?
+Consider each of the "big 3" assumptions separately. (5 pnts)
+
