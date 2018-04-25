@@ -1,0 +1,261 @@
+---
+title: "Meeting 12 - ANOVA"
+author: "Matthew E. Aiello-Lammens"
+output: 
+  html_document: 
+    toc: yes
+    code_folding: hide
+---
+
+
+# Introduction to Analysis of Variance - ANOVA
+
+While learning about regression, we've been working with both continuous predictor and response variables. 
+But in biology there are many times when we are working with **categorical** predictor variables and continuous responses. 
+For example, let's consider a fertilizer addition experiment, where the growth of some plant species is measured under a fertilizer versus no-fertilizer treatment. 
+Here, the predictor variable (fertilizer addition or not) is a categorical variable. 
+
+#### Challenge
+
+We have worked with this kind of simple case, where we have one-predictor variable which can take two values. What did we do in this case?
+
+
+```{r}
+library(dplyr)
+
+data(iris)
+t.test( x = filter(iris, Species == "setosa")$Petal.Length,
+        y = filter(iris, Species == "versicolor")$Petal.Length )
+
+anova(lm(data = filter(iris, Species != "virginica"), formula = Petal.Length ~ Species))
+```
+
+If we have more than two values within a single predictor variable, then we cannot use a *t*-test. Here we go to an ANOVA.
+
+```{r}
+anova(lm(data = iris, formula = Petal.Length ~ Species))
+
+```
+
+## Visual understanding of ANOVA
+
+First, recall the visual understanding of linear regression:
+
+![Logan - Figure 8.3](/Users/maiellolammens/Dropbox/Pace/Teaching/Web/ENS-623-Research-Stats/lectures/logan-fig-8-3.png)
+
+Now, what would this look like if the **x** value (i.e., the predictor) was categorical?
+
+![Logan - Figure 10.2](/Users/maiellolammens/Dropbox/Pace/Teaching/Web/ENS-623-Research-Stats/lectures/logan-fig-10-2.png)
+
+## Fixed versus Random Effects
+
+**Fixed factors** are ones we have manipulated, or that we expect *a priori* to have an effect on the response. 
+From Logan, p 254 - "conclusions about the effects of a fixed factor are restricted to the specific treatment levels investigated ..."
+
+**Random factors** are, as per Logan, p. 254, "randomly chosen from all the possible levels of populations and are used as random representatives of the populations". 
+E.g., density of plants could be random. Or position of camera traps on a hillside.
+
+## Null hypotheses
+
+**Fixed effects model:** 
+
+$$
+H_0: \mu_1 = \mu_2 = ... = \mu_i = \mu
+$$
+
+**Random effects model:**
+
+$$
+H_0: \sigma^2_1 = \sigma^2_2 = ... = \sigma^2_i = \sigma^2 
+$$
+
+
+# One-way ANOVA
+
+From Medley and Clements (1998), by way of Logan 2010 - investigation of the impact of zinc contamination on diversity of diatom species in the USA Rocky Mountains.
+
+```{r}
+diatoms <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter10/Data/medley.csv")
+```
+
+
+```{r}
+## Look at the data
+head(diatoms)
+
+summary(aov(data = diatoms, DIVERSITY ~ ZINC ))
+
+## Make the linear model
+diatom_lm <- lm(data = diatoms, DIVERSITY ~ ZINC )
+
+## Look at the ANOVA results
+anova(diatom_lm)
+
+## Look at the linear model results
+summary(diatom_lm)
+
+## Look at the model diagnostics
+plot(diatom_lm)
+
+```
+
+## Post-hoc comparisons
+
+Now we can say that the biodiversity measures taken at different zinc concentrations **DO NOT** come from a common distribution, but we don't know which are different from each other.
+
+We could compare each concentration to each of the others separately, but recall the problems with multiple comparions. 
+Instead, we'll use a *post-hoc* comparison method. 
+Specifically, we'll use the Tukey Honest Significant Differences (HSD), but there are several other methods you might use as well (see Logan p. 265). 
+
+```{r}
+TukeyHSD(aov(data = diatoms, DIVERSITY ~ ZINC ))
+```
+
+Note, that for reasons that have never been clear to me, you can only use the TukeyHSD method when using the `aov` function.
+For an alternative approach, see the `glht` function in the `multcomp` package. 
+This is described in Logan (e.g., p. 267).
+
+## Planned comparisons
+
+Where as unplanned, post-hoc comparisons require a correction for multiple comparisons, planned comparisons do not. 
+We will not cover planned comparisons in class, but they may show up in the homework or on the final. 
+Example 10B in Logan provides an example of the use of planned comparisons.
+
+## Non-parametric ANOVA
+
+As with many of the other methods we've discussed, there are also non-parameteric ANOVA approachs. 
+The most common is the Kruskal-Wallace test, which uses **rank based** statistics.
+
+
+# Nested ANOVA
+
+Sometimes your replicates aren't quite independent.
+
+**See visual as per Logan, Fig 11.1.**
+
+For formula, see Logan p. 284 and for calculation of F-ratios see Table 11.1.
+**Note that Mean-Squared Errors are the same if B is random or fixed, but F-ratio is differen! Why? Discuss.**
+
+## Unbalanced designes
+
+Often your observations will not be clean. This is unfortunate, as it makes the analyses more complicated. But they are still doable.
+
+### Nested ANOVA Example
+
+From Logan Example 11.A - Density-dependent grazing effects of sea urchin on filamentous algea (Andrew and Underwood 1993).
+
+Levels: 
+1. Sea urchin density
+2. Patches of Reef
+3. Quadrats within patches
+
+Get the data and have a look.
+
+```{r}
+algae_density <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter11/Data/andrew.csv")
+
+head(algae_density)
+summary(algae_density)
+```
+
+Patch and Quad need to be converted to factors!
+
+```{r}
+algae_density$PATCH <- factor(algae_density$PATCH)
+algae_density$QUAD <- factor(algae_density$QUAD)
+
+summary(algae_density)
+```
+
+Much better.
+
+Let's make some visuals.
+
+```{r}
+library(ggplot2)
+
+ggplot(data = algae_density) +
+  geom_boxplot(aes(x = TREAT, y = ALGAE)) +
+  theme_bw()
+```
+
+We should also consider this from the perspective to collapsing the quadrats into their mean values.
+
+```{r}
+library(dplyr)
+
+algae_density_agg <-
+  algae_density %>%
+  group_by(TREAT, PATCH) %>%
+  summarize(ALGAE_QUAD_MEAN = mean(ALGAE))
+
+ggplot(data = algae_density_agg) +
+  geom_boxplot(aes(x = TREAT, y = ALGAE_QUAD_MEAN)) +
+  theme_bw()
+
+```
+
+Construct an ANOVA model and look at the results.
+
+```{r}
+algae_density_aov <- aov(data = algae_density, ALGAE ~ TREAT + Error(PATCH))
+
+summary(algae_density_aov)
+```
+
+* What can we conclude?
+* What was the unit of replication?
+
+## Factorial ANOVA
+
+What if we want to look at two, or more, factors where one is not nested in the other?
+
+**See visuals as per Logan, Fig 12.1 and 12.2.**
+
+For formula, see Logan p. 314 and for calculation of F-ratios see Table 12.1.
+
+
+
+### Problems from unbalanced design
+
+See Logan Fig 12.3, p. 325. The variance in a model is "explained" sequentially.
+
+### Example - Two factor fixed effects model (Model I)
+
+
+```{r}
+limpets <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter12/Data/quinn.csv")
+
+head(limpets)
+summary(limpets)
+
+limpets$DENSITY <- factor(limpets$DENSITY)
+```
+
+Let's get some visuals.
+
+```{r}
+ggplot(data = limpets) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS)) +
+  theme_bw()
+
+ggplot(data = limpets) +
+  geom_boxplot(aes(x = SEASON, y = EGGS)) +
+  theme_bw()
+
+ggplot(data = limpets) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS, fill = SEASON)) +
+  theme_bw()
+
+```
+
+
+And let's run the model.
+
+```{r}
+limpets_lm <- lm(data = limpets, formula = EGGS ~ SEASON * DENSITY)
+summary(limpets_lm)
+anova(limpets_lm)
+```
+
+Provided there's time, we'll play with these models.
