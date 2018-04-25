@@ -215,44 +215,6 @@ What if we want to look at two, or more, factors where one is not nested in the 
 For formula, see Logan p. 314 and for calculation of F-ratios see Table 12.1.
 
 
-### Example - Two factor fixed effects model
-
-Effects of density and season on the number of eggs produced by slipper limpets.
-
-```{r}
-limpets1 <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter12/Data/quinn1.csv")
-
-head(limpets1)
-summary(limpets1)
-
-limpets1$DENSITY <- factor(limpets1$DENSITY)
-summary(limpets1)
-
-```
-
-```{r}
-ggplot(data = limpets1) +
-  geom_boxplot(aes(x = DENSITY, y = EGGS)) +
-  theme_bw()
-
-ggplot(data = limpets1) +
-  geom_boxplot(aes(x = SEASON, y = EGGS)) +
-  theme_bw()
-
-ggplot(data = limpets1) +
-  geom_boxplot(aes(x = DENSITY, y = EGGS, fill = SEASON)) +
-  theme_bw()
-
-```
-
-
-And let's run the model.
-
-```{r}
-limpets1_lm <- lm(data = limpets1, formula = EGGS ~ SEASON * DENSITY)
-summary(limpets1_lm)
-anova(limpets1_lm)
-```
 
 
 ### Example - Two factor fixed effects model (Model I)
@@ -291,6 +253,46 @@ And let's run the model.
 limpets_lm <- lm(data = limpets, formula = EGGS ~ SEASON * DENSITY)
 summary(limpets_lm)
 anova(limpets_lm)
+```
+
+
+### Example - Two factor fixed effects model
+
+Effects of density and season on the number of eggs produced by slipper limpets.
+
+```{r}
+limpets1 <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter12/Data/quinn1.csv")
+
+head(limpets1)
+summary(limpets1)
+
+limpets1$DENSITY <- factor(limpets1$DENSITY)
+summary(limpets1)
+
+```
+
+```{r}
+ggplot(data = limpets1) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS)) +
+  theme_bw()
+
+ggplot(data = limpets1) +
+  geom_boxplot(aes(x = SEASON, y = EGGS)) +
+  theme_bw()
+
+ggplot(data = limpets1) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS, fill = SEASON)) +
+  theme_bw()
+
+```
+
+
+And let's run the model.
+
+```{r}
+limpets1_lm <- lm(data = limpets1, formula = EGGS ~ SEASON * DENSITY)
+summary(limpets1_lm)
+anova(limpets1_lm)
 ```
 
 ### Problems from unbalanced design
