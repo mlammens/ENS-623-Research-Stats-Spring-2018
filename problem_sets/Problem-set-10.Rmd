@@ -1,0 +1,18 @@
+Problem Set 10: Linear Regression
+========================================================
+
+In this problem set, you will review the material on polynomial regression that we did not complete in class.
+Review the [polynomial regression section](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-11.html#linear-regression-with-quadratic-term-polynomial-regression) in the Meeting 11 notes.
+
+## Questions 1
+
+Looking over the diagnostic plots from the standard linear regression, what do you observe that might make you think this is not a good model fit?
+
+## Question 2
+
+Near the bottom of the section, the AIC values for multiple different models are calculated.
+Based on these AIC values, which is the best fit model?
+
+## Question 3
+
+Based on the model you selected as the best fit model, provide a brief explination of what might be going on biologically speaking. 
