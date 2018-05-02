@@ -1,0 +1,367 @@
+---
+title: "Meeting 13 - GLM, ANCOVA, Frequency Analysis"
+output: 
+  html_document: 
+    toc: yes
+    code_folding: hide
+---
+
+# Generalized Linear Models (GLMs)
+
+Recall the linear regression model we've been working with quite a bit this semester:
+
+$$
+Y_i = \beta_0 + \beta_1 X_i + \epsilon_i
+$$
+
+where
+
+$$
+\epsilon_i \sim N(0, \sigma^2)
+$$
+
+Two of the major assumptions in this model are that:
+
+1. The relationship between the independent and dependent variables is **linear**.
+2. The errors, $\epsilon_i$, are **normally distributed**.
+
+We refer to the class of models that rely on the above structure as **General Linear Models.**
+And as we've learned throug this semester, they can be be very good when dealing with continuous response variables that are normally distributed. 
+But what do we do when this is not the case?
+
+**Generalized Linear Models** are extensions of the models we've been using that free us from the constraints of these two assumptions.
+
+The basic structure of a Generalized Linear Model (GLM) is:
+
+$$
+g(Y_i) = \beta_0 + \beta_1 X_i + \epsilon_i
+$$
+
+where
+
+$$
+\epsilon_i \sim \text{variance function}
+$$
+
+In the above, we refer to $g(\bullet)$ as the **link function**. 
+Quite litteraly, the link function "links" the linear model with the response (dependent) variable.
+
+Here are some of the classic examples when we would use GLM instead of traditional regression:
+
+* Count data (errors are not normally distributed)
+* Binary data (response is not continuous)
+* Proporition data
+
+## Logistic regression
+
+Let's start by considering the case of Bernoulli or Binomially ditributed respose variables. 
+For example:
+
+* survival vs. mortality for individual organisms
+* allele of type I or type II for an individual
+* presence or absence of a species
+
+In all of these cases, we can consider $Y_i \sim \text{Binom}(n_i, p_i)$.
+
+The **link function** for Binomial data is:
+
+$$
+g(Y_i) = log( \frac{p_i}{1-p_i} ) = log(\text{"odds"})
+$$
+
+This is also known as the **logit**.
+
+And the variance function is:
+
+$$
+V(Y_i) \propto p_i(1-p_i)
+$$
+
+Looking at our basic structure formula, and applying our link function, we can write our model as:
+
+$$
+log( \frac{p_i}{1-p_i} )  = \beta_0 + \beta_1 X_i + \epsilon_i
+$$
+
+And if we were to re-arrange this so $p_i$ was by itself, we would get:
+
+$$
+p_i = \frac{e^{ \beta_0 + \beta_1 X_i}}{ 1 + e^{ \beta_0 + \beta_1 X_i}}
+$$
+
+How do we estimate $\beta_0$, $\beta_1$, and our variance component? 
+Because our errors are not normally distributed, we can not use OLS, so instead we have to use *Maximum Likelihood*.
+We have to maximize the likelihood of the Binomial distribution:
+
+$$
+L(p_i|Y_i) = \prod_{i=1}^{N} \frac{n_i!}{Y_i!(n_i - Y_i)!} p_i^{Y_i} (1-p_i)^{(n_i-Y_i)}
+$$
+
+where we substitute $p_i$ with the previous equation for $p_i$ in terms of our $\beta$'s.
+
+### Interpreting the coefficients in logistic regression
+
+If we fit a logistic model **without an intercept**, the best fit line must predict p = 0.5 when x = 0.
+So the intercept in this case shifts the probability for x = 0 up or down relative to 0.5.
+
+The "slope" $\hat{\beta_1}$ can be interpreted as, $e^{\hat{\beta_1}}$ is the change in the log odds for a 1 unit change in X.
+
+## Example of Logistic Regression
+
+From Logan p. 498
+
+> As part of an investigation into the factors controlling island spider populations, Polis et al. (1998) recorded the physical and biotic characteristics of the islands in the Gulf of California. Quinn and Keough (2002) subsequently modelled the presence/absence (PA) of a potential spider predator (Uta lizards) against the perimeter to area ratio (RATIO) of the islands to illustrate logistic regression (from Box 13.1 of Quinn and Keough (2002)).
+
+Get the data
+
+```{r}
+spiders <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter17/Data/polis.csv")
+
+spiders
+
+```
+
+Let's plot these data
+
+```{r}
+library(ggplot2)
+
+ggplot(data = spiders, aes(x = RATIO, y = PA)) +
+  geom_point() +
+  theme_bw()
+```
+
+Let's fit a *general* linear model, and see what happens.
+
+```{r}
+spiders.lm <- lm(data = spiders, formula = PA ~ RATIO)
+
+summary(spiders.lm)
+
+plot(spiders.lm)
+
+ggplot(data = spiders, aes(x = RATIO, y = PA)) +
+  geom_point() +
+  theme_bw() +
+  stat_smooth(method = "lm")
+
+```
+
+
+Let's try a *generalized* linear model (GLM)
+
+* Look at help for `glm`
+* Follow help for `family` - look at `link` options
+
+```{r}
+?glm
+
+spiders.glm <- glm(data = spiders, formula = PA ~ RATIO, family = binomial)
+
+plot(spiders.glm)
+```
+
+We should expect some of the trends in the Residcuals vs Predicted values that we see.
+
+Let's look at the summary.
+
+```{r}
+summary(spiders.glm)
+```
+
+Let's plot this model.
+
+```{r}
+ggplot(data = spiders, aes(x = RATIO, y = PA)) +
+  geom_point() +
+  theme_bw() +
+  stat_smooth(method = "glm", method.args = list(family = "binomial"))
+
+```
+
+We can test whether the GLM is significantly better than the intercept only model by using the `anova` function.
+
+```{r}
+anova(spiders.glm, test = "Chisq")
+```
+
+Note that for GLMs, `summary` does not return an *R^2^* value.
+We can still calculate a sense for the *R^2^* by looking at the **deviance** explained by our model, versus the null.
+
+```{r}
+1 - (spiders.glm$deviance/spiders.glm$null.deviance)
+```
+
+
+## Poisson regression
+
+* Good for modeling a response variable that is count data
+* Can also be used as an alternative to contingency tables to explore associations between categorical varialbes
+* Link function is $log(\mu)$
+
+
+# ANCOVA
+
+Some times we have a mix of continuous and categorical predictor variables, with a continuous response variable. 
+
+**See Figure 15.1 in Logan p. 449**
+
+![Logan - Figure 15.1](/Users/maiellolammens/Dropbox/Pace/Teaching/Web/ENS-623-Research-Stats/lectures/Logan-Fig-15.1.png)
+
+## Example
+
+From Logan p. 457
+
+> To investigate the impacts of sexual activity on male fruitfly longevity, Partridge and Farquhar (1981), measured the longevity of male fruitflies with access to either one virgin female (potential mate), eight virgin females, one pregnant female (not a potential mate), eight pregnant females or no females. The available male fruitflies varied in size and since size is known to impact longevity, the researchers randomly allocated each individual fruitfly to one of the five treatments and also measured thorax length as a covariate (from Box 12.1 of Quinn and Keough (2002)).
+
+Get the data
+
+```{r}
+fruitfly <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter15/Data/partridge.csv")
+
+head(fruitfly)
+```
+
+Plot these data
+
+By group membership
+
+```{r}
+ggplot(data = fruitfly, aes(x = TREATMENT, y = LONGEV)) +
+  geom_boxplot() +
+  theme_bw()
+```
+
+By size
+
+```{r}
+ggplot(data = fruitfly, aes(x = THORAX, y = LONGEV)) +
+  geom_point() +
+  theme_bw()
+```
+
+By both
+
+```{r}
+ggplot(data = fruitfly, aes(x = THORAX, y = LONGEV, colour = TREATMENT)) +
+  geom_point() +
+  theme_bw()
+```
+
+With linear regressions
+
+```{r}
+ggplot(data = fruitfly, aes(x = THORAX, y = LONGEV)) +
+  geom_point(aes(colour = TREATMENT)) +
+  stat_smooth(aes(colour = TREATMENT), method = "lm") +
+  stat_smooth(method = "lm", size = 2, colour = "black") +
+  theme_bw()
+```
+
+Let's build an ANCOVA model
+
+```{r}
+fruitfly_ancova <- lm(data = fruitfly, LONGEV ~ TREATMENT * THORAX)
+```
+
+Looking at the ANOVA table for this model, the fact that TREATMENT:THORAX interaction is not significant indicates that the slopes are not significantly different from each other.
+
+```{r}
+anova(fruitfly_ancova)
+```
+
+Look at the model diagnostics
+
+```{r}
+plot(fruitfly_ancova)
+```
+
+Note that there is a wedge-shaped pattern to the residuals, suggestive of non-homogeniety of variance. 
+We can use a log10 transform to deal with this problem.
+
+```{r}
+fruitfly_ancova_2 <- lm(data = fruitfly, log10(LONGEV) ~ TREATMENT + THORAX)
+
+plot(fruitfly_ancova_2)
+
+summary(fruitfly_ancova_2)
+```
+
+### Challenge
+
+Look at how the ANCOVA results differ from either ignoring the continuous or categorical predictor.
+
+
+# Frequency Analysis
+
+* $\chi^2$ analysis
+
+$$
+\chi^2 = \sum \frac{(o-e)^2}{e}
+$$
+
+where $o =$ observed and $e =$ expected frequencies.
+
+* Goodness of fit tests
+
+To examine if some set of data is distributed in a specific way, or has a frequency based on a known distribution, we can use the **Kolmogorov-Smirnov Test**. 
+You can also use the **KS Test** to see if two sets of data are distributed in the same way.
+
+* Contingency tables
+
+Examine if two or more categorical variables are associated with each other. This is essentially and extension of the $\chi^2$ analysis. The **Null** hypothesis is that the variables are **not** associated.
+
+* G-tests
+
+This is an alternative to the Goodness of fit tests and contingency tables approach. 
+
+From Logan p. 472
+
+> The G-test is based on a log likelihood-ratio test. A log likelihood ratio is a ratio of maximum likelihoods of the alternative and null hypotheses. More simply, a log likelihood ratio test essentially examines how likely (the probability) the alternative hypothesis (representing an effect) is compared to how likely the null hypothesis (no effect) is given the collected data.
+
+The $G^2$ statistic is
+
+$$
+G^2 = 2 \sum_i o_i log(\frac{o_i}{e_i})
+$$
+
+where $o =$ observed and $e =$ expected frequencies.
+
+## Example - Two-way contingency table
+
+From Logan pp. 478 - 480
+
+> In order to investigate the mortality of coolibah (Eucalyptus coolibah) trees across riparian dunes, Roberts (1993) counted the number of quadrats in which dead trees were present and the number in which they were absent in three positions (top, middle and bottom) along transects from the lakeshore up to the top of dunes. In this case, the classification of quadrats according to the presence/absence of dead coolibah trees will be interpreted as a response variable and the position along transect as a predictor variable (see Box 14.3 of Quinn and Keough (2002)).
+
+Get the data
+
+```{r}
+trees <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter16/Data/roberts.csv")
+
+head(trees)
+```
+
+Make a contingency table
+
+```{r}
+trees_xtab <- table(trees$POSITION, trees$DEAD)
+```
+
+Run a $\chi^2$ test
+
+```{r}
+(trees_chisq <- chisq.test(trees_xtab, corr = F))
+
+trees_chisq
+
+```
+
+We can also run a G-test using `likelihood.test` in the package `Deducer` (but note that this package as a *lot* of dependencies for this package, as it is part of the [JGR](http://rforge.net/JGR/) project).
+
+```{r, eval=FALSE}
+library(Deducer)
+
+likelihood.test(trees_xtab, conservative = TRUE)
+```
+
+From the results of both of these tests, we can reject the null hypothesis of no association between transect position and number of dead trees observed.

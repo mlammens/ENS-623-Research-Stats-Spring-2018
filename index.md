@@ -31,7 +31,7 @@ You can find a **DRAFT** copy of the syllabus [here](pages/syllabus.html)
 |4/11 | 10 | Non-parametric Tests; Correlation and Regression |Q&K Chap. 3 & 5; Logan Chap. 6-8|[Lecture notes 10](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-10.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-10-InClass.R) | | |
 |4/18 |  11 |Multiple and complex regression |Q&K Chap. 6; Logan Chap. 8 & 9 |[Lecture notes 11](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-11.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-11-InClass.R) |[Problem Set 9](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-9.html); [Methods description](pages/Methods-Description.html)  |
 |4/25 | 12 |ANOVA; Nested and Factorial ANOVA |Q&K 8 & 9; Logan 10-12 | [Lecture notes 12](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-12.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-12-InClass.R)  | [Problem Set 10](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-10.html)|
-|5/2  | 13 |ANCOVA; Analysis of Frequencies; GLM; wrap-up |Logan Chap. 15-17; Q&K 12-14 |[Lecture notes 13](http://mlammens.github.io/Biostats/lectures/Lecture-11.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-11-InClass.R) |  |
+|5/2  | 13 |ANCOVA; Analysis of Frequencies; GLM; wrap-up |Logan Chap. 15-17; Q&K 12-14 |[Lecture notes 13](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-13.html); [In class R file](http://mlammens.github.io/Biostats/lectures/Lecture-11-InClass.R) |  |
 
 
 <!---
