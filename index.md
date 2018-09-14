@@ -38,7 +38,7 @@ You can find a **DRAFT** copy of the syllabus [here](pages/syllabus.html)
 ### Topics to cover
 
 * 
-* Hypothesis Testing, Non-parametric Methods, Introduction to Linear Models
+* Hypothesis Testing, Non-parametric Methods and Bootstrapping, Introduction to Linear Models
 * [Correlation](https://xkcd.com/552/)
 * 
 * 
